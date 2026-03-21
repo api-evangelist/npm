@@ -1,0 +1,557 @@
+openapi: 3.1.0
+info:
+  title: npm Public API
+  description: >-
+    The npm Public API provides authenticated endpoints for managing npm
+    access tokens, configuring trusted publishers, and exchanging OIDC
+    tokens for short-lived registry access. It supports creating, listing,
+    and deleting npm access tokens with customizable permissions, scope
+    restrictions, expiration settings, and CIDR IP range limitations. The
+    API also enables CI/CD providers like GitHub Actions, GitLab CI, and
+    CircleCI to publish packages securely through OIDC token exchange
+    without requiring long-lived npm tokens.
+  version: '1.0.0'
+  contact:
+    name: npm Support
+    url: https://www.npmjs.com/support
+  termsOfService: https://docs.npmjs.com/policies/terms
+externalDocs:
+  description: npm Public API Documentation
+  url: https://api-docs.npmjs.com/
+servers:
+  - url: https://registry.npmjs.org
+    description: npm Public Registry
+tags:
+  - name: Tokens
+    description: >-
+      Manage npm access tokens for authentication. Create, list, and
+      delete tokens with customizable permissions and restrictions.
+  - name: OIDC
+    description: >-
+      OpenID Connect token exchange for trusted publishing. Exchange
+      OIDC identity tokens from supported CI/CD providers for
+      short-lived npm registry access tokens.
+  - name: Trusted Publishers
+    description: >-
+      Configure trusted publisher settings for packages to enable OIDC
+      token exchange from CI/CD providers without long-lived npm tokens.
+security:
+  - bearerAuth: []
+paths:
+  /-/npm/v1/tokens:
+    get:
+      operationId: listTokens
+      summary: List access tokens
+      description: >-
+        Retrieves a list of the authenticated user's active npm access
+        tokens. Token UUIDs are redacted in the response, but each
+        token object includes a key attribute containing the hexadecimal
+        SHA-512 hash of the token for identification purposes.
+      tags:
+        - Tokens
+      parameters:
+        - name: page
+          in: query
+          description: >-
+            Page number for paginated results.
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - name: perPage
+          in: query
+          description: >-
+            Number of tokens to return per page.
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: List of tokens retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    description: >-
+                      List of token objects.
+                    items:
+                      $ref: '#/components/schemas/Token'
+                  total:
+                    type: integer
+                    description: >-
+                      Total number of tokens.
+                  urls:
+                    type: object
+                    description: >-
+                      Pagination URLs.
+                    properties:
+                      next:
+                        type: string
+                        description: >-
+                          URL for the next page of results.
+        '401':
+          description: Authentication required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: createToken
+      summary: Create an access token
+      description: >-
+        Creates a new npm access token with customizable permissions,
+        scope restrictions, expiration settings, and CIDR IP range
+        limitations. The response includes the full token value, which
+        is only returned once and cannot be retrieved again.
+      tags:
+        - Tokens
+      parameters:
+        - name: npm-otp
+          in: header
+          description: >-
+            One-time password for accounts with two-factor authentication
+            enabled.
+          required: false
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenCreateRequest'
+      responses:
+        '200':
+          description: Token created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenWithValue'
+        '400':
+          description: Invalid request parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /-/npm/v1/tokens/token/{token_id}:
+    delete:
+      operationId: deleteToken
+      summary: Delete an access token
+      description: >-
+        Deletes an npm access token by its identifier. Note that the
+        token may remain valid in cache for up to one hour after
+        deletion.
+      tags:
+        - Tokens
+      parameters:
+        - name: token_id
+          in: path
+          description: >-
+            The token key hash or UUID identifying the token to delete.
+          required: true
+          schema:
+            type: string
+        - name: npm-otp
+          in: header
+          description: >-
+            One-time password for accounts with two-factor authentication
+            enabled.
+          required: false
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Token deleted successfully.
+        '401':
+          description: Authentication required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Token not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /-/npm/v1/security/oidc/tokens:
+    post:
+      operationId: exchangeOidcToken
+      summary: Exchange an OIDC token for an npm token
+      description: >-
+        Exchanges a valid OIDC identity token from a supported CI/CD
+        provider for a short-lived npm registry access token. The
+        OIDC token must be provided as a Bearer token in the
+        Authorization header. The provider must be pre-configured
+        as a trusted publisher for the target package.
+      tags:
+        - OIDC
+      security:
+        - oidcBearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - package
+              properties:
+                package:
+                  type: string
+                  description: >-
+                    The name of the package to obtain publishing access for.
+      responses:
+        '200':
+          description: OIDC token exchanged successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: >-
+                      A short-lived npm access token that can be used for
+                      publishing.
+        '401':
+          description: Invalid or expired OIDC token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: OIDC token claims do not match trusted publisher configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /-/npm/v1/security/trusted-publishers/packages/{package}:
+    get:
+      operationId: listTrustedPublishers
+      summary: List trusted publishers for a package
+      description: >-
+        Retrieves the trusted publisher configurations for a given package.
+        Each configuration specifies a CI/CD provider and the conditions
+        under which it is trusted to publish.
+      tags:
+        - Trusted Publishers
+      parameters:
+        - $ref: '#/components/parameters/encodedPackageName'
+      responses:
+        '200':
+          description: Trusted publishers retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    description: >-
+                      List of trusted publisher configurations.
+                    items:
+                      $ref: '#/components/schemas/TrustedPublisher'
+        '401':
+          description: Authentication required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Package not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: addTrustedPublisher
+      summary: Add a trusted publisher for a package
+      description: >-
+        Configures a new trusted publisher for a package. This allows
+        the specified CI/CD provider to publish the package using OIDC
+        token exchange without requiring long-lived npm tokens. Only
+        users with write permissions on the package can configure
+        trusted publishers.
+      tags:
+        - Trusted Publishers
+      parameters:
+        - $ref: '#/components/parameters/encodedPackageName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrustedPublisherRequest'
+      responses:
+        '201':
+          description: Trusted publisher added successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrustedPublisher'
+        '400':
+          description: Invalid request parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Insufficient permissions to manage trusted publishers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /-/npm/v1/security/trusted-publishers/packages/{package}/{publisher_id}:
+    delete:
+      operationId: removeTrustedPublisher
+      summary: Remove a trusted publisher from a package
+      description: >-
+        Removes a trusted publisher configuration from a package, revoking
+        the CI/CD provider's ability to publish via OIDC token exchange.
+      tags:
+        - Trusted Publishers
+      parameters:
+        - $ref: '#/components/parameters/encodedPackageName'
+        - name: publisher_id
+          in: path
+          description: >-
+            The identifier of the trusted publisher configuration to remove.
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Trusted publisher removed successfully.
+        '401':
+          description: Authentication required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Trusted publisher configuration not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        npm access token provided as a Bearer token. Supports both
+        classic tokens and granular access tokens.
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        Basic authentication using npm username and password.
+    oidcBearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        OIDC identity token from a supported CI/CD provider, provided
+        as a Bearer token for token exchange.
+  parameters:
+    encodedPackageName:
+      name: package
+      in: path
+      description: >-
+        The name of the package, URL-encoded for scoped packages
+        (e.g., @scope%2Fpackage).
+      required: true
+      schema:
+        type: string
+  schemas:
+    Token:
+      type: object
+      description: >-
+        An npm access token with its metadata. The actual token value
+        is redacted; only the key hash is provided.
+      properties:
+        key:
+          type: string
+          description: >-
+            The hexadecimal SHA-512 hash of the token, used for
+            identification.
+        token:
+          type: string
+          description: >-
+            A redacted representation of the token UUID.
+        cidr_whitelist:
+          type: array
+          description: >-
+            List of CIDR IP ranges that are allowed to use this token.
+            Null if no restrictions are set.
+          items:
+            type: string
+        readonly:
+          type: boolean
+          description: >-
+            Whether this token has read-only access.
+        automation:
+          type: boolean
+          description: >-
+            Whether this token is an automation token that bypasses
+            two-factor authentication requirements for publishing.
+        created:
+          type: string
+          format: date-time
+          description: >-
+            The date and time the token was created.
+        updated:
+          type: string
+          format: date-time
+          description: >-
+            The date and time the token was last updated.
+    TokenWithValue:
+      type: object
+      description: >-
+        An npm access token including the full token value. The token
+        value is only returned once at creation time and cannot be
+        retrieved again.
+      allOf:
+        - $ref: '#/components/schemas/Token'
+        - type: object
+          properties:
+            token:
+              type: string
+              description: >-
+                The full token UUID value. This is only returned at
+                creation time.
+    TokenCreateRequest:
+      type: object
+      description: >-
+        Request body for creating a new npm access token.
+      required:
+        - password
+      properties:
+        password:
+          type: string
+          description: >-
+            The user's npm account password, required to authorize
+            token creation.
+        readonly:
+          type: boolean
+          description: >-
+            Set to true to create a read-only token.
+          default: false
+        automation:
+          type: boolean
+          description: >-
+            Set to true to create an automation token that bypasses
+            two-factor authentication for publishing.
+          default: false
+        cidr_whitelist:
+          type: array
+          description: >-
+            List of CIDR IP ranges to restrict where this token can
+            be used from.
+          items:
+            type: string
+            pattern: '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$'
+    TrustedPublisher:
+      type: object
+      description: >-
+        A trusted publisher configuration that allows a CI/CD provider
+        to publish a package using OIDC token exchange.
+      properties:
+        id:
+          type: string
+          description: >-
+            The unique identifier for this trusted publisher configuration.
+        provider:
+          type: string
+          description: >-
+            The CI/CD provider name.
+          enum:
+            - github-actions
+            - gitlab-ci
+            - circleci
+        repository_owner:
+          type: string
+          description: >-
+            The owner or namespace of the source repository.
+        repository:
+          type: string
+          description: >-
+            The name of the source repository.
+        workflow_filename:
+          type: string
+          description: >-
+            The workflow file that is trusted to publish, applicable
+            to GitHub Actions.
+        environment:
+          type: string
+          description: >-
+            The deployment environment name, if restricted.
+        created:
+          type: string
+          format: date-time
+          description: >-
+            The date and time the trusted publisher was configured.
+    TrustedPublisherRequest:
+      type: object
+      description: >-
+        Request body for adding a trusted publisher configuration.
+      required:
+        - provider
+        - repository_owner
+        - repository
+      properties:
+        provider:
+          type: string
+          description: >-
+            The CI/CD provider name.
+          enum:
+            - github-actions
+            - gitlab-ci
+            - circleci
+        repository_owner:
+          type: string
+          description: >-
+            The owner or namespace of the source repository.
+        repository:
+          type: string
+          description: >-
+            The name of the source repository.
+        workflow_filename:
+          type: string
+          description: >-
+            The workflow file that is trusted to publish. Required
+            for GitHub Actions.
+        environment:
+          type: string
+          description: >-
+            The deployment environment name to restrict publishing to.
+    Error:
+      type: object
+      description: >-
+        An error response from the npm API.
+      properties:
+        error:
+          type: string
+          description: >-
+            The error type or code.
+        message:
+          type: string
+          description: >-
+            A human-readable description of the error.

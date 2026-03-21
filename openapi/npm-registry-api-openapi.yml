@@ -1,0 +1,671 @@
+openapi: 3.1.0
+info:
+  title: npm Registry API
+  description: >-
+    The npm Registry API provides programmatic access to the npm package
+    registry, the largest software registry in the world hosting over two
+    million JavaScript packages. Developers can query package metadata,
+    download tarballs, search for packages, and retrieve version-specific
+    information. The API follows CouchDB-based conventions and serves
+    package manifests in JSON format, enabling tools and services to
+    integrate with the npm ecosystem for dependency resolution, package
+    discovery, and automated workflows.
+  version: '1.0.0'
+  contact:
+    name: npm Support
+    url: https://www.npmjs.com/support
+  termsOfService: https://docs.npmjs.com/policies/terms
+externalDocs:
+  description: npm Registry API Documentation
+  url: https://github.com/npm/registry/blob/main/docs/REGISTRY-API.md
+servers:
+  - url: https://registry.npmjs.org
+    description: npm Public Registry
+tags:
+  - name: Registry
+    description: >-
+      Registry metadata and status information.
+  - name: Packages
+    description: >-
+      Package metadata retrieval, including full packuments and
+      version-specific documents.
+  - name: Search
+    description: >-
+      Full-text search across the npm registry with weighted scoring.
+  - name: Downloads
+    description: >-
+      Package tarball downloads.
+paths:
+  /:
+    get:
+      operationId: getRegistryMetadata
+      summary: Get registry metadata
+      description: >-
+        Returns metadata about the npm registry, including document counts,
+        storage sizes, and instance information. This endpoint follows the
+        CouchDB database information convention.
+      tags:
+        - Registry
+      responses:
+        '200':
+          description: Registry metadata retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegistryMetadata'
+  /{package}:
+    get:
+      operationId: getPackageDocument
+      summary: Get a package document (packument)
+      description: >-
+        Retrieves the full package document (packument) for a given package
+        name. The packument includes all published versions, dist-tags,
+        maintainers, repository information, and README content. For scoped
+        packages, the package name should be URL-encoded (e.g.,
+        @scope%2Fpackage).
+      tags:
+        - Packages
+      parameters:
+        - $ref: '#/components/parameters/packageName'
+      responses:
+        '200':
+          description: Package document retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackageDocument'
+        '404':
+          description: Package not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /{package}/{version}:
+    get:
+      operationId: getPackageVersion
+      summary: Get a specific package version
+      description: >-
+        Retrieves metadata for a specific version of a package. The version
+        can be a valid semver string or the literal string "latest" to
+        retrieve the version pointed to by the latest dist-tag. Returns
+        the version-specific manifest including dependencies, scripts, and
+        distribution information.
+      tags:
+        - Packages
+      parameters:
+        - $ref: '#/components/parameters/packageName'
+        - $ref: '#/components/parameters/packageVersion'
+      responses:
+        '200':
+          description: Package version metadata retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackageVersion'
+        '404':
+          description: Package or version not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /-/v1/search:
+    get:
+      operationId: searchPackages
+      summary: Search packages
+      description: >-
+        Performs a full-text search across the npm registry. Results can be
+        weighted by quality, popularity, and maintenance scores. Supports
+        special search qualifiers such as author, maintainer, scope, and
+        keywords filters. Qualifiers like not:unstable, not:insecure,
+        is:unstable, and boost-exact can be included in the text parameter.
+      tags:
+        - Search
+      parameters:
+        - name: text
+          in: query
+          description: >-
+            Full-text search query. Supports special qualifiers such as
+            author:username, maintainer:username, scope:scopename,
+            keywords:keyword, not:unstable, not:insecure, is:unstable,
+            is:insecure, and boost-exact:true.
+          required: true
+          schema:
+            type: string
+        - name: size
+          in: query
+          description: >-
+            Number of results to return. Maximum value is 250.
+          required: false
+          schema:
+            type: integer
+            default: 20
+            minimum: 1
+            maximum: 250
+        - name: from
+          in: query
+          description: >-
+            Offset for pagination, indicating the starting position in the
+            result set.
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - name: quality
+          in: query
+          description: >-
+            Weighting for the quality score component of search results,
+            between 0 and 1.
+          required: false
+          schema:
+            type: number
+            minimum: 0
+            maximum: 1
+        - name: popularity
+          in: query
+          description: >-
+            Weighting for the popularity score component of search results,
+            between 0 and 1.
+          required: false
+          schema:
+            type: number
+            minimum: 0
+            maximum: 1
+        - name: maintenance
+          in: query
+          description: >-
+            Weighting for the maintenance score component of search results,
+            between 0 and 1.
+          required: false
+          schema:
+            type: number
+            minimum: 0
+            maximum: 1
+      responses:
+        '200':
+          description: Search results returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResults'
+  /{package}/-/{tarball}:
+    get:
+      operationId: downloadPackageTarball
+      summary: Download a package tarball
+      description: >-
+        Downloads the tarball archive for a specific version of a package.
+        The tarball filename is typically in the format
+        {package}-{version}.tgz. This endpoint is used by the npm CLI
+        during package installation.
+      tags:
+        - Downloads
+      parameters:
+        - $ref: '#/components/parameters/packageName'
+        - name: tarball
+          in: path
+          description: >-
+            The tarball filename, typically in the format
+            {package}-{version}.tgz.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Tarball file returned successfully.
+          content:
+            application/gzip:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Tarball not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  parameters:
+    packageName:
+      name: package
+      in: path
+      description: >-
+        The name of the package. For scoped packages, use URL encoding
+        (e.g., @scope%2Fpackage).
+      required: true
+      schema:
+        type: string
+    packageVersion:
+      name: version
+      in: path
+      description: >-
+        A valid semver version string, or the literal string "latest"
+        to resolve the current latest dist-tag.
+      required: true
+      schema:
+        type: string
+  schemas:
+    RegistryMetadata:
+      type: object
+      description: >-
+        Metadata about the npm registry instance, following CouchDB
+        database information conventions.
+      properties:
+        db_name:
+          type: string
+          description: >-
+            The name of the database, typically "registry".
+        doc_count:
+          type: integer
+          description: >-
+            The total number of documents in the registry.
+        doc_del_count:
+          type: integer
+          description: >-
+            The total number of deleted documents.
+        update_seq:
+          type: integer
+          description: >-
+            The current update sequence number.
+        purge_seq:
+          type: integer
+          description: >-
+            The current purge sequence number.
+        compact_running:
+          type: boolean
+          description: >-
+            Whether a database compaction is currently running.
+        disk_size:
+          type: integer
+          description: >-
+            Total disk size in bytes.
+        data_size:
+          type: integer
+          description: >-
+            Actual data size in bytes.
+        instance_start_time:
+          type: string
+          description: >-
+            Timestamp of when this registry instance started.
+        disk_format_version:
+          type: integer
+          description: >-
+            The version of the on-disk storage format.
+        committed_update_seq:
+          type: integer
+          description: >-
+            The last committed update sequence number.
+    PackageDocument:
+      type: object
+      description: >-
+        A full package document (packument) containing all metadata for a
+        package, including every published version.
+      properties:
+        _id:
+          type: string
+          description: >-
+            The package name, used as the document identifier.
+        _rev:
+          type: string
+          description: >-
+            The CouchDB document revision identifier.
+        name:
+          type: string
+          description: >-
+            The name of the package.
+        description:
+          type: string
+          description: >-
+            A short description of the package.
+        dist-tags:
+          type: object
+          description: >-
+            A mapping of distribution tags to version strings. The
+            "latest" tag is always present.
+          additionalProperties:
+            type: string
+        versions:
+          type: object
+          description: >-
+            A mapping of version strings to version metadata objects.
+          additionalProperties:
+            $ref: '#/components/schemas/PackageVersion'
+        time:
+          type: object
+          description: >-
+            A mapping of version strings to ISO 8601 timestamps indicating
+            when each version was published. Includes special keys
+            "created" and "modified".
+          additionalProperties:
+            type: string
+            format: date-time
+        maintainers:
+          type: array
+          description: >-
+            List of current package maintainers.
+          items:
+            $ref: '#/components/schemas/Person'
+        author:
+          $ref: '#/components/schemas/Person'
+        repository:
+          $ref: '#/components/schemas/Repository'
+        readme:
+          type: string
+          description: >-
+            The README content for the package, typically from the
+            latest version.
+        readmeFilename:
+          type: string
+          description: >-
+            The filename of the README file.
+        homepage:
+          type: string
+          format: uri
+          description: >-
+            The URL of the package homepage.
+        keywords:
+          type: array
+          description: >-
+            Keywords associated with the package for search discovery.
+          items:
+            type: string
+        bugs:
+          type: object
+          description: >-
+            Issue tracker information.
+          properties:
+            url:
+              type: string
+              format: uri
+              description: >-
+                URL of the issue tracker.
+        license:
+          type: string
+          description: >-
+            The SPDX license identifier for the package.
+    PackageVersion:
+      type: object
+      description: >-
+        Metadata for a specific version of a package, including
+        dependencies, scripts, and distribution information.
+      properties:
+        name:
+          type: string
+          description: >-
+            The name of the package.
+        version:
+          type: string
+          description: >-
+            The semver version string.
+        description:
+          type: string
+          description: >-
+            A short description of the package.
+        main:
+          type: string
+          description: >-
+            The entry point module for the package.
+        scripts:
+          type: object
+          description: >-
+            A mapping of script names to shell commands.
+          additionalProperties:
+            type: string
+        dependencies:
+          type: object
+          description: >-
+            A mapping of package names to semver ranges for runtime
+            dependencies.
+          additionalProperties:
+            type: string
+        devDependencies:
+          type: object
+          description: >-
+            A mapping of package names to semver ranges for development
+            dependencies.
+          additionalProperties:
+            type: string
+        peerDependencies:
+          type: object
+          description: >-
+            A mapping of package names to semver ranges for peer
+            dependencies.
+          additionalProperties:
+            type: string
+        optionalDependencies:
+          type: object
+          description: >-
+            A mapping of package names to semver ranges for optional
+            dependencies.
+          additionalProperties:
+            type: string
+        engines:
+          type: object
+          description: >-
+            A mapping of runtime names to semver ranges specifying
+            compatible environments.
+          additionalProperties:
+            type: string
+        author:
+          $ref: '#/components/schemas/Person'
+        maintainers:
+          type: array
+          description: >-
+            List of maintainers for this version.
+          items:
+            $ref: '#/components/schemas/Person'
+        repository:
+          $ref: '#/components/schemas/Repository'
+        license:
+          type: string
+          description: >-
+            The SPDX license identifier.
+        keywords:
+          type: array
+          description: >-
+            Keywords associated with this version.
+          items:
+            type: string
+        dist:
+          $ref: '#/components/schemas/Distribution'
+        _npmVersion:
+          type: string
+          description: >-
+            The version of npm used to publish this package version.
+        _nodeVersion:
+          type: string
+          description: >-
+            The version of Node.js used to publish this package version.
+        _npmUser:
+          $ref: '#/components/schemas/Person'
+    Person:
+      type: object
+      description: >-
+        A person object representing a user, author, or maintainer.
+      properties:
+        name:
+          type: string
+          description: >-
+            The display name of the person.
+        email:
+          type: string
+          format: email
+          description: >-
+            The email address of the person.
+        url:
+          type: string
+          format: uri
+          description: >-
+            The personal URL or website of the person.
+    Repository:
+      type: object
+      description: >-
+        Source code repository information.
+      properties:
+        type:
+          type: string
+          description: >-
+            The version control system type, typically "git".
+        url:
+          type: string
+          description: >-
+            The URL of the source code repository.
+    Distribution:
+      type: object
+      description: >-
+        Distribution metadata for a specific published version,
+        including integrity hashes and tarball location.
+      properties:
+        shasum:
+          type: string
+          description: >-
+            The SHA-1 checksum of the tarball.
+        tarball:
+          type: string
+          format: uri
+          description: >-
+            The URL where the tarball can be downloaded.
+        integrity:
+          type: string
+          description: >-
+            The Subresource Integrity (SRI) hash of the tarball,
+            typically using SHA-512.
+        fileCount:
+          type: integer
+          description: >-
+            The number of files in the tarball.
+        unpackedSize:
+          type: integer
+          description: >-
+            The total unpacked size of the tarball in bytes.
+        signatures:
+          type: array
+          description: >-
+            Cryptographic signatures for the package version.
+          items:
+            type: object
+            properties:
+              keyid:
+                type: string
+                description: >-
+                  The identifier of the signing key.
+              sig:
+                type: string
+                description: >-
+                  The signature value.
+    SearchResults:
+      type: object
+      description: >-
+        Search results from the npm registry search endpoint.
+      properties:
+        objects:
+          type: array
+          description: >-
+            List of search result objects.
+          items:
+            $ref: '#/components/schemas/SearchResultItem'
+        total:
+          type: integer
+          description: >-
+            The total number of matching results.
+        time:
+          type: string
+          description: >-
+            Timestamp of when the search was performed.
+    SearchResultItem:
+      type: object
+      description: >-
+        A single search result item containing package metadata and
+        scoring information.
+      properties:
+        package:
+          type: object
+          description: >-
+            Summary package metadata.
+          properties:
+            name:
+              type: string
+              description: >-
+                The package name.
+            scope:
+              type: string
+              description: >-
+                The package scope, or "unscoped" if none.
+            version:
+              type: string
+              description: >-
+                The latest version of the package.
+            description:
+              type: string
+              description: >-
+                A short description of the package.
+            keywords:
+              type: array
+              description: >-
+                Keywords associated with the package.
+              items:
+                type: string
+            date:
+              type: string
+              format: date-time
+              description: >-
+                The publication date of the latest version.
+            links:
+              type: object
+              description: >-
+                Links to related resources such as npm page, homepage,
+                repository, and bugs.
+              additionalProperties:
+                type: string
+            author:
+              $ref: '#/components/schemas/Person'
+            publisher:
+              $ref: '#/components/schemas/Person'
+            maintainers:
+              type: array
+              description: >-
+                List of package maintainers.
+              items:
+                $ref: '#/components/schemas/Person'
+        score:
+          type: object
+          description: >-
+            Scoring breakdown for the package.
+          properties:
+            final:
+              type: number
+              description: >-
+                The final combined score.
+            detail:
+              type: object
+              description: >-
+                Detailed score breakdown.
+              properties:
+                quality:
+                  type: number
+                  description: >-
+                    The quality score component.
+                popularity:
+                  type: number
+                  description: >-
+                    The popularity score component.
+                maintenance:
+                  type: number
+                  description: >-
+                    The maintenance score component.
+        searchScore:
+          type: number
+          description: >-
+            The search relevance score for this result.
+    Error:
+      type: object
+      description: >-
+        An error response from the registry.
+      properties:
+        error:
+          type: string
+          description: >-
+            The error type or code.
+        reason:
+          type: string
+          description: >-
+            A human-readable explanation of the error.

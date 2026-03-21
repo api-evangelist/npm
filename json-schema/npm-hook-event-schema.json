@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://npmjs.com/schemas/npm/hook-event.json",
+  "title": "npm Hook Event Payload",
+  "description": "The webhook event payload delivered by npm hooks when registry changes occur. Each payload is signed with HMAC SHA-256 using the shared secret configured on the hook subscription.",
+  "type": "object",
+  "required": ["event", "name", "type", "time"],
+  "properties": {
+    "event": {
+      "type": "string",
+      "description": "The type of registry event that occurred.",
+      "enum": [
+        "package:change",
+        "package:publish",
+        "package:unpublish",
+        "package:owner",
+        "package:dist-tag",
+        "package:deprecate",
+        "package:star"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the package associated with the event."
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of entity that triggered the hook subscription.",
+      "enum": ["package", "scope", "owner"]
+    },
+    "version": {
+      "type": "string",
+      "description": "The version of the package associated with the event, if applicable."
+    },
+    "hookOwner": {
+      "type": "object",
+      "description": "The npm user who owns the hook subscription.",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The npm username of the hook owner."
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "description": "Event-specific payload data containing details about what changed."
+    },
+    "change": {
+      "type": "object",
+      "description": "Details about the specific change that occurred.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "The affected version, if applicable."
+        },
+        "dist-tag": {
+          "type": "string",
+          "description": "The affected dist-tag, if applicable."
+        },
+        "maintainer": {
+          "type": "string",
+          "description": "The affected maintainer username, if applicable."
+        }
+      }
+    },
+    "time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The ISO 8601 timestamp of when the event occurred."
+    }
+  }
+}

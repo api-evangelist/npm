@@ -1,0 +1,404 @@
+asyncapi: 2.6.0
+info:
+  title: npm Hooks Events
+  description: >-
+    The npm Hooks event system delivers HTTP POST payloads to subscriber
+    endpoints whenever changes occur in the npm registry. Hooks can be
+    configured to watch for changes to individual packages, all packages
+    within a scope, or all packages published by a specific npm user.
+    Each payload is signed with a shared secret using HMAC SHA-256, and
+    the signature is included in the x-npm-signature header for
+    verification. Note that npm hooks services have been deprecated as
+    of July 2024.
+  version: '1.0.0'
+  contact:
+    name: npm Support
+    url: https://www.npmjs.com/support
+servers:
+  subscriber:
+    url: '{subscriberUrl}'
+    protocol: https
+    description: >-
+      The subscriber's HTTP endpoint that receives webhook payloads.
+      This URL is configured when creating a hook subscription.
+    variables:
+      subscriberUrl:
+        description: >-
+          The URL of the subscriber endpoint.
+channels:
+  /webhook:
+    description: >-
+      Receives HTTP POST payloads from the npm registry when a watched
+      entity changes. Each delivery includes an x-npm-signature header
+      containing an HMAC SHA-256 signature of the payload body using
+      the shared secret configured during hook creation.
+    publish:
+      operationId: receiveRegistryEvent
+      summary: Receive an npm registry change event
+      description: >-
+        Receives a webhook payload when a package is published,
+        unpublished, updated, or when ownership or scope membership
+        changes occur.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/PackageChanged'
+          - $ref: '#/components/messages/PackagePublished'
+          - $ref: '#/components/messages/PackageUnpublished'
+          - $ref: '#/components/messages/OwnerChanged'
+          - $ref: '#/components/messages/DistTagChanged'
+          - $ref: '#/components/messages/DeprecationChanged'
+          - $ref: '#/components/messages/StarChanged'
+components:
+  messages:
+    PackageChanged:
+      name: packageChanged
+      title: Package Changed
+      summary: >-
+        Sent when a package is modified in any way.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          x-npm-signature:
+            type: string
+            description: >-
+              HMAC SHA-256 signature of the payload body, using the
+              shared secret configured on the hook.
+      payload:
+        $ref: '#/components/schemas/PackageChangeEvent'
+    PackagePublished:
+      name: packagePublished
+      title: Package Published
+      summary: >-
+        Sent when a new version of a package is published to the
+        registry.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          x-npm-signature:
+            type: string
+            description: >-
+              HMAC SHA-256 signature of the payload body.
+      payload:
+        $ref: '#/components/schemas/PackagePublishEvent'
+    PackageUnpublished:
+      name: packageUnpublished
+      title: Package Unpublished
+      summary: >-
+        Sent when a package version is unpublished from the registry.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          x-npm-signature:
+            type: string
+            description: >-
+              HMAC SHA-256 signature of the payload body.
+      payload:
+        $ref: '#/components/schemas/PackageUnpublishEvent'
+    OwnerChanged:
+      name: ownerChanged
+      title: Owner Changed
+      summary: >-
+        Sent when the maintainers or owner of a package changes.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          x-npm-signature:
+            type: string
+            description: >-
+              HMAC SHA-256 signature of the payload body.
+      payload:
+        $ref: '#/components/schemas/OwnerChangeEvent'
+    DistTagChanged:
+      name: distTagChanged
+      title: Dist-Tag Changed
+      summary: >-
+        Sent when a distribution tag is added, modified, or removed
+        on a package.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          x-npm-signature:
+            type: string
+            description: >-
+              HMAC SHA-256 signature of the payload body.
+      payload:
+        $ref: '#/components/schemas/DistTagChangeEvent'
+    DeprecationChanged:
+      name: deprecationChanged
+      title: Deprecation Changed
+      summary: >-
+        Sent when a package version is deprecated or undeprecated.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          x-npm-signature:
+            type: string
+            description: >-
+              HMAC SHA-256 signature of the payload body.
+      payload:
+        $ref: '#/components/schemas/DeprecationChangeEvent'
+    StarChanged:
+      name: starChanged
+      title: Star Changed
+      summary: >-
+        Sent when a user stars or unstars a package.
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          x-npm-signature:
+            type: string
+            description: >-
+              HMAC SHA-256 signature of the payload body.
+      payload:
+        $ref: '#/components/schemas/StarChangeEvent'
+  schemas:
+    BaseEvent:
+      type: object
+      description: >-
+        Common fields present in all npm hook event payloads.
+      properties:
+        event:
+          type: string
+          description: >-
+            The type of event that occurred.
+        name:
+          type: string
+          description: >-
+            The name of the package associated with the event.
+        type:
+          type: string
+          description: >-
+            The type of entity that triggered the hook.
+          enum:
+            - package
+            - scope
+            - owner
+        version:
+          type: string
+          description: >-
+            The version of the package associated with the event,
+            if applicable.
+        hookOwner:
+          type: object
+          description: >-
+            The npm user who owns the hook subscription.
+          properties:
+            username:
+              type: string
+              description: >-
+                The npm username of the hook owner.
+        payload:
+          type: object
+          description: >-
+            The event-specific payload data.
+        change:
+          type: object
+          description: >-
+            Details about what changed.
+        time:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp of when the event occurred.
+    PackageChangeEvent:
+      allOf:
+        - $ref: '#/components/schemas/BaseEvent'
+        - type: object
+          description: >-
+            Event payload for a general package change.
+          properties:
+            event:
+              type: string
+              enum:
+                - package:change
+            payload:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: >-
+                    The package name.
+                version:
+                  type: string
+                  description: >-
+                    The affected version.
+                description:
+                  type: string
+                  description: >-
+                    The package description.
+    PackagePublishEvent:
+      allOf:
+        - $ref: '#/components/schemas/BaseEvent'
+        - type: object
+          description: >-
+            Event payload for a new package version publication.
+          properties:
+            event:
+              type: string
+              enum:
+                - package:publish
+            payload:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: >-
+                    The package name.
+                version:
+                  type: string
+                  description: >-
+                    The newly published version.
+                description:
+                  type: string
+                  description: >-
+                    The package description.
+                dist:
+                  type: object
+                  description: >-
+                    Distribution metadata for the published version.
+                  properties:
+                    shasum:
+                      type: string
+                      description: >-
+                        SHA-1 checksum of the tarball.
+                    tarball:
+                      type: string
+                      format: uri
+                      description: >-
+                        URL of the published tarball.
+    PackageUnpublishEvent:
+      allOf:
+        - $ref: '#/components/schemas/BaseEvent'
+        - type: object
+          description: >-
+            Event payload for a package version being unpublished.
+          properties:
+            event:
+              type: string
+              enum:
+                - package:unpublish
+            payload:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: >-
+                    The package name.
+                version:
+                  type: string
+                  description: >-
+                    The unpublished version.
+    OwnerChangeEvent:
+      allOf:
+        - $ref: '#/components/schemas/BaseEvent'
+        - type: object
+          description: >-
+            Event payload for an ownership change on a package.
+          properties:
+            event:
+              type: string
+              enum:
+                - package:owner
+            payload:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: >-
+                    The package name.
+                maintainers:
+                  type: array
+                  description: >-
+                    Updated list of maintainers.
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        description: >-
+                          Maintainer username.
+                      email:
+                        type: string
+                        format: email
+                        description: >-
+                          Maintainer email.
+    DistTagChangeEvent:
+      allOf:
+        - $ref: '#/components/schemas/BaseEvent'
+        - type: object
+          description: >-
+            Event payload for a dist-tag change on a package.
+          properties:
+            event:
+              type: string
+              enum:
+                - package:dist-tag
+            payload:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: >-
+                    The package name.
+                dist-tags:
+                  type: object
+                  description: >-
+                    Updated mapping of dist-tags to versions.
+                  additionalProperties:
+                    type: string
+    DeprecationChangeEvent:
+      allOf:
+        - $ref: '#/components/schemas/BaseEvent'
+        - type: object
+          description: >-
+            Event payload for a deprecation change on a package version.
+          properties:
+            event:
+              type: string
+              enum:
+                - package:deprecate
+            payload:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: >-
+                    The package name.
+                version:
+                  type: string
+                  description: >-
+                    The affected version.
+                deprecated:
+                  type: string
+                  description: >-
+                    The deprecation message, or empty string if
+                    undeprecated.
+    StarChangeEvent:
+      allOf:
+        - $ref: '#/components/schemas/BaseEvent'
+        - type: object
+          description: >-
+            Event payload for a star or unstar action on a package.
+          properties:
+            event:
+              type: string
+              enum:
+                - package:star
+            payload:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: >-
+                    The package name.
+                user:
+                  type: string
+                  description: >-
+                    The npm user who starred or unstarred the package.

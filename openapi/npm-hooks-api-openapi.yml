@@ -1,0 +1,376 @@
+openapi: 3.1.0
+info:
+  title: npm Hooks API
+  description: >-
+    The npm Hooks API allows developers to subscribe to notifications about
+    changes in the npm registry. Hooks send HTTP POST payloads to a
+    configured URI whenever a package is changed, enabling developers to
+    build integrations that respond to registry events in real time. Users
+    can add hooks to follow specific packages, track all activity of given
+    npm users, or monitor all packages within an organization or user
+    scope. The API provides endpoints for creating, listing, updating, and
+    deleting hook subscriptions. Note that npm hooks services have been
+    deprecated as of July 2024.
+  version: '1.0.0'
+  contact:
+    name: npm Support
+    url: https://www.npmjs.com/support
+  termsOfService: https://docs.npmjs.com/policies/terms
+externalDocs:
+  description: npm Hooks Documentation
+  url: https://blog.npmjs.org/post/145260155635/introducing-hooks-get-notifications-of-npm
+servers:
+  - url: https://registry.npmjs.org
+    description: npm Public Registry
+tags:
+  - name: Hooks
+    description: >-
+      Webhook subscription management for npm registry events. Create,
+      list, update, and delete hook subscriptions to receive notifications
+      when packages, scopes, or user activities change.
+security:
+  - bearerAuth: []
+paths:
+  /-/npm/v1/hooks:
+    get:
+      operationId: listHooks
+      summary: List webhooks
+      description: >-
+        Retrieves all webhook subscriptions for the authenticated user.
+        Results can be filtered by package name and paginated using
+        limit and offset parameters.
+      tags:
+        - Hooks
+      parameters:
+        - name: package
+          in: query
+          description: >-
+            Filter hooks by package name. Does not support regular
+            expressions.
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: >-
+            Maximum number of hooks to return.
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+        - name: offset
+          in: query
+          description: >-
+            Number of hooks to skip for pagination.
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '200':
+          description: List of hooks retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    description: >-
+                      List of hook subscription objects.
+                    items:
+                      $ref: '#/components/schemas/Hook'
+        '401':
+          description: Authentication required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /-/npm/v1/hooks/hook:
+    post:
+      operationId: createHook
+      summary: Create a webhook
+      description: >-
+        Creates a new webhook subscription. The hook will send HTTP POST
+        payloads to the specified endpoint URI whenever the watched
+        entity changes. Hooks can watch individual packages, all packages
+        belonging to a scope, or all packages published by a specific
+        npm user.
+      tags:
+        - Hooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HookCreateRequest'
+      responses:
+        '201':
+          description: Hook created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hook'
+        '400':
+          description: Invalid request parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /-/npm/v1/hooks/hook/{id}:
+    get:
+      operationId: getHook
+      summary: Get a webhook
+      description: >-
+        Retrieves a specific webhook subscription by its identifier.
+      tags:
+        - Hooks
+      parameters:
+        - $ref: '#/components/parameters/hookId'
+      responses:
+        '200':
+          description: Hook retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hook'
+        '401':
+          description: Authentication required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Hook not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      operationId: updateHook
+      summary: Update a webhook
+      description: >-
+        Updates an existing webhook subscription. The endpoint URI and
+        shared secret can be modified. The response includes the full
+        updated hook object.
+      tags:
+        - Hooks
+      parameters:
+        - $ref: '#/components/parameters/hookId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HookUpdateRequest'
+      responses:
+        '200':
+          description: Hook updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hook'
+        '400':
+          description: Invalid request parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Hook not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      operationId: deleteHook
+      summary: Delete a webhook
+      description: >-
+        Deletes a webhook subscription. The response includes the hook
+        object that was deleted.
+      tags:
+        - Hooks
+      parameters:
+        - $ref: '#/components/parameters/hookId'
+      responses:
+        '200':
+          description: Hook deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hook'
+        '401':
+          description: Authentication required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Hook not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        npm access token provided as a Bearer token.
+  parameters:
+    hookId:
+      name: id
+      in: path
+      description: >-
+        The unique identifier of the webhook subscription.
+      required: true
+      schema:
+        type: string
+  schemas:
+    Hook:
+      type: object
+      description: >-
+        A webhook subscription object that defines what registry events
+        trigger notifications and where those notifications are sent.
+      properties:
+        id:
+          type: string
+          description: >-
+            The unique identifier for this hook subscription.
+        username:
+          type: string
+          description: >-
+            The npm username of the hook owner.
+        name:
+          type: string
+          description: >-
+            The name of the entity being watched. For packages, this
+            is the package name. For scopes, this is the scope name.
+            For owners, this is the npm username.
+        type:
+          type: string
+          description: >-
+            The type of entity being watched.
+          enum:
+            - package
+            - scope
+            - owner
+        endpoint:
+          type: string
+          format: uri
+          description: >-
+            The URI where webhook payloads will be sent via HTTP POST.
+        last_delivery:
+          type: object
+          description: >-
+            Information about the last delivery attempt.
+          properties:
+            id:
+              type: string
+              description: >-
+                The identifier of the last delivery.
+            timestamp:
+              type: string
+              format: date-time
+              description: >-
+                When the last delivery was attempted.
+            status:
+              type: integer
+              description: >-
+                The HTTP status code received from the endpoint.
+        response_code:
+          type: integer
+          description: >-
+            The HTTP response code from the last delivery attempt.
+        status:
+          type: string
+          description: >-
+            The current status of the hook subscription.
+        created:
+          type: string
+          format: date-time
+          description: >-
+            When the hook was created.
+        updated:
+          type: string
+          format: date-time
+          description: >-
+            When the hook was last updated.
+    HookCreateRequest:
+      type: object
+      description: >-
+        Request body for creating a new webhook subscription.
+      required:
+        - type
+        - name
+        - endpoint
+        - secret
+      properties:
+        type:
+          type: string
+          description: >-
+            The type of entity to watch for changes.
+          enum:
+            - package
+            - scope
+            - owner
+        name:
+          type: string
+          description: >-
+            The name of the entity to watch. For packages, use the
+            package name. For scopes, use the scope name (e.g.,
+            @myorg). For owners, use the npm username.
+        endpoint:
+          type: string
+          format: uri
+          description: >-
+            The URI to receive webhook payloads via HTTP POST.
+        secret:
+          type: string
+          description: >-
+            A shared secret used to sign webhook payloads. The
+            signature is included in the x-npm-signature header
+            of each delivery.
+    HookUpdateRequest:
+      type: object
+      description: >-
+        Request body for updating an existing webhook subscription.
+      required:
+        - endpoint
+        - secret
+      properties:
+        endpoint:
+          type: string
+          format: uri
+          description: >-
+            The updated URI to receive webhook payloads.
+        secret:
+          type: string
+          description: >-
+            The updated shared secret for payload signing.
+    Error:
+      type: object
+      description: >-
+        An error response from the npm API.
+      properties:
+        error:
+          type: string
+          description: >-
+            The error type or code.
+        message:
+          type: string
+          description: >-
+            A human-readable description of the error.
