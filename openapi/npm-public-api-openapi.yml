@@ -22,15 +22,15 @@ servers:
   - url: https://registry.npmjs.org
     description: npm Public Registry
 tags:
-  - name: Tokens
-    description: >-
-      Manage npm access tokens for authentication. Create, list, and
-      delete tokens with customizable permissions and restrictions.
   - name: OIDC
     description: >-
       OpenID Connect token exchange for trusted publishing. Exchange
       OIDC identity tokens from supported CI/CD providers for
       short-lived npm registry access tokens.
+  - name: Tokens
+    description: >-
+      Manage npm access tokens for authentication. Create, list, and
+      delete tokens with customizable permissions and restrictions.
   - name: Trusted Publishers
     description: >-
       Configure trusted publisher settings for packages to enable OIDC

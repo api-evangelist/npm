@@ -22,19 +22,19 @@ servers:
   - url: https://registry.npmjs.org
     description: npm Public Registry
 tags:
-  - name: Registry
+  - name: Downloads
     description: >-
-      Registry metadata and status information.
+      Package tarball downloads.
   - name: Packages
     description: >-
       Package metadata retrieval, including full packuments and
       version-specific documents.
+  - name: Registry
+    description: >-
+      Registry metadata and status information.
   - name: Search
     description: >-
       Full-text search across the npm registry with weighted scoring.
-  - name: Downloads
-    description: >-
-      Package tarball downloads.
 paths:
   /:
     get:
