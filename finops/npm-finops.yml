@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,10 +9,11 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: npm
 providerId: npm
-publisherName: npm
-serviceCategory: API
+publisherName: GitHub, Inc.
+serviceCategory: Developer Tools / Package Registry
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - Packages
   - JavaScript
@@ -22,50 +24,27 @@ tags:
   - FinOps
   - Cost Management
   - FOCUS
-description: FinOps framework definition for the npm API surface. Provides a FOCUS-aligned mapping for
-  cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
+description: 'FOCUS-aligned FinOps for npm: the public registry is free; commercial spend is on GitHub
+  seats and Packages storage/egress, billed per user per month with usage overages.'
+sources:
+  - https://github.com/pricing
+  - https://docs.github.com/en/billing
+  - https://www.npmjs.com/products
 principles:
   - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
+    description: Use the GitHub billing dashboard and Billing Platform API to see per-org Packages storage,
+      data transfer, and Actions minutes. Public registry consumption is free and not metered.
   - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
+    description: Tag spend by GitHub organization and team; private npm packages roll up under the publishing
+      org's GitHub Packages line items.
   - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
+    description: Use the public npm registry for OSS dependencies (zero cost). Mirror or proxy via Verdaccio/JFrog
+      for high-volume bulk reads. Use replicate.npmjs.com instead of scraping for indexing workloads.
   - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+    description: Org admins manage seats and Packages overage policies. Set Actions/Packages spending
+      limits and alerts in GitHub billing settings; reconcile monthly invoices against per-team chargeback.
 billingModel:
-  pricingCategory: Usage-Based
+  pricingCategory: Subscription + Usage
   billingFrequency: Monthly
   billingCurrency: USD
   chargeCategories:
@@ -77,41 +56,42 @@ billingModel:
   chargeFrequency: Recurring
 focusColumns:
   ServiceName: npm
-  ServiceCategory: Developer Tools / API
+  ServiceCategory: Developer Tools / Package Registry
   ProviderName: npm
-  PublisherName: npm
-  InvoiceIssuerName: npm
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: GitHub, Inc.
+  InvoiceIssuerName: GitHub, Inc.
+  PricingCategory: Subscription + Usage
+  PricingUnit: seat
   BillingCurrency: USD
   ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: github_seats
+    description: Per-user GitHub plan seat (Team or Enterprise) granting private npm package access
+    unit: seat
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
+      - plan
+      - org
+  - name: packages_storage
+    description: GitHub Packages storage consumed by private npm packages
+    unit: GB-month
+    aggregation: avg
+    dimensions:
+      - org
+      - visibility
+  - name: packages_data_transfer
+    description: Outbound data transfer from the GitHub Packages registry
     unit: GB
     aggregation: sum
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
+      - org
+  - name: actions_minutes
+    description: GitHub Actions minutes consumed by npm publish/CI workflows
+    unit: minute
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
+      - runner_os
+      - org
 apis:
   - name: npm Registry API
     baseURL: https://registry.npmjs.org
@@ -122,56 +102,45 @@ apis:
       - Package Management
       - Node.js
     serviceName: npm Registry API
-    serviceCategory: API
+    serviceCategory: Package Registry
   - name: npm Public API
     baseURL: https://npm.pkg.github.com
     tags:
       - Packages
       - Tokens
       - Authentication
-      - Security
-      - OIDC
-      - Access Control
-    serviceName: npm Public API
-    serviceCategory: API
+    serviceName: GitHub Packages npm
+    serviceCategory: Package Registry
   - name: npm Hooks API
     baseURL: ''
     tags:
       - Webhooks
       - Notifications
       - Events
-      - Automation
-      - Packages
     serviceName: npm Hooks API
-    serviceCategory: API
+    serviceCategory: Package Registry
   - name: npm CLI
     baseURL: ''
     tags:
       - Command Line
       - Package Management
-      - JavaScript
-      - Node.js
-      - Developer Tools
     serviceName: npm CLI
-    serviceCategory: API
+    serviceCategory: Package Registry
   - name: npm Provenance
     baseURL: ''
     tags:
       - Security
       - Supply Chain
-      - Verification
       - Sigstore
-      - Transparency
-      - CI/CD
     serviceName: npm Provenance
-    serviceCategory: API
+    serviceCategory: Package Registry
 unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+  - name: Cost per private package GB-month
+    metric: packages_storage_cost / packages_storage_GB
+    target: minimize via cleanup of stale package versions
+  - name: Cost per developer-month
+    metric: github_seat_cost + packages_overage / active_developers
+    target: monitor against GitHub Team baseline
 maintainers:
   - FN: API Evangelist
     email: info@apievangelist.com

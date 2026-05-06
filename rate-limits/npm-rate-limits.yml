@@ -4,7 +4,8 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: npm
 providerId: npm
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - Packages
   - JavaScript
@@ -13,98 +14,59 @@ tags:
   - Registry
   - Security
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the npm API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: npm does not publish per-second or per-minute numeric rate limits for the public registry
+  at registry.npmjs.org. Reads are anonymous and CDN-fronted; abusive traffic is throttled per-IP at the
+  edge. The replication endpoint (replicate.npmjs.com) has explicit pagination caps. Authenticated publish
+  and webhook operations are throttled at the application layer. Limits are not raised per tier; bulk
+  consumers should use replication rather than scraping.
+sources:
+  - https://github.com/npm/registry/blob/main/docs/REGISTRY-API.md
+  - https://github.com/orgs/community/discussions/152515
+  - https://docs.npmjs.com/
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
+  - name: Public registry reads
+    scope: IP
+    metric: varies
+    limit: see CDN abuse policy; not numerically published
     applies:
       - npm Registry API
-      - npm Public API
-      - npm Hooks API
-      - npm CLI
-      - npm Provenance
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
+  - name: Replication _changes pagination
+    scope: account
+    metric: results_per_request
+    limit: 10000
+    notes: 'limit query parameter: default 1000, maximum 10000.'
     applies:
       - npm Registry API
-      - npm Public API
-      - npm Hooks API
-      - npm CLI
-      - npm Provenance
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
+  - name: Search API page size
+    scope: IP
+    metric: results_per_request
+    limit: 250
+    notes: size parameter on /-/v1/search; default 20, maximum 250.
     applies:
       - npm Registry API
-      - npm Public API
-      - npm Hooks API
-      - npm CLI
-      - npm Provenance
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
+  - name: Authenticated publish
+    scope: account
+    metric: varies
+    limit: see registry abuse policy
     applies:
       - npm Registry API
-      - npm Public API
-      - npm Hooks API
       - npm CLI
-      - npm Provenance
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - npm Registry API
-      - npm Public API
-      - npm Hooks API
-      - npm CLI
-      - npm Provenance
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Use replication for bulk
+    description: For bulk indexing or mirroring, use /_changes and /_all_docs on replicate.npmjs.com with
+      the npm-replication-opt-in header rather than scraping registry.npmjs.org.
+  - name: Backoff
+    description: Honor Retry-After when present; clients should implement exponential backoff with jitter
+      on 429/503 responses.
+  - name: Authentication for writes
+    description: Publish, deprecate, and access-token operations require an npm token; reads are anonymous
+      for public packages.
+  - name: 2FA / Provenance
+    description: Publishing requires 2FA on the account or a CI provenance attestation. Not a rate limit
+      but governs which write requests are accepted.
 maintainers:
   - FN: API Evangelist
     email: info@apievangelist.com
