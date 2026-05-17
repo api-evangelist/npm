@@ -6,7 +6,7 @@ description: >-
   provides APIs for searching and retrieving package metadata, managing access
   tokens, subscribing to registry event webhooks, and publishing packages with
   supply chain provenance verification.
-type: Contract
+kind: contract
 position: Consuming
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
