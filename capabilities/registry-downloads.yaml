@@ -1,0 +1,77 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: npm Registry API — Downloads
+  description: 'npm Registry API — Downloads. 1 operations. Lead operation: Download a package tarball. Self-contained Naftiko
+    capability covering one Npm business surface.'
+  tags:
+  - Npm
+  - Downloads
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NPM_API_KEY: NPM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: registry-downloads
+    baseUri: https://registry.npmjs.org
+    description: npm Registry API — Downloads business capability. Self-contained, no shared references.
+    resources:
+    - name: package---tarball
+      path: /{package}/-/{tarball}
+      operations:
+      - name: downloadpackagetarball
+        method: GET
+        description: Download a package tarball
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tarball
+          in: path
+          type: string
+          description: The tarball filename, typically in the format {package}-{version}.tgz.
+          required: true
+  exposes:
+  - type: rest
+    namespace: registry-downloads-rest
+    port: 8080
+    description: REST adapter for npm Registry API — Downloads. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/{package}//{tarball}
+      name: package-tarball
+      description: REST surface for package---tarball.
+      operations:
+      - method: GET
+        name: downloadpackagetarball
+        description: Download a package tarball
+        call: registry-downloads.downloadpackagetarball
+        with:
+          tarball: rest.tarball
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: registry-downloads-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for npm Registry API — Downloads. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: download-package-tarball
+      description: Download a package tarball
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: registry-downloads.downloadpackagetarball
+      with:
+        tarball: tools.tarball
+      outputParameters:
+      - type: object
+        mapping: $.

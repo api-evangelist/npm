@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: npm Public API — OIDC
+  description: 'npm Public API — OIDC. 1 operations. Lead operation: Exchange an OIDC token for an npm token. Self-contained
+    Naftiko capability covering one Npm business surface.'
+  tags:
+  - Npm
+  - OIDC
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NPM_API_KEY: NPM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: public-oidc
+    baseUri: https://registry.npmjs.org
+    description: npm Public API — OIDC business capability. Self-contained, no shared references.
+    resources:
+    - name: --npm-v1-security-oidc-tokens
+      path: /-/npm/v1/security/oidc/tokens
+      operations:
+      - name: exchangeoidctoken
+        method: POST
+        description: Exchange an OIDC token for an npm token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NPM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: public-oidc-rest
+    port: 8080
+    description: REST adapter for npm Public API — OIDC. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1//npm/v1/security/oidc/tokens
+      name: npm-v1-security-oidc-tokens
+      description: REST surface for --npm-v1-security-oidc-tokens.
+      operations:
+      - method: POST
+        name: exchangeoidctoken
+        description: Exchange an OIDC token for an npm token
+        call: public-oidc.exchangeoidctoken
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: public-oidc-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for npm Public API — OIDC. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: exchange-oidc-token-npm-token
+      description: Exchange an OIDC token for an npm token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: public-oidc.exchangeoidctoken
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

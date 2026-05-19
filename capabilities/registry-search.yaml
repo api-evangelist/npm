@@ -1,0 +1,108 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: npm Registry API — Search
+  description: 'npm Registry API — Search. 1 operations. Lead operation: Search packages. Self-contained Naftiko capability
+    covering one Npm business surface.'
+  tags:
+  - Npm
+  - Search
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NPM_API_KEY: NPM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: registry-search
+    baseUri: https://registry.npmjs.org
+    description: npm Registry API — Search business capability. Self-contained, no shared references.
+    resources:
+    - name: --v1-search
+      path: /-/v1/search
+      operations:
+      - name: searchpackages
+        method: GET
+        description: Search packages
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: text
+          in: query
+          type: string
+          description: Full-text search query. Supports special qualifiers such as author:username, maintainer:username, scope:scopename,
+            keywords:keyword, not:unstable, not:insecure,
+          required: true
+        - name: size
+          in: query
+          type: integer
+          description: Number of results to return. Maximum value is 250.
+        - name: from
+          in: query
+          type: integer
+          description: Offset for pagination, indicating the starting position in the result set.
+        - name: quality
+          in: query
+          type: number
+          description: Weighting for the quality score component of search results, between 0 and 1.
+        - name: popularity
+          in: query
+          type: number
+          description: Weighting for the popularity score component of search results, between 0 and 1.
+        - name: maintenance
+          in: query
+          type: number
+          description: Weighting for the maintenance score component of search results, between 0 and 1.
+  exposes:
+  - type: rest
+    namespace: registry-search-rest
+    port: 8080
+    description: REST adapter for npm Registry API — Search. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1//v1/search
+      name: v1-search
+      description: REST surface for --v1-search.
+      operations:
+      - method: GET
+        name: searchpackages
+        description: Search packages
+        call: registry-search.searchpackages
+        with:
+          text: rest.text
+          size: rest.size
+          from: rest.from
+          quality: rest.quality
+          popularity: rest.popularity
+          maintenance: rest.maintenance
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: registry-search-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for npm Registry API — Search. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: search-packages
+      description: Search packages
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: registry-search.searchpackages
+      with:
+        text: tools.text
+        size: tools.size
+        from: tools.from
+        quality: tools.quality
+        popularity: tools.popularity
+        maintenance: tools.maintenance
+      outputParameters:
+      - type: object
+        mapping: $.

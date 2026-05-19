@@ -1,32 +1,35 @@
 naftiko: 1.0.0-alpha2
 info:
-  label: npm Hooks API
-  description: The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks
-    send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that
-    respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given
-    npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing,
-    updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.
+  label: npm Hooks API — Hooks
+  description: 'npm Hooks API — Hooks. 5 operations. Lead operation: List webhooks. Self-contained Naftiko capability covering
+    one Npm business surface.'
   tags:
   - Npm
-  - API
-  created: '2026-05-06'
-  modified: '2026-05-06'
+  - Hooks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NPM_API_KEY: NPM_API_KEY
 capability:
   consumes:
   - type: http
-    namespace: npm
+    namespace: hooks-hooks
     baseUri: https://registry.npmjs.org
-    description: npm Hooks API HTTP API.
-    authentication:
-      type: bearer
-      token: '{{NPM_TOKEN}}'
+    description: npm Hooks API — Hooks business capability. Self-contained, no shared references.
     resources:
-    - name: npm-v1-hooks
+    - name: --npm-v1-hooks
       path: /-/npm/v1/hooks
       operations:
       - name: listhooks
         method: GET
         description: List webhooks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
         inputParameters:
         - name: package
           in: query
@@ -40,12 +43,7 @@ capability:
           in: query
           type: integer
           description: Number of hooks to skip for pagination.
-        outputRawFormat: json
-        outputParameters:
-        - name: result
-          type: object
-          value: $.
-    - name: npm-v1-hooks-hook
+    - name: --npm-v1-hooks-hook
       path: /-/npm/v1/hooks/hook
       operations:
       - name: createhook
@@ -56,7 +54,13 @@ capability:
         - name: result
           type: object
           value: $.
-    - name: npm-v1-hooks-hook-id
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: --npm-v1-hooks-hook-id
       path: /-/npm/v1/hooks/hook/{id}
       operations:
       - name: gethook
@@ -75,6 +79,12 @@ capability:
         - name: result
           type: object
           value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
       - name: deletehook
         method: DELETE
         description: Delete a webhook
@@ -83,133 +93,133 @@ capability:
         - name: result
           type: object
           value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NPM_API_KEY}}'
   exposes:
   - type: rest
+    namespace: hooks-hooks-rest
     port: 8080
-    namespace: npm-rest
-    description: REST adapter for npm Hooks API.
+    description: REST adapter for npm Hooks API — Hooks. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
     resources:
-    - path: /-/npm/v1/hooks
-      name: listhooks
+    - path: /v1//npm/v1/hooks
+      name: npm-v1-hooks
+      description: REST surface for --npm-v1-hooks.
       operations:
       - method: GET
         name: listhooks
         description: List webhooks
-        call: npm.listhooks
+        call: hooks-hooks.listhooks
+        with:
+          package: rest.package
+          limit: rest.limit
+          offset: rest.offset
         outputParameters:
         - type: object
           mapping: $.
-    - path: /-/npm/v1/hooks/hook
-      name: createhook
+    - path: /v1//npm/v1/hooks/hook
+      name: npm-v1-hooks-hook
+      description: REST surface for --npm-v1-hooks-hook.
       operations:
       - method: POST
         name: createhook
         description: Create a webhook
-        call: npm.createhook
+        call: hooks-hooks.createhook
+        with:
+          body: rest.body
         outputParameters:
         - type: object
           mapping: $.
-    - path: /-/npm/v1/hooks/hook/{id}
-      name: gethook
+    - path: /v1//npm/v1/hooks/hook/{id}
+      name: npm-v1-hooks-hook-id
+      description: REST surface for --npm-v1-hooks-hook-id.
       operations:
       - method: GET
         name: gethook
         description: Get a webhook
-        call: npm.gethook
+        call: hooks-hooks.gethook
         outputParameters:
         - type: object
           mapping: $.
-    - path: /-/npm/v1/hooks/hook/{id}
-      name: updatehook
-      operations:
       - method: PUT
         name: updatehook
         description: Update a webhook
-        call: npm.updatehook
+        call: hooks-hooks.updatehook
+        with:
+          body: rest.body
         outputParameters:
         - type: object
           mapping: $.
-    - path: /-/npm/v1/hooks/hook/{id}
-      name: deletehook
-      operations:
       - method: DELETE
         name: deletehook
         description: Delete a webhook
-        call: npm.deletehook
+        call: hooks-hooks.deletehook
         outputParameters:
         - type: object
           mapping: $.
   - type: mcp
+    namespace: hooks-hooks-mcp
     port: 9090
-    namespace: npm-mcp
     transport: http
-    description: MCP adapter for npm Hooks API for AI agent use.
+    description: MCP adapter for npm Hooks API — Hooks. One tool per consumed operation, routed inline through this capability's
+      consumes block.
     tools:
-    - name: listhooks
+    - name: list-webhooks
       description: List webhooks
       hints:
         readOnly: true
         destructive: false
         idempotent: true
-      call: npm.listhooks
+      call: hooks-hooks.listhooks
       with:
         package: tools.package
         limit: tools.limit
         offset: tools.offset
-      inputParameters:
-      - name: package
-        type: string
-        description: Filter hooks by package name. Does not support regular expressions.
-      - name: limit
-        type: integer
-        description: Maximum number of hooks to return.
-      - name: offset
-        type: integer
-        description: Number of hooks to skip for pagination.
       outputParameters:
       - type: object
         mapping: $.
-    - name: createhook
+    - name: create-webhook
       description: Create a webhook
       hints:
         readOnly: false
         destructive: false
         idempotent: false
-      call: npm.createhook
+      call: hooks-hooks.createhook
+      with:
+        body: tools.body
       outputParameters:
       - type: object
         mapping: $.
-    - name: gethook
+    - name: get-webhook
       description: Get a webhook
       hints:
         readOnly: true
         destructive: false
         idempotent: true
-      call: npm.gethook
+      call: hooks-hooks.gethook
       outputParameters:
       - type: object
         mapping: $.
-    - name: updatehook
+    - name: update-webhook
       description: Update a webhook
       hints:
         readOnly: false
         destructive: false
         idempotent: true
-      call: npm.updatehook
+      call: hooks-hooks.updatehook
+      with:
+        body: tools.body
       outputParameters:
       - type: object
         mapping: $.
-    - name: deletehook
+    - name: delete-webhook
       description: Delete a webhook
       hints:
         readOnly: false
         destructive: true
         idempotent: true
-      call: npm.deletehook
+      call: hooks-hooks.deletehook
       outputParameters:
       - type: object
         mapping: $.
-binds:
-- namespace: env
-  keys:
-    NPM_TOKEN: NPM_TOKEN

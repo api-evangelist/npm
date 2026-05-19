@@ -1,0 +1,174 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: npm Public API — Tokens
+  description: 'npm Public API — Tokens. 3 operations. Lead operation: List access tokens. Self-contained Naftiko capability
+    covering one Npm business surface.'
+  tags:
+  - Npm
+  - Tokens
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NPM_API_KEY: NPM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: public-tokens
+    baseUri: https://registry.npmjs.org
+    description: npm Public API — Tokens business capability. Self-contained, no shared references.
+    resources:
+    - name: --npm-v1-tokens
+      path: /-/npm/v1/tokens
+      operations:
+      - name: listtokens
+        method: GET
+        description: List access tokens
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Page number for paginated results.
+        - name: perPage
+          in: query
+          type: integer
+          description: Number of tokens to return per page.
+      - name: createtoken
+        method: POST
+        description: Create an access token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: npm-otp
+          in: header
+          type: string
+          description: One-time password for accounts with two-factor authentication enabled.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: --npm-v1-tokens-token-token_id
+      path: /-/npm/v1/tokens/token/{token_id}
+      operations:
+      - name: deletetoken
+        method: DELETE
+        description: Delete an access token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: token_id
+          in: path
+          type: string
+          description: The token key hash or UUID identifying the token to delete.
+          required: true
+        - name: npm-otp
+          in: header
+          type: string
+          description: One-time password for accounts with two-factor authentication enabled.
+    authentication:
+      type: bearer
+      token: '{{env.NPM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: public-tokens-rest
+    port: 8080
+    description: REST adapter for npm Public API — Tokens. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1//npm/v1/tokens
+      name: npm-v1-tokens
+      description: REST surface for --npm-v1-tokens.
+      operations:
+      - method: GET
+        name: listtokens
+        description: List access tokens
+        call: public-tokens.listtokens
+        with:
+          page: rest.page
+          perPage: rest.perPage
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createtoken
+        description: Create an access token
+        call: public-tokens.createtoken
+        with:
+          npm-otp: rest.npm-otp
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1//npm/v1/tokens/token/{token-id}
+      name: npm-v1-tokens-token-token-id
+      description: REST surface for --npm-v1-tokens-token-token_id.
+      operations:
+      - method: DELETE
+        name: deletetoken
+        description: Delete an access token
+        call: public-tokens.deletetoken
+        with:
+          token_id: rest.token_id
+          npm-otp: rest.npm-otp
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: public-tokens-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for npm Public API — Tokens. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-access-tokens
+      description: List access tokens
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: public-tokens.listtokens
+      with:
+        page: tools.page
+        perPage: tools.perPage
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-access-token
+      description: Create an access token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: public-tokens.createtoken
+      with:
+        npm-otp: tools.npm-otp
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-access-token
+      description: Delete an access token
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: public-tokens.deletetoken
+      with:
+        token_id: tools.token_id
+        npm-otp: tools.npm-otp
+      outputParameters:
+      - type: object
+        mapping: $.

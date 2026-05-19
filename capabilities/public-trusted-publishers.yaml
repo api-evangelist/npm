@@ -1,0 +1,147 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: npm Public API — Trusted Publishers
+  description: 'npm Public API — Trusted Publishers. 3 operations. Lead operation: List trusted publishers for a package.
+    Self-contained Naftiko capability covering one Npm business surface.'
+  tags:
+  - Npm
+  - Trusted Publishers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NPM_API_KEY: NPM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: public-trusted-publishers
+    baseUri: https://registry.npmjs.org
+    description: npm Public API — Trusted Publishers business capability. Self-contained, no shared references.
+    resources:
+    - name: --npm-v1-security-trusted-publishers-packages-package
+      path: /-/npm/v1/security/trusted-publishers/packages/{package}
+      operations:
+      - name: listtrustedpublishers
+        method: GET
+        description: List trusted publishers for a package
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: addtrustedpublisher
+        method: POST
+        description: Add a trusted publisher for a package
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: --npm-v1-security-trusted-publishers-packages-package-publisher_id
+      path: /-/npm/v1/security/trusted-publishers/packages/{package}/{publisher_id}
+      operations:
+      - name: removetrustedpublisher
+        method: DELETE
+        description: Remove a trusted publisher from a package
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: publisher_id
+          in: path
+          type: string
+          description: The identifier of the trusted publisher configuration to remove.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NPM_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: public-trusted-publishers-rest
+    port: 8080
+    description: REST adapter for npm Public API — Trusted Publishers. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1//npm/v1/security/trusted-publishers/packages/{package}
+      name: npm-v1-security-trusted-publishers-packages-package
+      description: REST surface for --npm-v1-security-trusted-publishers-packages-package.
+      operations:
+      - method: GET
+        name: listtrustedpublishers
+        description: List trusted publishers for a package
+        call: public-trusted-publishers.listtrustedpublishers
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: addtrustedpublisher
+        description: Add a trusted publisher for a package
+        call: public-trusted-publishers.addtrustedpublisher
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1//npm/v1/security/trusted-publishers/packages/{package}/{publisher-id}
+      name: npm-v1-security-trusted-publishers-packages-package-publisher-id
+      description: REST surface for --npm-v1-security-trusted-publishers-packages-package-publisher_id.
+      operations:
+      - method: DELETE
+        name: removetrustedpublisher
+        description: Remove a trusted publisher from a package
+        call: public-trusted-publishers.removetrustedpublisher
+        with:
+          publisher_id: rest.publisher_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: public-trusted-publishers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for npm Public API — Trusted Publishers. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-trusted-publishers-package
+      description: List trusted publishers for a package
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: public-trusted-publishers.listtrustedpublishers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-trusted-publisher-package
+      description: Add a trusted publisher for a package
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: public-trusted-publishers.addtrustedpublisher
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-trusted-publisher-package
+      description: Remove a trusted publisher from a package
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: public-trusted-publishers.removetrustedpublisher
+      with:
+        publisher_id: tools.publisher_id
+      outputParameters:
+      - type: object
+        mapping: $.
