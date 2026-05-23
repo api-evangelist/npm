@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PackageDocument",
+  "title": "PackageDocument",
+  "type": "object",
+  "description": "A full package document (packument) containing all metadata for a package, including every published version.",
+  "properties": {
+    "_id": {
+      "type": "string",
+      "description": "The package name, used as the document identifier."
+    },
+    "_rev": {
+      "type": "string",
+      "description": "The CouchDB document revision identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the package."
+    },
+    "description": {
+      "type": "string",
+      "description": "A short description of the package."
+    },
+    "dist-tags": {
+      "type": "object",
+      "description": "A mapping of distribution tags to version strings. The \"latest\" tag is always present.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "versions": {
+      "type": "object",
+      "description": "A mapping of version strings to version metadata objects.",
+      "additionalProperties": {
+        "$ref": "#/components/schemas/PackageVersion"
+      }
+    },
+    "time": {
+      "type": "object",
+      "description": "A mapping of version strings to ISO 8601 timestamps indicating when each version was published. Includes special keys \"created\" and \"modified\".",
+      "additionalProperties": {
+        "type": "string",
+        "format": "date-time"
+      }
+    },
+    "maintainers": {
+      "type": "array",
+      "description": "List of current package maintainers.",
+      "items": {
+        "$ref": "#/components/schemas/Person"
+      }
+    },
+    "author": {
+      "$ref": "#/components/schemas/Person"
+    },
+    "repository": {
+      "$ref": "#/components/schemas/Repository"
+    },
+    "readme": {
+      "type": "string",
+      "description": "The README content for the package, typically from the latest version."
+    },
+    "readmeFilename": {
+      "type": "string",
+      "description": "The filename of the README file."
+    },
+    "homepage": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URL of the package homepage."
+    },
+    "keywords": {
+      "type": "array",
+      "description": "Keywords associated with the package for search discovery.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "bugs": {
+      "type": "object",
+      "description": "Issue tracker information.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the issue tracker."
+        }
+      }
+    },
+    "license": {
+      "type": "string",
+      "description": "The SPDX license identifier for the package."
+    }
+  }
+}

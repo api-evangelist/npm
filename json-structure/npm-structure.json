@@ -1,0 +1,111 @@
+{
+  "provider": "npm",
+  "providerId": "npm",
+  "kind": "json-structure",
+  "description": "Structural overview of the npm API surface; extracted from openapi/.",
+  "schemaCount": 9,
+  "operationCount": 5,
+  "schemas": [
+    {
+      "name": "RegistryMetadata",
+      "type": "object",
+      "propertyCount": 11,
+      "required": []
+    },
+    {
+      "name": "PackageDocument",
+      "type": "object",
+      "propertyCount": 16,
+      "required": []
+    },
+    {
+      "name": "PackageVersion",
+      "type": "object",
+      "propertyCount": 19,
+      "required": []
+    },
+    {
+      "name": "Person",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Repository",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "Distribution",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "SearchResults",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "SearchResultItem",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Error",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/",
+      "operationId": "getRegistryMetadata",
+      "summary": "Get registry metadata",
+      "tags": [
+        "Registry"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/{package}",
+      "operationId": "getPackageDocument",
+      "summary": "Get a package document (packument)",
+      "tags": [
+        "Packages"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/{package}/{version}",
+      "operationId": "getPackageVersion",
+      "summary": "Get a specific package version",
+      "tags": [
+        "Packages"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/-/v1/search",
+      "operationId": "searchPackages",
+      "summary": "Search packages",
+      "tags": [
+        "Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/{package}/-/{tarball}",
+      "operationId": "downloadPackageTarball",
+      "summary": "Download a package tarball",
+      "tags": [
+        "Downloads"
+      ]
+    }
+  ]
+}

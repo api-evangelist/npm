@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Token",
+  "title": "Token",
+  "type": "object",
+  "description": "An npm access token with its metadata. The actual token value is redacted; only the key hash is provided.",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "The hexadecimal SHA-512 hash of the token, used for identification."
+    },
+    "token": {
+      "type": "string",
+      "description": "A redacted representation of the token UUID."
+    },
+    "cidr_whitelist": {
+      "type": "array",
+      "description": "List of CIDR IP ranges that are allowed to use this token. Null if no restrictions are set.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "readonly": {
+      "type": "boolean",
+      "description": "Whether this token has read-only access."
+    },
+    "automation": {
+      "type": "boolean",
+      "description": "Whether this token is an automation token that bypasses two-factor authentication requirements for publishing."
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the token was created."
+    },
+    "updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the token was last updated."
+    }
+  }
+}

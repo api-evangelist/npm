@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RegistryMetadata",
+  "title": "RegistryMetadata",
+  "type": "object",
+  "description": "Metadata about the npm registry instance, following CouchDB database information conventions.",
+  "properties": {
+    "db_name": {
+      "type": "string",
+      "description": "The name of the database, typically \"registry\"."
+    },
+    "doc_count": {
+      "type": "integer",
+      "description": "The total number of documents in the registry."
+    },
+    "doc_del_count": {
+      "type": "integer",
+      "description": "The total number of deleted documents."
+    },
+    "update_seq": {
+      "type": "integer",
+      "description": "The current update sequence number."
+    },
+    "purge_seq": {
+      "type": "integer",
+      "description": "The current purge sequence number."
+    },
+    "compact_running": {
+      "type": "boolean",
+      "description": "Whether a database compaction is currently running."
+    },
+    "disk_size": {
+      "type": "integer",
+      "description": "Total disk size in bytes."
+    },
+    "data_size": {
+      "type": "integer",
+      "description": "Actual data size in bytes."
+    },
+    "instance_start_time": {
+      "type": "string",
+      "description": "Timestamp of when this registry instance started."
+    },
+    "disk_format_version": {
+      "type": "integer",
+      "description": "The version of the on-disk storage format."
+    },
+    "committed_update_seq": {
+      "type": "integer",
+      "description": "The last committed update sequence number."
+    }
+  }
+}

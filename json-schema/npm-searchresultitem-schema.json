@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SearchResultItem",
+  "title": "SearchResultItem",
+  "type": "object",
+  "description": "A single search result item containing package metadata and scoring information.",
+  "properties": {
+    "package": {
+      "type": "object",
+      "description": "Summary package metadata.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The package name."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The package scope, or \"unscoped\" if none."
+        },
+        "version": {
+          "type": "string",
+          "description": "The latest version of the package."
+        },
+        "description": {
+          "type": "string",
+          "description": "A short description of the package."
+        },
+        "keywords": {
+          "type": "array",
+          "description": "Keywords associated with the package.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The publication date of the latest version."
+        },
+        "links": {
+          "type": "object",
+          "description": "Links to related resources such as npm page, homepage, repository, and bugs.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "author": {
+          "$ref": "#/components/schemas/Person"
+        },
+        "publisher": {
+          "$ref": "#/components/schemas/Person"
+        },
+        "maintainers": {
+          "type": "array",
+          "description": "List of package maintainers.",
+          "items": {
+            "$ref": "#/components/schemas/Person"
+          }
+        }
+      }
+    },
+    "score": {
+      "type": "object",
+      "description": "Scoring breakdown for the package.",
+      "properties": {
+        "final": {
+          "type": "number",
+          "description": "The final combined score."
+        },
+        "detail": {
+          "type": "object",
+          "description": "Detailed score breakdown.",
+          "properties": {
+            "quality": {
+              "type": "number",
+              "description": "The quality score component."
+            },
+            "popularity": {
+              "type": "number",
+              "description": "The popularity score component."
+            },
+            "maintenance": {
+              "type": "number",
+              "description": "The maintenance score component."
+            }
+          }
+        }
+      }
+    },
+    "searchScore": {
+      "type": "number",
+      "description": "The search relevance score for this result."
+    }
+  }
+}

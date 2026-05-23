@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SearchResults",
+  "title": "SearchResults",
+  "type": "object",
+  "description": "Search results from the npm registry search endpoint.",
+  "properties": {
+    "objects": {
+      "type": "array",
+      "description": "List of search result objects.",
+      "items": {
+        "$ref": "#/components/schemas/SearchResultItem"
+      }
+    },
+    "total": {
+      "type": "integer",
+      "description": "The total number of matching results."
+    },
+    "time": {
+      "type": "string",
+      "description": "Timestamp of when the search was performed."
+    }
+  }
+}

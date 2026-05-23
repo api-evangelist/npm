@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TrustedPublisherRequest",
+  "title": "TrustedPublisherRequest",
+  "type": "object",
+  "description": "Request body for adding a trusted publisher configuration.",
+  "required": [
+    "provider",
+    "repository_owner",
+    "repository"
+  ],
+  "properties": {
+    "provider": {
+      "type": "string",
+      "description": "The CI/CD provider name.",
+      "enum": [
+        "github-actions",
+        "gitlab-ci",
+        "circleci"
+      ]
+    },
+    "repository_owner": {
+      "type": "string",
+      "description": "The owner or namespace of the source repository."
+    },
+    "repository": {
+      "type": "string",
+      "description": "The name of the source repository."
+    },
+    "workflow_filename": {
+      "type": "string",
+      "description": "The workflow file that is trusted to publish. Required for GitHub Actions."
+    },
+    "environment": {
+      "type": "string",
+      "description": "The deployment environment name to restrict publishing to."
+    }
+  }
+}

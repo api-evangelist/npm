@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Distribution",
+  "title": "Distribution",
+  "type": "object",
+  "description": "Distribution metadata for a specific published version, including integrity hashes and tarball location.",
+  "properties": {
+    "shasum": {
+      "type": "string",
+      "description": "The SHA-1 checksum of the tarball."
+    },
+    "tarball": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URL where the tarball can be downloaded."
+    },
+    "integrity": {
+      "type": "string",
+      "description": "The Subresource Integrity (SRI) hash of the tarball, typically using SHA-512."
+    },
+    "fileCount": {
+      "type": "integer",
+      "description": "The number of files in the tarball."
+    },
+    "unpackedSize": {
+      "type": "integer",
+      "description": "The total unpacked size of the tarball in bytes."
+    },
+    "signatures": {
+      "type": "array",
+      "description": "Cryptographic signatures for the package version.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "keyid": {
+            "type": "string",
+            "description": "The identifier of the signing key."
+          },
+          "sig": {
+            "type": "string",
+            "description": "The signature value."
+          }
+        }
+      }
+    }
+  }
+}

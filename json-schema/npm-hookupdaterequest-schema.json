@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/HookUpdateRequest",
+  "title": "HookUpdateRequest",
+  "type": "object",
+  "description": "Request body for updating an existing webhook subscription.",
+  "required": [
+    "endpoint",
+    "secret"
+  ],
+  "properties": {
+    "endpoint": {
+      "type": "string",
+      "format": "uri",
+      "description": "The updated URI to receive webhook payloads."
+    },
+    "secret": {
+      "type": "string",
+      "description": "The updated shared secret for payload signing."
+    }
+  }
+}

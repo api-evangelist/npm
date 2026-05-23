@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Hook",
+  "title": "Hook",
+  "type": "object",
+  "description": "A webhook subscription object that defines what registry events trigger notifications and where those notifications are sent.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for this hook subscription."
+    },
+    "username": {
+      "type": "string",
+      "description": "The npm username of the hook owner."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the entity being watched. For packages, this is the package name. For scopes, this is the scope name. For owners, this is the npm username."
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of entity being watched.",
+      "enum": [
+        "package",
+        "scope",
+        "owner"
+      ]
+    },
+    "endpoint": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URI where webhook payloads will be sent via HTTP POST."
+    },
+    "last_delivery": {
+      "type": "object",
+      "description": "Information about the last delivery attempt.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier of the last delivery."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the last delivery was attempted."
+        },
+        "status": {
+          "type": "integer",
+          "description": "The HTTP status code received from the endpoint."
+        }
+      }
+    },
+    "response_code": {
+      "type": "integer",
+      "description": "The HTTP response code from the last delivery attempt."
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the hook subscription."
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the hook was created."
+    },
+    "updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the hook was last updated."
+    }
+  }
+}

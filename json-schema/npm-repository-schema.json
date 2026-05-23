@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Repository",
+  "title": "Repository",
+  "type": "object",
+  "description": "Source code repository information.",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "The version control system type, typically \"git\"."
+    },
+    "url": {
+      "type": "string",
+      "description": "The URL of the source code repository."
+    }
+  }
+}

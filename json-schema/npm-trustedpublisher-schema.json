@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TrustedPublisher",
+  "title": "TrustedPublisher",
+  "type": "object",
+  "description": "A trusted publisher configuration that allows a CI/CD provider to publish a package using OIDC token exchange.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for this trusted publisher configuration."
+    },
+    "provider": {
+      "type": "string",
+      "description": "The CI/CD provider name.",
+      "enum": [
+        "github-actions",
+        "gitlab-ci",
+        "circleci"
+      ]
+    },
+    "repository_owner": {
+      "type": "string",
+      "description": "The owner or namespace of the source repository."
+    },
+    "repository": {
+      "type": "string",
+      "description": "The name of the source repository."
+    },
+    "workflow_filename": {
+      "type": "string",
+      "description": "The workflow file that is trusted to publish, applicable to GitHub Actions."
+    },
+    "environment": {
+      "type": "string",
+      "description": "The deployment environment name, if restricted."
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the trusted publisher was configured."
+    }
+  }
+}

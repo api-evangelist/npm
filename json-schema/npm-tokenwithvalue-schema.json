@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TokenWithValue",
+  "title": "TokenWithValue",
+  "type": "object",
+  "description": "An npm access token including the full token value. The token value is only returned once at creation time and cannot be retrieved again.",
+  "allOf": [
+    {
+      "$ref": "#/components/schemas/Token"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "The full token UUID value. This is only returned at creation time."
+        }
+      }
+    }
+  ]
+}

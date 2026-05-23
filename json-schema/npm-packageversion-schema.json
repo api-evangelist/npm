@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PackageVersion",
+  "title": "PackageVersion",
+  "type": "object",
+  "description": "Metadata for a specific version of a package, including dependencies, scripts, and distribution information.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the package."
+    },
+    "version": {
+      "type": "string",
+      "description": "The semver version string."
+    },
+    "description": {
+      "type": "string",
+      "description": "A short description of the package."
+    },
+    "main": {
+      "type": "string",
+      "description": "The entry point module for the package."
+    },
+    "scripts": {
+      "type": "object",
+      "description": "A mapping of script names to shell commands.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "dependencies": {
+      "type": "object",
+      "description": "A mapping of package names to semver ranges for runtime dependencies.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "devDependencies": {
+      "type": "object",
+      "description": "A mapping of package names to semver ranges for development dependencies.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "peerDependencies": {
+      "type": "object",
+      "description": "A mapping of package names to semver ranges for peer dependencies.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "optionalDependencies": {
+      "type": "object",
+      "description": "A mapping of package names to semver ranges for optional dependencies.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "engines": {
+      "type": "object",
+      "description": "A mapping of runtime names to semver ranges specifying compatible environments.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "author": {
+      "$ref": "#/components/schemas/Person"
+    },
+    "maintainers": {
+      "type": "array",
+      "description": "List of maintainers for this version.",
+      "items": {
+        "$ref": "#/components/schemas/Person"
+      }
+    },
+    "repository": {
+      "$ref": "#/components/schemas/Repository"
+    },
+    "license": {
+      "type": "string",
+      "description": "The SPDX license identifier."
+    },
+    "keywords": {
+      "type": "array",
+      "description": "Keywords associated with this version.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dist": {
+      "$ref": "#/components/schemas/Distribution"
+    },
+    "_npmVersion": {
+      "type": "string",
+      "description": "The version of npm used to publish this package version."
+    },
+    "_nodeVersion": {
+      "type": "string",
+      "description": "The version of Node.js used to publish this package version."
+    },
+    "_npmUser": {
+      "$ref": "#/components/schemas/Person"
+    }
+  }
+}
