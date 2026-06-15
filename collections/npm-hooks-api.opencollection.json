@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "npm Hooks API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Hooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List webhooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://registry.npmjs.org/-/npm/v1/hooks",
+            "params": [
+              {
+                "name": "package",
+                "value": "",
+                "type": "query",
+                "description": "Filter hooks by package name. Does not support regular expressions."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of hooks to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of hooks to skip for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieves all webhook subscriptions for the authenticated user. Results can be filtered by package name and paginated using limit and offset parameters."
+        },
+        {
+          "info": {
+            "name": "Create a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://registry.npmjs.org/-/npm/v1/hooks/hook",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new webhook subscription. The hook will send HTTP POST payloads to the specified endpoint URI whenever the watched entity changes. Hooks can watch individual packages, all packages belonging to a scope, or all packages published by a specific npm user."
+        },
+        {
+          "info": {
+            "name": "Get a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://registry.npmjs.org/-/npm/v1/hooks/hook/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the webhook subscription."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific webhook subscription by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://registry.npmjs.org/-/npm/v1/hooks/hook/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the webhook subscription."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing webhook subscription. The endpoint URI and shared secret can be modified. The response includes the full updated hook object."
+        },
+        {
+          "info": {
+            "name": "Delete a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://registry.npmjs.org/-/npm/v1/hooks/hook/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the webhook subscription."
+              }
+            ]
+          },
+          "docs": "Deletes a webhook subscription. The response includes the hook object that was deleted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

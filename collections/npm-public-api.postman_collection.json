@@ -1,0 +1,1716 @@
+{
+  "item": [
+    {
+      "id": "a4dd2ee4-9bc0-46de-a757-2c2dd59fee13",
+      "name": "OIDC",
+      "description": {
+        "content": "OpenID Connect token exchange for trusted publishing. Exchange OIDC identity tokens from supported CI/CD providers for short-lived npm registry access tokens.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5fa6519a-159e-4291-a465-b1f93870b587",
+          "name": "Exchange an OIDC token for an npm token",
+          "request": {
+            "name": "Exchange an OIDC token for an npm token",
+            "description": {
+              "content": "Exchanges a valid OIDC identity token from a supported CI/CD provider for a short-lived npm registry access token. The OIDC token must be provided as a Bearer token in the Authorization header. The provider must be pre-configured as a trusted publisher for the target package.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "-",
+                "npm",
+                "v1",
+                "security",
+                "oidc",
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"package\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "257bafde-c487-4bc5-93c3-89961f721048",
+              "name": "OIDC token exchanged successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "security",
+                    "oidc",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"package\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e15452d8-8521-435f-b509-55d03bde6f25",
+              "name": "Invalid or expired OIDC token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "security",
+                    "oidc",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"package\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3217cf93-0dd8-463e-a253-1a5933985f90",
+              "name": "OIDC token claims do not match trusted publisher configuration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "security",
+                    "oidc",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"package\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "e0cbcf9a-dde4-4209-8e6f-81914ce1473c",
+      "name": "Tokens",
+      "description": {
+        "content": "Manage npm access tokens for authentication. Create, list, and delete tokens with customizable permissions and restrictions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "52cfed03-8fc4-4d78-894c-3e964e707058",
+          "name": "List access tokens",
+          "request": {
+            "name": "List access tokens",
+            "description": {
+              "content": "Retrieves a list of the authenticated user's active npm access tokens. Token UUIDs are redacted in the response, but each token object includes a key attribute containing the hexadecimal SHA-512 hash of the token for identification purposes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "-",
+                "npm",
+                "v1",
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for paginated results."
+                },
+                {
+                  "disabled": false,
+                  "key": "perPage",
+                  "value": "<integer>",
+                  "description": "Number of tokens to return per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6fa79faf-7ab3-47b1-8528-9e45bc18c8d9",
+              "name": "List of tokens retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objects\": [\n    {\n      \"key\": \"string\",\n      \"token\": \"string\",\n      \"cidr_whitelist\": [\n        \"string\",\n        \"string\"\n      ],\n      \"readonly\": false,\n      \"automation\": true,\n      \"created\": \"2019-11-16T10:50:07.855Z\",\n      \"updated\": \"2024-01-10T22:34:26.423Z\"\n    },\n    {\n      \"key\": \"string\",\n      \"token\": \"string\",\n      \"cidr_whitelist\": [\n        \"string\",\n        \"string\"\n      ],\n      \"readonly\": false,\n      \"automation\": true,\n      \"created\": \"1995-08-22T20:16:55.680Z\",\n      \"updated\": \"2017-11-02T03:32:06.965Z\"\n    }\n  ],\n  \"total\": 2852,\n  \"urls\": {\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2ff09c3-80a9-4514-9cfb-88e644ccd3b6",
+              "name": "Authentication required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c7a6acd0-322d-4a5e-9d45-73683b8d0b73",
+          "name": "Create an access token",
+          "request": {
+            "name": "Create an access token",
+            "description": {
+              "content": "Creates a new npm access token with customizable permissions, scope restrictions, expiration settings, and CIDR IP range limitations. The response includes the full token value, which is only returned once and cannot be retrieved again.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "-",
+                "npm",
+                "v1",
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "One-time password for accounts with two-factor authentication enabled.",
+                "key": "npm-otp",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"password\": \"<string>\",\n  \"readonly\": false,\n  \"automation\": false,\n  \"cidr_whitelist\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "df4b510b-8280-4baa-af66-a2dfc4d95215",
+              "name": "Token created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "One-time password for accounts with two-factor authentication enabled.",
+                    "key": "npm-otp",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"<string>\",\n  \"readonly\": false,\n  \"automation\": false,\n  \"cidr_whitelist\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key\": \"string\",\n  \"token\": \"string\",\n  \"cidr_whitelist\": [\n    \"string\",\n    \"string\"\n  ],\n  \"readonly\": false,\n  \"automation\": false,\n  \"created\": \"2016-10-12T16:34:17.543Z\",\n  \"updated\": \"1959-12-17T01:19:37.136Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bdad1e70-b4fe-449a-879f-5d5f9ad463b6",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "One-time password for accounts with two-factor authentication enabled.",
+                    "key": "npm-otp",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"<string>\",\n  \"readonly\": false,\n  \"automation\": false,\n  \"cidr_whitelist\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe63b372-4bc6-4dec-b086-24a9da2ddf19",
+              "name": "Authentication required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "One-time password for accounts with two-factor authentication enabled.",
+                    "key": "npm-otp",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"<string>\",\n  \"readonly\": false,\n  \"automation\": false,\n  \"cidr_whitelist\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8b3c0c9-94d3-4b3e-a788-f1d441564606",
+          "name": "Delete an access token",
+          "request": {
+            "name": "Delete an access token",
+            "description": {
+              "content": "Deletes an npm access token by its identifier. Note that the token may remain valid in cache for up to one hour after deletion.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "-",
+                "npm",
+                "v1",
+                "tokens",
+                "token",
+                ":token_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "token_id",
+                  "description": "(Required) The token key hash or UUID identifying the token to delete."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "One-time password for accounts with two-factor authentication enabled.",
+                "key": "npm-otp",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a57eb86d-97b3-4879-bf22-7dd090a5f985",
+              "name": "Token deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "tokens",
+                    "token",
+                    ":token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token_id",
+                      "description": "(Required) The token key hash or UUID identifying the token to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "One-time password for accounts with two-factor authentication enabled.",
+                    "key": "npm-otp",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "98c7e053-25bc-42fe-9a13-ea4f58b2fafb",
+              "name": "Authentication required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "tokens",
+                    "token",
+                    ":token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token_id",
+                      "description": "(Required) The token key hash or UUID identifying the token to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "One-time password for accounts with two-factor authentication enabled.",
+                    "key": "npm-otp",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c70ca16-09d5-452a-8738-a5bd29ab3c98",
+              "name": "Token not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "tokens",
+                    "token",
+                    ":token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token_id",
+                      "description": "(Required) The token key hash or UUID identifying the token to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "One-time password for accounts with two-factor authentication enabled.",
+                    "key": "npm-otp",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "ed360a62-e6fb-4870-8246-96e32d7bd5f6",
+      "name": "Trusted Publishers",
+      "description": {
+        "content": "Configure trusted publisher settings for packages to enable OIDC token exchange from CI/CD providers without long-lived npm tokens.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "302a2775-0bc5-4efe-a81c-da845587d72a",
+          "name": "List trusted publishers for a package",
+          "request": {
+            "name": "List trusted publishers for a package",
+            "description": {
+              "content": "Retrieves the trusted publisher configurations for a given package. Each configuration specifies a CI/CD provider and the conditions under which it is trusted to publish.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "-",
+                "npm",
+                "v1",
+                "security",
+                "trusted-publishers",
+                "packages",
+                ":package"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "package",
+                  "description": "(Required) The name of the package, URL-encoded for scoped packages (e.g., @scope%2Fpackage)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "77f8c6dd-4a0e-4a67-b55d-6702a55c5e98",
+              "name": "Trusted publishers retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "security",
+                    "trusted-publishers",
+                    "packages",
+                    ":package"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package",
+                      "description": "(Required) The name of the package, URL-encoded for scoped packages (e.g., @scope%2Fpackage)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objects\": [\n    {\n      \"id\": \"string\",\n      \"provider\": \"github-actions\",\n      \"repository_owner\": \"string\",\n      \"repository\": \"string\",\n      \"workflow_filename\": \"string\",\n      \"environment\": \"string\",\n      \"created\": \"2006-01-08T16:14:34.618Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"provider\": \"gitlab-ci\",\n      \"repository_owner\": \"string\",\n      \"repository\": \"string\",\n      \"workflow_filename\": \"string\",\n      \"environment\": \"string\",\n      \"created\": \"1979-01-10T06:33:27.863Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d038ac76-afb3-4fd9-9082-b0d673085511",
+              "name": "Authentication required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "security",
+                    "trusted-publishers",
+                    "packages",
+                    ":package"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package",
+                      "description": "(Required) The name of the package, URL-encoded for scoped packages (e.g., @scope%2Fpackage)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10745f21-6b56-4f0a-99dd-6652dfc0bd5d",
+              "name": "Package not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "security",
+                    "trusted-publishers",
+                    "packages",
+                    ":package"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package",
+                      "description": "(Required) The name of the package, URL-encoded for scoped packages (e.g., @scope%2Fpackage)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06c9cf51-2aa1-42be-a4b7-4ac3a155a6c7",
+          "name": "Add a trusted publisher for a package",
+          "request": {
+            "name": "Add a trusted publisher for a package",
+            "description": {
+              "content": "Configures a new trusted publisher for a package. This allows the specified CI/CD provider to publish the package using OIDC token exchange without requiring long-lived npm tokens. Only users with write permissions on the package can configure trusted publishers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "-",
+                "npm",
+                "v1",
+                "security",
+                "trusted-publishers",
+                "packages",
+                ":package"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "package",
+                  "description": "(Required) The name of the package, URL-encoded for scoped packages (e.g., @scope%2Fpackage)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"provider\": \"<string>\",\n  \"repository_owner\": \"<string>\",\n  \"repository\": \"<string>\",\n  \"workflow_filename\": \"<string>\",\n  \"environment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bdb9f0c2-e5d3-4dee-9fb1-b969600cf1ec",
+              "name": "Trusted publisher added successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "security",
+                    "trusted-publishers",
+                    "packages",
+                    ":package"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package",
+                      "description": "(Required) The name of the package, URL-encoded for scoped packages (e.g., @scope%2Fpackage)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"provider\": \"<string>\",\n  \"repository_owner\": \"<string>\",\n  \"repository\": \"<string>\",\n  \"workflow_filename\": \"<string>\",\n  \"environment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"provider\": \"circleci\",\n  \"repository_owner\": \"string\",\n  \"repository\": \"string\",\n  \"workflow_filename\": \"string\",\n  \"environment\": \"string\",\n  \"created\": \"1948-10-21T15:41:39.268Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b22ab885-42d0-47a8-993a-fc6041ea0e3f",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "security",
+                    "trusted-publishers",
+                    "packages",
+                    ":package"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package",
+                      "description": "(Required) The name of the package, URL-encoded for scoped packages (e.g., @scope%2Fpackage)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"provider\": \"<string>\",\n  \"repository_owner\": \"<string>\",\n  \"repository\": \"<string>\",\n  \"workflow_filename\": \"<string>\",\n  \"environment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7176a8a7-eb81-4ddf-97da-b864f9f33ed5",
+              "name": "Authentication required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "security",
+                    "trusted-publishers",
+                    "packages",
+                    ":package"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package",
+                      "description": "(Required) The name of the package, URL-encoded for scoped packages (e.g., @scope%2Fpackage)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"provider\": \"<string>\",\n  \"repository_owner\": \"<string>\",\n  \"repository\": \"<string>\",\n  \"workflow_filename\": \"<string>\",\n  \"environment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a22ea84-d58b-4015-a569-83a84aa23225",
+              "name": "Insufficient permissions to manage trusted publishers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "security",
+                    "trusted-publishers",
+                    "packages",
+                    ":package"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package",
+                      "description": "(Required) The name of the package, URL-encoded for scoped packages (e.g., @scope%2Fpackage)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"provider\": \"<string>\",\n  \"repository_owner\": \"<string>\",\n  \"repository\": \"<string>\",\n  \"workflow_filename\": \"<string>\",\n  \"environment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e513544-cc74-4922-b70e-2b77bda0f5bf",
+          "name": "Remove a trusted publisher from a package",
+          "request": {
+            "name": "Remove a trusted publisher from a package",
+            "description": {
+              "content": "Removes a trusted publisher configuration from a package, revoking the CI/CD provider's ability to publish via OIDC token exchange.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "-",
+                "npm",
+                "v1",
+                "security",
+                "trusted-publishers",
+                "packages",
+                ":package",
+                ":publisher_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "package",
+                  "description": "(Required) The name of the package, URL-encoded for scoped packages (e.g., @scope%2Fpackage)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "publisher_id",
+                  "description": "(Required) The identifier of the trusted publisher configuration to remove."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "acf1f3a3-d78f-47d0-acd4-158c42ae82fb",
+              "name": "Trusted publisher removed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "security",
+                    "trusted-publishers",
+                    "packages",
+                    ":package",
+                    ":publisher_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package",
+                      "description": "(Required) The name of the package, URL-encoded for scoped packages (e.g., @scope%2Fpackage)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "publisher_id",
+                      "description": "(Required) The identifier of the trusted publisher configuration to remove."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "98cb7f19-6035-4cf2-884e-bbebdc50a4dd",
+              "name": "Authentication required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "security",
+                    "trusted-publishers",
+                    "packages",
+                    ":package",
+                    ":publisher_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package",
+                      "description": "(Required) The name of the package, URL-encoded for scoped packages (e.g., @scope%2Fpackage)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "publisher_id",
+                      "description": "(Required) The identifier of the trusted publisher configuration to remove."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e62bd42-84c2-460f-94af-e2a1849c8a47",
+              "name": "Trusted publisher configuration not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "npm",
+                    "v1",
+                    "security",
+                    "trusted-publishers",
+                    "packages",
+                    ":package",
+                    ":publisher_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package",
+                      "description": "(Required) The name of the package, URL-encoded for scoped packages (e.g., @scope%2Fpackage)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "publisher_id",
+                      "description": "(Required) The identifier of the trusted publisher configuration to remove."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://registry.npmjs.org",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e128c1e4-b5bb-44c3-9ccf-9d51088e6eae",
+    "name": "npm Public API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The npm Public API provides authenticated endpoints for managing npm access tokens, configuring trusted publishers, and exchanging OIDC tokens for short-lived registry access. It supports creating, listing, and deleting npm access tokens with customizable permissions, scope restrictions, expiration settings, and CIDR IP range limitations. The API also enables CI/CD providers like GitHub Actions, GitLab CI, and CircleCI to publish packages securely through OIDC token exchange without requiring long-lived npm tokens.\n\nContact Support:\n Name: npm Support",
+      "type": "text/plain"
+    }
+  }
+}

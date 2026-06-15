@@ -1,0 +1,171 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "npm Registry API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Registry",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get registry metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://registry.npmjs.org/"
+          },
+          "docs": "Returns metadata about the npm registry, including document counts, storage sizes, and instance information. This endpoint follows the CouchDB database information convention."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Packages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a package document (packument)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://registry.npmjs.org/:package",
+            "params": [
+              {
+                "name": "package",
+                "value": "",
+                "type": "path",
+                "description": "The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage)."
+              }
+            ]
+          },
+          "docs": "Retrieves the full package document (packument) for a given package name. The packument includes all published versions, dist-tags, maintainers, repository information, and README content. For scoped packages, the package name should be URL-encoded (e.g., @scope%2Fpackage)."
+        },
+        {
+          "info": {
+            "name": "Get a specific package version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://registry.npmjs.org/:package/:version",
+            "params": [
+              {
+                "name": "package",
+                "value": "",
+                "type": "path",
+                "description": "The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage)."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "A valid semver version string, or the literal string \"latest\" to resolve the current latest dist-tag."
+              }
+            ]
+          },
+          "docs": "Retrieves metadata for a specific version of a package. The version can be a valid semver string or the literal string \"latest\" to retrieve the version pointed to by the latest dist-tag. Returns the version-specific manifest including dependencies, scripts, and distribution information."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search packages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://registry.npmjs.org/-/v1/search",
+            "params": [
+              {
+                "name": "text",
+                "value": "",
+                "type": "query",
+                "description": "Full-text search query. Supports special qualifiers such as author:username, maintainer:username, scope:scopename, keywords:keyword, not:unstable, not:insecure, is:unstable, is:insecure, and boost-exact:true."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return. Maximum value is 250."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination, indicating the starting position in the result set."
+              },
+              {
+                "name": "quality",
+                "value": "",
+                "type": "query",
+                "description": "Weighting for the quality score component of search results, between 0 and 1."
+              },
+              {
+                "name": "popularity",
+                "value": "",
+                "type": "query",
+                "description": "Weighting for the popularity score component of search results, between 0 and 1."
+              },
+              {
+                "name": "maintenance",
+                "value": "",
+                "type": "query",
+                "description": "Weighting for the maintenance score component of search results, between 0 and 1."
+              }
+            ]
+          },
+          "docs": "Performs a full-text search across the npm registry. Results can be weighted by quality, popularity, and maintenance scores. Supports special search qualifiers such as author, maintainer, scope, and keywords filters. Qualifiers like not:unstable, not:insecure, is:unstable, and boost-exact can be included in the text parameter."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Downloads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download a package tarball",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://registry.npmjs.org/:package/-/:tarball",
+            "params": [
+              {
+                "name": "package",
+                "value": "",
+                "type": "path",
+                "description": "The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage)."
+              },
+              {
+                "name": "tarball",
+                "value": "",
+                "type": "path",
+                "description": "The tarball filename, typically in the format {package}-{version}.tgz."
+              }
+            ]
+          },
+          "docs": "Downloads the tarball archive for a specific version of a package. The tarball filename is typically in the format {package}-{version}.tgz. This endpoint is used by the npm CLI during package installation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
