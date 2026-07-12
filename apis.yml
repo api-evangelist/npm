@@ -131,6 +131,12 @@ apis:
       - type: Documentation
         url: https://github.blog/security/supply-chain-security/introducing-npm-package-provenance/
 common:
+  - type: VulnerabilityDisclosure
+    url: security/npm-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/npm-domain-security.yml
+  - type: Authentication
+    url: authentication/npm-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/npm-inc-
   - url: https://www.npmjs.com/

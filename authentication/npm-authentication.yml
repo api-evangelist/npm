@@ -1,0 +1,20 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/npm-hooks-api-openapi.yml, openapi/npm-public-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: npm access token provided as a Bearer token.
+  sources:
+  - openapi/npm-hooks-api-openapi.yml
+  - openapi/npm-public-api-openapi.yml
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: Basic authentication using npm username and password.
+  sources:
+  - openapi/npm-public-api-openapi.yml
