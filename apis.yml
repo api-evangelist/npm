@@ -131,6 +131,8 @@ apis:
       - type: Documentation
         url: https://github.blog/security/supply-chain-security/introducing-npm-package-provenance/
 common:
+  - type: AgenticAccess
+    url: agentic-access/npm-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/npm-vulnerability-disclosure.yml
   - type: DomainSecurity
