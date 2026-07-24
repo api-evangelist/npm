@@ -1,0 +1,206 @@
+openapi: 3.1.0
+info:
+  title: npm Hooks Downloads Trusted Publishers API
+  description: The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.
+  version: 1.0.0
+  contact:
+    name: npm Support
+    url: https://www.npmjs.com/support
+  termsOfService: https://docs.npmjs.com/policies/terms
+servers:
+- url: https://registry.npmjs.org
+  description: npm Public Registry
+security:
+- bearerAuth: []
+tags:
+- name: Trusted Publishers
+  description: Configure trusted publisher settings for packages to enable OIDC token exchange from CI/CD providers without long-lived npm tokens.
+paths:
+  /-/npm/v1/security/trusted-publishers/packages/{package}:
+    get:
+      operationId: listTrustedPublishers
+      summary: List trusted publishers for a package
+      description: Retrieves the trusted publisher configurations for a given package. Each configuration specifies a CI/CD provider and the conditions under which it is trusted to publish.
+      tags:
+      - Trusted Publishers
+      parameters:
+      - $ref: '#/components/parameters/encodedPackageName'
+      responses:
+        '200':
+          description: Trusted publishers retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    description: List of trusted publisher configurations.
+                    items:
+                      $ref: '#/components/schemas/TrustedPublisher'
+        '401':
+          description: Authentication required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Package not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: addTrustedPublisher
+      summary: Add a trusted publisher for a package
+      description: Configures a new trusted publisher for a package. This allows the specified CI/CD provider to publish the package using OIDC token exchange without requiring long-lived npm tokens. Only users with write permissions on the package can configure trusted publishers.
+      tags:
+      - Trusted Publishers
+      parameters:
+      - $ref: '#/components/parameters/encodedPackageName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrustedPublisherRequest'
+      responses:
+        '201':
+          description: Trusted publisher added successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrustedPublisher'
+        '400':
+          description: Invalid request parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Insufficient permissions to manage trusted publishers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /-/npm/v1/security/trusted-publishers/packages/{package}/{publisher_id}:
+    delete:
+      operationId: removeTrustedPublisher
+      summary: Remove a trusted publisher from a package
+      description: Removes a trusted publisher configuration from a package, revoking the CI/CD provider's ability to publish via OIDC token exchange.
+      tags:
+      - Trusted Publishers
+      parameters:
+      - $ref: '#/components/parameters/encodedPackageName'
+      - name: publisher_id
+        in: path
+        description: The identifier of the trusted publisher configuration to remove.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Trusted publisher removed successfully.
+        '401':
+          description: Authentication required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Trusted publisher configuration not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    TrustedPublisherRequest:
+      type: object
+      description: Request body for adding a trusted publisher configuration.
+      required:
+      - provider
+      - repository_owner
+      - repository
+      properties:
+        provider:
+          type: string
+          description: The CI/CD provider name.
+          enum:
+          - github-actions
+          - gitlab-ci
+          - circleci
+        repository_owner:
+          type: string
+          description: The owner or namespace of the source repository.
+        repository:
+          type: string
+          description: The name of the source repository.
+        workflow_filename:
+          type: string
+          description: The workflow file that is trusted to publish. Required for GitHub Actions.
+        environment:
+          type: string
+          description: The deployment environment name to restrict publishing to.
+    TrustedPublisher:
+      type: object
+      description: A trusted publisher configuration that allows a CI/CD provider to publish a package using OIDC token exchange.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for this trusted publisher configuration.
+        provider:
+          type: string
+          description: The CI/CD provider name.
+          enum:
+          - github-actions
+          - gitlab-ci
+          - circleci
+        repository_owner:
+          type: string
+          description: The owner or namespace of the source repository.
+        repository:
+          type: string
+          description: The name of the source repository.
+        workflow_filename:
+          type: string
+          description: The workflow file that is trusted to publish, applicable to GitHub Actions.
+        environment:
+          type: string
+          description: The deployment environment name, if restricted.
+        created:
+          type: string
+          format: date-time
+          description: The date and time the trusted publisher was configured.
+    Error:
+      type: object
+      description: An error response from the npm API.
+      properties:
+        error:
+          type: string
+          description: The error type or code.
+        message:
+          type: string
+          description: A human-readable description of the error.
+  parameters:
+    encodedPackageName:
+      name: package
+      in: path
+      description: The name of the package, URL-encoded for scoped packages (e.g., @scope%2Fpackage).
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: npm access token provided as a Bearer token.
+externalDocs:
+  description: npm Hooks Documentation
+  url: https://blog.npmjs.org/post/145260155635/introducing-hooks-get-notifications-of-npm

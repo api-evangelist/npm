@@ -1,0 +1,186 @@
+openapi: 3.1.0
+info:
+  title: npm Hooks Downloads Search API
+  description: The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.
+  version: 1.0.0
+  contact:
+    name: npm Support
+    url: https://www.npmjs.com/support
+  termsOfService: https://docs.npmjs.com/policies/terms
+servers:
+- url: https://registry.npmjs.org
+  description: npm Public Registry
+security:
+- bearerAuth: []
+tags:
+- name: Search
+  description: Full-text search across the npm registry with weighted scoring.
+paths:
+  /-/v1/search:
+    get:
+      operationId: searchPackages
+      summary: Search packages
+      description: Performs a full-text search across the npm registry. Results can be weighted by quality, popularity, and maintenance scores. Supports special search qualifiers such as author, maintainer, scope, and keywords filters. Qualifiers like not:unstable, not:insecure, is:unstable, and boost-exact can be included in the text parameter.
+      tags:
+      - Search
+      parameters:
+      - name: text
+        in: query
+        description: Full-text search query. Supports special qualifiers such as author:username, maintainer:username, scope:scopename, keywords:keyword, not:unstable, not:insecure, is:unstable, is:insecure, and boost-exact:true.
+        required: true
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: Number of results to return. Maximum value is 250.
+        required: false
+        schema:
+          type: integer
+          default: 20
+          minimum: 1
+          maximum: 250
+      - name: from
+        in: query
+        description: Offset for pagination, indicating the starting position in the result set.
+        required: false
+        schema:
+          type: integer
+          default: 0
+          minimum: 0
+      - name: quality
+        in: query
+        description: Weighting for the quality score component of search results, between 0 and 1.
+        required: false
+        schema:
+          type: number
+          minimum: 0
+          maximum: 1
+      - name: popularity
+        in: query
+        description: Weighting for the popularity score component of search results, between 0 and 1.
+        required: false
+        schema:
+          type: number
+          minimum: 0
+          maximum: 1
+      - name: maintenance
+        in: query
+        description: Weighting for the maintenance score component of search results, between 0 and 1.
+        required: false
+        schema:
+          type: number
+          minimum: 0
+          maximum: 1
+      responses:
+        '200':
+          description: Search results returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResults'
+components:
+  schemas:
+    SearchResults:
+      type: object
+      description: Search results from the npm registry search endpoint.
+      properties:
+        objects:
+          type: array
+          description: List of search result objects.
+          items:
+            $ref: '#/components/schemas/SearchResultItem'
+        total:
+          type: integer
+          description: The total number of matching results.
+        time:
+          type: string
+          description: Timestamp of when the search was performed.
+    SearchResultItem:
+      type: object
+      description: A single search result item containing package metadata and scoring information.
+      properties:
+        package:
+          type: object
+          description: Summary package metadata.
+          properties:
+            name:
+              type: string
+              description: The package name.
+            scope:
+              type: string
+              description: The package scope, or "unscoped" if none.
+            version:
+              type: string
+              description: The latest version of the package.
+            description:
+              type: string
+              description: A short description of the package.
+            keywords:
+              type: array
+              description: Keywords associated with the package.
+              items:
+                type: string
+            date:
+              type: string
+              format: date-time
+              description: The publication date of the latest version.
+            links:
+              type: object
+              description: Links to related resources such as npm page, homepage, repository, and bugs.
+              additionalProperties:
+                type: string
+            author:
+              $ref: '#/components/schemas/Person'
+            publisher:
+              $ref: '#/components/schemas/Person'
+            maintainers:
+              type: array
+              description: List of package maintainers.
+              items:
+                $ref: '#/components/schemas/Person'
+        score:
+          type: object
+          description: Scoring breakdown for the package.
+          properties:
+            final:
+              type: number
+              description: The final combined score.
+            detail:
+              type: object
+              description: Detailed score breakdown.
+              properties:
+                quality:
+                  type: number
+                  description: The quality score component.
+                popularity:
+                  type: number
+                  description: The popularity score component.
+                maintenance:
+                  type: number
+                  description: The maintenance score component.
+        searchScore:
+          type: number
+          description: The search relevance score for this result.
+    Person:
+      type: object
+      description: A person object representing a user, author, or maintainer.
+      properties:
+        name:
+          type: string
+          description: The display name of the person.
+        email:
+          type: string
+          format: email
+          description: The email address of the person.
+        url:
+          type: string
+          format: uri
+          description: The personal URL or website of the person.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: npm access token provided as a Bearer token.
+externalDocs:
+  description: npm Hooks Documentation
+  url: https://blog.npmjs.org/post/145260155635/introducing-hooks-get-notifications-of-npm

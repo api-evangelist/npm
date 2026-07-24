@@ -1,0 +1,82 @@
+openapi: 3.1.0
+info:
+  title: npm Hooks Downloads OIDC API
+  description: The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.
+  version: 1.0.0
+  contact:
+    name: npm Support
+    url: https://www.npmjs.com/support
+  termsOfService: https://docs.npmjs.com/policies/terms
+servers:
+- url: https://registry.npmjs.org
+  description: npm Public Registry
+security:
+- bearerAuth: []
+tags:
+- name: OIDC
+  description: OpenID Connect token exchange for trusted publishing. Exchange OIDC identity tokens from supported CI/CD providers for short-lived npm registry access tokens.
+paths:
+  /-/npm/v1/security/oidc/tokens:
+    post:
+      operationId: exchangeOidcToken
+      summary: Exchange an OIDC token for an npm token
+      description: Exchanges a valid OIDC identity token from a supported CI/CD provider for a short-lived npm registry access token. The OIDC token must be provided as a Bearer token in the Authorization header. The provider must be pre-configured as a trusted publisher for the target package.
+      tags:
+      - OIDC
+      security:
+      - oidcBearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - package
+              properties:
+                package:
+                  type: string
+                  description: The name of the package to obtain publishing access for.
+      responses:
+        '200':
+          description: OIDC token exchanged successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: A short-lived npm access token that can be used for publishing.
+        '401':
+          description: Invalid or expired OIDC token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: OIDC token claims do not match trusted publisher configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      description: An error response from the npm API.
+      properties:
+        error:
+          type: string
+          description: The error type or code.
+        message:
+          type: string
+          description: A human-readable description of the error.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: npm access token provided as a Bearer token.
+externalDocs:
+  description: npm Hooks Documentation
+  url: https://blog.npmjs.org/post/145260155635/introducing-hooks-get-notifications-of-npm

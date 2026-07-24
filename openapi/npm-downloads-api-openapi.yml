@@ -1,0 +1,75 @@
+openapi: 3.1.0
+info:
+  title: npm Hooks Downloads API
+  description: The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.
+  version: 1.0.0
+  contact:
+    name: npm Support
+    url: https://www.npmjs.com/support
+  termsOfService: https://docs.npmjs.com/policies/terms
+servers:
+- url: https://registry.npmjs.org
+  description: npm Public Registry
+security:
+- bearerAuth: []
+tags:
+- name: Downloads
+  description: Package tarball downloads.
+paths:
+  /{package}/-/{tarball}:
+    get:
+      operationId: downloadPackageTarball
+      summary: Download a package tarball
+      description: Downloads the tarball archive for a specific version of a package. The tarball filename is typically in the format {package}-{version}.tgz. This endpoint is used by the npm CLI during package installation.
+      tags:
+      - Downloads
+      parameters:
+      - $ref: '#/components/parameters/packageName'
+      - name: tarball
+        in: path
+        description: The tarball filename, typically in the format {package}-{version}.tgz.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Tarball file returned successfully.
+          content:
+            application/gzip:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Tarball not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      description: An error response from the registry.
+      properties:
+        error:
+          type: string
+          description: The error type or code.
+        reason:
+          type: string
+          description: A human-readable explanation of the error.
+  parameters:
+    packageName:
+      name: package
+      in: path
+      description: The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage).
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: npm access token provided as a Bearer token.
+externalDocs:
+  description: npm Hooks Documentation
+  url: https://blog.npmjs.org/post/145260155635/introducing-hooks-get-notifications-of-npm

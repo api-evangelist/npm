@@ -1,0 +1,295 @@
+openapi: 3.1.0
+info:
+  title: npm Hooks Downloads Packages API
+  description: The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.
+  version: 1.0.0
+  contact:
+    name: npm Support
+    url: https://www.npmjs.com/support
+  termsOfService: https://docs.npmjs.com/policies/terms
+servers:
+- url: https://registry.npmjs.org
+  description: npm Public Registry
+security:
+- bearerAuth: []
+tags:
+- name: Packages
+  description: Package metadata retrieval, including full packuments and version-specific documents.
+paths:
+  /{package}:
+    get:
+      operationId: getPackageDocument
+      summary: Get a package document (packument)
+      description: Retrieves the full package document (packument) for a given package name. The packument includes all published versions, dist-tags, maintainers, repository information, and README content. For scoped packages, the package name should be URL-encoded (e.g., @scope%2Fpackage).
+      tags:
+      - Packages
+      parameters:
+      - $ref: '#/components/parameters/packageName'
+      responses:
+        '200':
+          description: Package document retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackageDocument'
+        '404':
+          description: Package not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /{package}/{version}:
+    get:
+      operationId: getPackageVersion
+      summary: Get a specific package version
+      description: Retrieves metadata for a specific version of a package. The version can be a valid semver string or the literal string "latest" to retrieve the version pointed to by the latest dist-tag. Returns the version-specific manifest including dependencies, scripts, and distribution information.
+      tags:
+      - Packages
+      parameters:
+      - $ref: '#/components/parameters/packageName'
+      - $ref: '#/components/parameters/packageVersion'
+      responses:
+        '200':
+          description: Package version metadata retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackageVersion'
+        '404':
+          description: Package or version not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    PackageVersion:
+      type: object
+      description: Metadata for a specific version of a package, including dependencies, scripts, and distribution information.
+      properties:
+        name:
+          type: string
+          description: The name of the package.
+        version:
+          type: string
+          description: The semver version string.
+        description:
+          type: string
+          description: A short description of the package.
+        main:
+          type: string
+          description: The entry point module for the package.
+        scripts:
+          type: object
+          description: A mapping of script names to shell commands.
+          additionalProperties:
+            type: string
+        dependencies:
+          type: object
+          description: A mapping of package names to semver ranges for runtime dependencies.
+          additionalProperties:
+            type: string
+        devDependencies:
+          type: object
+          description: A mapping of package names to semver ranges for development dependencies.
+          additionalProperties:
+            type: string
+        peerDependencies:
+          type: object
+          description: A mapping of package names to semver ranges for peer dependencies.
+          additionalProperties:
+            type: string
+        optionalDependencies:
+          type: object
+          description: A mapping of package names to semver ranges for optional dependencies.
+          additionalProperties:
+            type: string
+        engines:
+          type: object
+          description: A mapping of runtime names to semver ranges specifying compatible environments.
+          additionalProperties:
+            type: string
+        author:
+          $ref: '#/components/schemas/Person'
+        maintainers:
+          type: array
+          description: List of maintainers for this version.
+          items:
+            $ref: '#/components/schemas/Person'
+        repository:
+          $ref: '#/components/schemas/Repository'
+        license:
+          type: string
+          description: The SPDX license identifier.
+        keywords:
+          type: array
+          description: Keywords associated with this version.
+          items:
+            type: string
+        dist:
+          $ref: '#/components/schemas/Distribution'
+        _npmVersion:
+          type: string
+          description: The version of npm used to publish this package version.
+        _nodeVersion:
+          type: string
+          description: The version of Node.js used to publish this package version.
+        _npmUser:
+          $ref: '#/components/schemas/Person'
+    Distribution:
+      type: object
+      description: Distribution metadata for a specific published version, including integrity hashes and tarball location.
+      properties:
+        shasum:
+          type: string
+          description: The SHA-1 checksum of the tarball.
+        tarball:
+          type: string
+          format: uri
+          description: The URL where the tarball can be downloaded.
+        integrity:
+          type: string
+          description: The Subresource Integrity (SRI) hash of the tarball, typically using SHA-512.
+        fileCount:
+          type: integer
+          description: The number of files in the tarball.
+        unpackedSize:
+          type: integer
+          description: The total unpacked size of the tarball in bytes.
+        signatures:
+          type: array
+          description: Cryptographic signatures for the package version.
+          items:
+            type: object
+            properties:
+              keyid:
+                type: string
+                description: The identifier of the signing key.
+              sig:
+                type: string
+                description: The signature value.
+    Error:
+      type: object
+      description: An error response from the registry.
+      properties:
+        error:
+          type: string
+          description: The error type or code.
+        reason:
+          type: string
+          description: A human-readable explanation of the error.
+    PackageDocument:
+      type: object
+      description: A full package document (packument) containing all metadata for a package, including every published version.
+      properties:
+        _id:
+          type: string
+          description: The package name, used as the document identifier.
+        _rev:
+          type: string
+          description: The CouchDB document revision identifier.
+        name:
+          type: string
+          description: The name of the package.
+        description:
+          type: string
+          description: A short description of the package.
+        dist-tags:
+          type: object
+          description: A mapping of distribution tags to version strings. The "latest" tag is always present.
+          additionalProperties:
+            type: string
+        versions:
+          type: object
+          description: A mapping of version strings to version metadata objects.
+          additionalProperties:
+            $ref: '#/components/schemas/PackageVersion'
+        time:
+          type: object
+          description: A mapping of version strings to ISO 8601 timestamps indicating when each version was published. Includes special keys "created" and "modified".
+          additionalProperties:
+            type: string
+            format: date-time
+        maintainers:
+          type: array
+          description: List of current package maintainers.
+          items:
+            $ref: '#/components/schemas/Person'
+        author:
+          $ref: '#/components/schemas/Person'
+        repository:
+          $ref: '#/components/schemas/Repository'
+        readme:
+          type: string
+          description: The README content for the package, typically from the latest version.
+        readmeFilename:
+          type: string
+          description: The filename of the README file.
+        homepage:
+          type: string
+          format: uri
+          description: The URL of the package homepage.
+        keywords:
+          type: array
+          description: Keywords associated with the package for search discovery.
+          items:
+            type: string
+        bugs:
+          type: object
+          description: Issue tracker information.
+          properties:
+            url:
+              type: string
+              format: uri
+              description: URL of the issue tracker.
+        license:
+          type: string
+          description: The SPDX license identifier for the package.
+    Repository:
+      type: object
+      description: Source code repository information.
+      properties:
+        type:
+          type: string
+          description: The version control system type, typically "git".
+        url:
+          type: string
+          description: The URL of the source code repository.
+    Person:
+      type: object
+      description: A person object representing a user, author, or maintainer.
+      properties:
+        name:
+          type: string
+          description: The display name of the person.
+        email:
+          type: string
+          format: email
+          description: The email address of the person.
+        url:
+          type: string
+          format: uri
+          description: The personal URL or website of the person.
+  parameters:
+    packageName:
+      name: package
+      in: path
+      description: The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage).
+      required: true
+      schema:
+        type: string
+    packageVersion:
+      name: version
+      in: path
+      description: A valid semver version string, or the literal string "latest" to resolve the current latest dist-tag.
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: npm access token provided as a Bearer token.
+externalDocs:
+  description: npm Hooks Documentation
+  url: https://blog.npmjs.org/post/145260155635/introducing-hooks-get-notifications-of-npm
