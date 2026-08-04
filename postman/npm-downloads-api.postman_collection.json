@@ -1,0 +1,208 @@
+{
+  "info": {
+    "_postman_id": "ddfb762f-37b8-486b-b0e5-c5a235c35610",
+    "name": "npm Hooks Downloads API",
+    "description": "The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.\n\nContact Support:\n Name: npm Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:23:30.000Z",
+    "updatedAt": "2026-07-28T02:23:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ddfb762f-37b8-486b-b0e5-c5a235c35610"
+  },
+  "item": [
+    {
+      "name": "{package}",
+      "item": [
+        {
+          "name": "-",
+          "item": [
+            {
+              "name": "{tarball}",
+              "item": [
+                {
+                  "name": "Download a package tarball",
+                  "id": "bd58db6c-b900-47c5-b24f-554b115c0f9b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/gzip"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:package/-/:tarball",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":package",
+                        "-",
+                        ":tarball"
+                      ],
+                      "variable": [
+                        {
+                          "id": "3ba9b5c9-07a0-4156-8fd2-5767eb8fd2ed",
+                          "key": "package",
+                          "value": "<string>",
+                          "description": "(Required) The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage)."
+                        },
+                        {
+                          "id": "3f7f1cef-7b67-43da-a5dc-9c1f2c8b44de",
+                          "key": "tarball",
+                          "value": "<string>",
+                          "description": "(Required) The tarball filename, typically in the format {package}-{version}.tgz."
+                        }
+                      ]
+                    },
+                    "description": "Downloads the tarball archive for a specific version of a package. The tarball filename is typically in the format {package}-{version}.tgz. This endpoint is used by the npm CLI during package installation."
+                  },
+                  "response": [
+                    {
+                      "id": "550473c3-bb98-4746-8301-7d5ec5ef0379",
+                      "name": "Tarball file returned successfully.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/gzip"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/:package/-/:tarball",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":package",
+                            "-",
+                            ":tarball"
+                          ],
+                          "variable": [
+                            {
+                              "key": "package"
+                            },
+                            {
+                              "key": "tarball"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/gzip"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<binary>",
+                      "createdAt": "2026-07-28T02:23:30.000Z",
+                      "updatedAt": "2026-07-28T02:23:30.000Z",
+                      "uid": "35240-550473c3-bb98-4746-8301-7d5ec5ef0379"
+                    },
+                    {
+                      "id": "ecf33fb4-bf5f-4d74-9e0e-0465c4c64b24",
+                      "name": "Tarball not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/:package/-/:tarball",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":package",
+                            "-",
+                            ":tarball"
+                          ],
+                          "variable": [
+                            {
+                              "key": "package"
+                            },
+                            {
+                              "key": "tarball"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:23:30.000Z",
+                      "updatedAt": "2026-07-28T02:23:30.000Z",
+                      "uid": "35240-ecf33fb4-bf5f-4d74-9e0e-0465c4c64b24"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:23:30.000Z",
+                  "updatedAt": "2026-07-28T02:23:30.000Z",
+                  "uid": "35240-bd58db6c-b900-47c5-b24f-554b115c0f9b"
+                }
+              ],
+              "id": "0d9eeb91-3d07-446e-b4e8-4af3348324ad",
+              "createdAt": "2026-07-28T02:23:30.000Z",
+              "updatedAt": "2026-07-28T02:23:30.000Z",
+              "uid": "35240-0d9eeb91-3d07-446e-b4e8-4af3348324ad"
+            }
+          ],
+          "id": "1bd5c1b4-5cae-458a-b6af-4347519719c0",
+          "createdAt": "2026-07-28T02:23:30.000Z",
+          "updatedAt": "2026-07-28T02:23:30.000Z",
+          "uid": "35240-1bd5c1b4-5cae-458a-b6af-4347519719c0"
+        }
+      ],
+      "id": "aad3cbd7-81f0-4a9c-9488-5449723b43ce",
+      "createdAt": "2026-07-28T02:23:30.000Z",
+      "updatedAt": "2026-07-28T02:23:30.000Z",
+      "uid": "35240-aad3cbd7-81f0-4a9c-9488-5449723b43ce"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://registry.npmjs.org"
+    }
+  ]
+}

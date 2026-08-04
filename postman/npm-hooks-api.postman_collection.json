@@ -1,0 +1,1210 @@
+{
+  "info": {
+    "_postman_id": "184861d8-2dc3-4ad2-862a-b3f98ba1c583",
+    "name": "npm Downloads Hooks API",
+    "description": "The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.\n\nContact Support:\n Name: npm Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:23:28.000Z",
+    "updatedAt": "2026-07-28T02:23:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-184861d8-2dc3-4ad2-862a-b3f98ba1c583"
+  },
+  "item": [
+    {
+      "name": "-",
+      "item": [
+        {
+          "name": "npm",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "hooks",
+                  "item": [
+                    {
+                      "name": "hook",
+                      "item": [
+                        {
+                          "name": "{id}",
+                          "item": [
+                            {
+                              "name": "Get a webhook",
+                              "id": "396e8110-144d-4a55-a888-62f74238556e",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/-/npm/v1/hooks/hook/:id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "-",
+                                    "npm",
+                                    "v1",
+                                    "hooks",
+                                    "hook",
+                                    ":id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "3b3726c3-2cd6-4fc3-9afe-c6fea6e962c2",
+                                      "key": "id",
+                                      "value": "<string>",
+                                      "description": "(Required) The unique identifier of the webhook subscription."
+                                    }
+                                  ]
+                                },
+                                "description": "Retrieves a specific webhook subscription by its identifier."
+                              },
+                              "response": [
+                                {
+                                  "id": "fd5eb8a6-a219-491c-b6a4-2f1001a866bb",
+                                  "name": "Hook retrieved successfully.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/-/npm/v1/hooks/hook/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "-",
+                                        "npm",
+                                        "v1",
+                                        "hooks",
+                                        "hook",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<string>\",\n  \"username\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"package\",\n  \"endpoint\": \"<uri>\",\n  \"last_delivery\": {\n    \"id\": \"<string>\",\n    \"timestamp\": \"<dateTime>\",\n    \"status\": \"<integer>\"\n  },\n  \"response_code\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\"\n}",
+                                  "createdAt": "2026-07-28T02:23:28.000Z",
+                                  "updatedAt": "2026-07-28T02:23:28.000Z",
+                                  "uid": "35240-fd5eb8a6-a219-491c-b6a4-2f1001a866bb"
+                                },
+                                {
+                                  "id": "3a4dd729-d545-4df7-856e-33508c7dbfa8",
+                                  "name": "Authentication required.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/-/npm/v1/hooks/hook/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "-",
+                                        "npm",
+                                        "v1",
+                                        "hooks",
+                                        "hook",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:23:28.000Z",
+                                  "updatedAt": "2026-07-28T02:23:28.000Z",
+                                  "uid": "35240-3a4dd729-d545-4df7-856e-33508c7dbfa8"
+                                },
+                                {
+                                  "id": "dd4908ed-2d8c-4b8a-83bc-9543e281b0d0",
+                                  "name": "Hook not found.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/-/npm/v1/hooks/hook/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "-",
+                                        "npm",
+                                        "v1",
+                                        "hooks",
+                                        "hook",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:23:28.000Z",
+                                  "updatedAt": "2026-07-28T02:23:28.000Z",
+                                  "uid": "35240-dd4908ed-2d8c-4b8a-83bc-9543e281b0d0"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:23:28.000Z",
+                              "updatedAt": "2026-07-28T02:23:28.000Z",
+                              "uid": "35240-396e8110-144d-4a55-a888-62f74238556e"
+                            },
+                            {
+                              "name": "Update a webhook",
+                              "id": "bf2cf62f-4a87-4257-bee1-f4c77260f1e3",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"endpoint\": \"<uri>\",\n  \"secret\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/-/npm/v1/hooks/hook/:id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "-",
+                                    "npm",
+                                    "v1",
+                                    "hooks",
+                                    "hook",
+                                    ":id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "a0b0db74-a261-4ff4-bfc0-8cb2499e439b",
+                                      "key": "id",
+                                      "value": "<string>",
+                                      "description": "(Required) The unique identifier of the webhook subscription."
+                                    }
+                                  ]
+                                },
+                                "description": "Updates an existing webhook subscription. The endpoint URI and shared secret can be modified. The response includes the full updated hook object."
+                              },
+                              "response": [
+                                {
+                                  "id": "349d37a4-e1e1-4e9f-85c2-7dc4af2da117",
+                                  "name": "Hook updated successfully.",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"endpoint\": \"<uri>\",\n  \"secret\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/-/npm/v1/hooks/hook/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "-",
+                                        "npm",
+                                        "v1",
+                                        "hooks",
+                                        "hook",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<string>\",\n  \"username\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"package\",\n  \"endpoint\": \"<uri>\",\n  \"last_delivery\": {\n    \"id\": \"<string>\",\n    \"timestamp\": \"<dateTime>\",\n    \"status\": \"<integer>\"\n  },\n  \"response_code\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\"\n}",
+                                  "createdAt": "2026-07-28T02:23:28.000Z",
+                                  "updatedAt": "2026-07-28T02:23:28.000Z",
+                                  "uid": "35240-349d37a4-e1e1-4e9f-85c2-7dc4af2da117"
+                                },
+                                {
+                                  "id": "c725c7ff-c54e-413a-ab0e-003e0ec95b62",
+                                  "name": "Invalid request parameters.",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"endpoint\": \"<uri>\",\n  \"secret\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/-/npm/v1/hooks/hook/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "-",
+                                        "npm",
+                                        "v1",
+                                        "hooks",
+                                        "hook",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:23:28.000Z",
+                                  "updatedAt": "2026-07-28T02:23:28.000Z",
+                                  "uid": "35240-c725c7ff-c54e-413a-ab0e-003e0ec95b62"
+                                },
+                                {
+                                  "id": "b00db5e2-3f41-452a-a03c-2bdf23915328",
+                                  "name": "Authentication required.",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"endpoint\": \"<uri>\",\n  \"secret\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/-/npm/v1/hooks/hook/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "-",
+                                        "npm",
+                                        "v1",
+                                        "hooks",
+                                        "hook",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:23:28.000Z",
+                                  "updatedAt": "2026-07-28T02:23:28.000Z",
+                                  "uid": "35240-b00db5e2-3f41-452a-a03c-2bdf23915328"
+                                },
+                                {
+                                  "id": "b806586e-c3f0-413b-98e2-06cbddfa456b",
+                                  "name": "Hook not found.",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"endpoint\": \"<uri>\",\n  \"secret\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/-/npm/v1/hooks/hook/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "-",
+                                        "npm",
+                                        "v1",
+                                        "hooks",
+                                        "hook",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:23:28.000Z",
+                                  "updatedAt": "2026-07-28T02:23:28.000Z",
+                                  "uid": "35240-b806586e-c3f0-413b-98e2-06cbddfa456b"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:23:28.000Z",
+                              "updatedAt": "2026-07-28T02:23:28.000Z",
+                              "uid": "35240-bf2cf62f-4a87-4257-bee1-f4c77260f1e3"
+                            },
+                            {
+                              "name": "Delete a webhook",
+                              "id": "9ad52fe9-9184-4b53-b1a2-c6afa39dca83",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/-/npm/v1/hooks/hook/:id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "-",
+                                    "npm",
+                                    "v1",
+                                    "hooks",
+                                    "hook",
+                                    ":id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "08a72981-1bce-4701-8335-569fa7a03d7a",
+                                      "key": "id",
+                                      "value": "<string>",
+                                      "description": "(Required) The unique identifier of the webhook subscription."
+                                    }
+                                  ]
+                                },
+                                "description": "Deletes a webhook subscription. The response includes the hook object that was deleted."
+                              },
+                              "response": [
+                                {
+                                  "id": "7bb44fae-6b0c-4060-8e5d-824b9f653c39",
+                                  "name": "Hook deleted successfully.",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/-/npm/v1/hooks/hook/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "-",
+                                        "npm",
+                                        "v1",
+                                        "hooks",
+                                        "hook",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<string>\",\n  \"username\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"package\",\n  \"endpoint\": \"<uri>\",\n  \"last_delivery\": {\n    \"id\": \"<string>\",\n    \"timestamp\": \"<dateTime>\",\n    \"status\": \"<integer>\"\n  },\n  \"response_code\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\"\n}",
+                                  "createdAt": "2026-07-28T02:23:28.000Z",
+                                  "updatedAt": "2026-07-28T02:23:28.000Z",
+                                  "uid": "35240-7bb44fae-6b0c-4060-8e5d-824b9f653c39"
+                                },
+                                {
+                                  "id": "fca6e8e5-30e0-4ba5-b5bb-2341870b9ca6",
+                                  "name": "Authentication required.",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/-/npm/v1/hooks/hook/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "-",
+                                        "npm",
+                                        "v1",
+                                        "hooks",
+                                        "hook",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:23:28.000Z",
+                                  "updatedAt": "2026-07-28T02:23:28.000Z",
+                                  "uid": "35240-fca6e8e5-30e0-4ba5-b5bb-2341870b9ca6"
+                                },
+                                {
+                                  "id": "9ae7b927-7f83-4987-a8ea-9543c2b8087d",
+                                  "name": "Hook not found.",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/-/npm/v1/hooks/hook/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "-",
+                                        "npm",
+                                        "v1",
+                                        "hooks",
+                                        "hook",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:23:28.000Z",
+                                  "updatedAt": "2026-07-28T02:23:28.000Z",
+                                  "uid": "35240-9ae7b927-7f83-4987-a8ea-9543c2b8087d"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:23:28.000Z",
+                              "updatedAt": "2026-07-28T02:23:28.000Z",
+                              "uid": "35240-9ad52fe9-9184-4b53-b1a2-c6afa39dca83"
+                            }
+                          ],
+                          "id": "0eecb847-2396-4a74-b9be-021dfeefddb2",
+                          "createdAt": "2026-07-28T02:23:28.000Z",
+                          "updatedAt": "2026-07-28T02:23:28.000Z",
+                          "uid": "35240-0eecb847-2396-4a74-b9be-021dfeefddb2"
+                        },
+                        {
+                          "name": "Create a webhook",
+                          "id": "c63479b5-aa9c-466e-8fdd-4e08c402197e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"type\": \"owner\",\n  \"name\": \"<string>\",\n  \"endpoint\": \"<uri>\",\n  \"secret\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/-/npm/v1/hooks/hook",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "-",
+                                "npm",
+                                "v1",
+                                "hooks",
+                                "hook"
+                              ]
+                            },
+                            "description": "Creates a new webhook subscription. The hook will send HTTP POST payloads to the specified endpoint URI whenever the watched entity changes. Hooks can watch individual packages, all packages belonging to a scope, or all packages published by a specific npm user."
+                          },
+                          "response": [
+                            {
+                              "id": "ccf4f553-0a6e-4cff-a4a4-6e9fde232bc3",
+                              "name": "Hook created successfully.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"type\": \"owner\",\n  \"name\": \"<string>\",\n  \"endpoint\": \"<uri>\",\n  \"secret\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/-/npm/v1/hooks/hook",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "-",
+                                    "npm",
+                                    "v1",
+                                    "hooks",
+                                    "hook"
+                                  ]
+                                }
+                              },
+                              "status": "Created",
+                              "code": 201,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"username\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"package\",\n  \"endpoint\": \"<uri>\",\n  \"last_delivery\": {\n    \"id\": \"<string>\",\n    \"timestamp\": \"<dateTime>\",\n    \"status\": \"<integer>\"\n  },\n  \"response_code\": \"<integer>\",\n  \"status\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-07-28T02:23:28.000Z",
+                              "updatedAt": "2026-07-28T02:23:28.000Z",
+                              "uid": "35240-ccf4f553-0a6e-4cff-a4a4-6e9fde232bc3"
+                            },
+                            {
+                              "id": "8a28a1f8-14ac-4e83-aaa8-31bc5be54857",
+                              "name": "Invalid request parameters.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"type\": \"owner\",\n  \"name\": \"<string>\",\n  \"endpoint\": \"<uri>\",\n  \"secret\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/-/npm/v1/hooks/hook",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "-",
+                                    "npm",
+                                    "v1",
+                                    "hooks",
+                                    "hook"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:23:28.000Z",
+                              "updatedAt": "2026-07-28T02:23:28.000Z",
+                              "uid": "35240-8a28a1f8-14ac-4e83-aaa8-31bc5be54857"
+                            },
+                            {
+                              "id": "748bc64b-8f97-4b51-9c56-8a132a5a5867",
+                              "name": "Authentication required.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"type\": \"owner\",\n  \"name\": \"<string>\",\n  \"endpoint\": \"<uri>\",\n  \"secret\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/-/npm/v1/hooks/hook",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "-",
+                                    "npm",
+                                    "v1",
+                                    "hooks",
+                                    "hook"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:23:28.000Z",
+                              "updatedAt": "2026-07-28T02:23:28.000Z",
+                              "uid": "35240-748bc64b-8f97-4b51-9c56-8a132a5a5867"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:23:28.000Z",
+                          "updatedAt": "2026-07-28T02:23:28.000Z",
+                          "uid": "35240-c63479b5-aa9c-466e-8fdd-4e08c402197e"
+                        }
+                      ],
+                      "id": "92212e1e-296d-4c45-b10d-24179aa7d7e9",
+                      "createdAt": "2026-07-28T02:23:28.000Z",
+                      "updatedAt": "2026-07-28T02:23:28.000Z",
+                      "uid": "35240-92212e1e-296d-4c45-b10d-24179aa7d7e9"
+                    },
+                    {
+                      "name": "List webhooks",
+                      "id": "4f5aa7d8-6da1-42f7-aa0a-3fac48315893",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/-/npm/v1/hooks?package=<string>&limit=<integer>&offset=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "-",
+                            "npm",
+                            "v1",
+                            "hooks"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter hooks by package name. Does not support regular expressions.",
+                              "key": "package",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Maximum number of hooks to return.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Number of hooks to skip for pagination.",
+                              "key": "offset",
+                              "value": "<integer>"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves all webhook subscriptions for the authenticated user. Results can be filtered by package name and paginated using limit and offset parameters."
+                      },
+                      "response": [
+                        {
+                          "id": "d094688f-70a0-4582-8d8a-b65784811313",
+                          "name": "List of hooks retrieved successfully.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/-/npm/v1/hooks?package=<string>&limit=<integer>&offset=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "-",
+                                "npm",
+                                "v1",
+                                "hooks"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter hooks by package name. Does not support regular expressions.",
+                                  "key": "package",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Maximum number of hooks to return.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Number of hooks to skip for pagination.",
+                                  "key": "offset",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"objects\": [\n    {\n      \"id\": \"<string>\",\n      \"username\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"package\",\n      \"endpoint\": \"<uri>\",\n      \"last_delivery\": {\n        \"id\": \"<string>\",\n        \"timestamp\": \"<dateTime>\",\n        \"status\": \"<integer>\"\n      },\n      \"response_code\": \"<integer>\",\n      \"status\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"username\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"scope\",\n      \"endpoint\": \"<uri>\",\n      \"last_delivery\": {\n        \"id\": \"<string>\",\n        \"timestamp\": \"<dateTime>\",\n        \"status\": \"<integer>\"\n      },\n      \"response_code\": \"<integer>\",\n      \"status\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:23:28.000Z",
+                          "updatedAt": "2026-07-28T02:23:28.000Z",
+                          "uid": "35240-d094688f-70a0-4582-8d8a-b65784811313"
+                        },
+                        {
+                          "id": "f8e4b708-a605-4747-80c4-053eed4ab150",
+                          "name": "Authentication required.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/-/npm/v1/hooks?package=<string>&limit=<integer>&offset=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "-",
+                                "npm",
+                                "v1",
+                                "hooks"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter hooks by package name. Does not support regular expressions.",
+                                  "key": "package",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Maximum number of hooks to return.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Number of hooks to skip for pagination.",
+                                  "key": "offset",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:23:28.000Z",
+                          "updatedAt": "2026-07-28T02:23:28.000Z",
+                          "uid": "35240-f8e4b708-a605-4747-80c4-053eed4ab150"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:23:28.000Z",
+                      "updatedAt": "2026-07-28T02:23:28.000Z",
+                      "uid": "35240-4f5aa7d8-6da1-42f7-aa0a-3fac48315893"
+                    }
+                  ],
+                  "id": "d2b6b047-3b0c-44ea-929d-94dfd5c74ba0",
+                  "createdAt": "2026-07-28T02:23:28.000Z",
+                  "updatedAt": "2026-07-28T02:23:28.000Z",
+                  "uid": "35240-d2b6b047-3b0c-44ea-929d-94dfd5c74ba0"
+                }
+              ],
+              "id": "636f784d-8f94-424d-ba4a-b55d6415a3ce",
+              "createdAt": "2026-07-28T02:23:28.000Z",
+              "updatedAt": "2026-07-28T02:23:28.000Z",
+              "uid": "35240-636f784d-8f94-424d-ba4a-b55d6415a3ce"
+            }
+          ],
+          "id": "b131df92-b376-4632-a061-f04fe5b2bc30",
+          "createdAt": "2026-07-28T02:23:28.000Z",
+          "updatedAt": "2026-07-28T02:23:28.000Z",
+          "uid": "35240-b131df92-b376-4632-a061-f04fe5b2bc30"
+        }
+      ],
+      "id": "b280df2d-64b5-4af0-a6b0-2ae0aabf4ab1",
+      "createdAt": "2026-07-28T02:23:28.000Z",
+      "updatedAt": "2026-07-28T02:23:28.000Z",
+      "uid": "35240-b280df2d-64b5-4af0-a6b0-2ae0aabf4ab1"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://registry.npmjs.org"
+    }
+  ]
+}

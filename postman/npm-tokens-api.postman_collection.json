@@ -1,0 +1,700 @@
+{
+  "info": {
+    "_postman_id": "a649961a-bb04-4ffa-9626-5e0b0a9c55ef",
+    "name": "npm Hooks Downloads Tokens API",
+    "description": "The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.\n\nContact Support:\n Name: npm Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:23:43.000Z",
+    "updatedAt": "2026-07-28T02:23:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a649961a-bb04-4ffa-9626-5e0b0a9c55ef"
+  },
+  "item": [
+    {
+      "name": "-",
+      "item": [
+        {
+          "name": "npm",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "tokens",
+                  "item": [
+                    {
+                      "name": "token",
+                      "item": [
+                        {
+                          "name": "{token_id}",
+                          "item": [
+                            {
+                              "name": "Delete an access token",
+                              "id": "ed8dca1a-5d6c-4665-9f96-b3ba30e7ccf1",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "One-time password for accounts with two-factor authentication enabled.",
+                                    "key": "npm-otp",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/-/npm/v1/tokens/token/:token_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "-",
+                                    "npm",
+                                    "v1",
+                                    "tokens",
+                                    "token",
+                                    ":token_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "706c50ad-9254-498d-b901-0ec3341b0e3e",
+                                      "key": "token_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The token key hash or UUID identifying the token to delete."
+                                    }
+                                  ]
+                                },
+                                "description": "Deletes an npm access token by its identifier. Note that the token may remain valid in cache for up to one hour after deletion."
+                              },
+                              "response": [
+                                {
+                                  "id": "cbd2b486-8e86-48b7-acbf-c2b69b93444c",
+                                  "name": "Token deleted successfully.",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "One-time password for accounts with two-factor authentication enabled.",
+                                        "key": "npm-otp",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/-/npm/v1/tokens/token/:token_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "-",
+                                        "npm",
+                                        "v1",
+                                        "tokens",
+                                        "token",
+                                        ":token_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "token_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "No Content",
+                                  "code": 204,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T02:23:44.000Z",
+                                  "updatedAt": "2026-07-28T02:23:44.000Z",
+                                  "uid": "35240-cbd2b486-8e86-48b7-acbf-c2b69b93444c"
+                                },
+                                {
+                                  "id": "6350c993-d0da-4aac-a01b-ec139004c3ce",
+                                  "name": "Authentication required.",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "One-time password for accounts with two-factor authentication enabled.",
+                                        "key": "npm-otp",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/-/npm/v1/tokens/token/:token_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "-",
+                                        "npm",
+                                        "v1",
+                                        "tokens",
+                                        "token",
+                                        ":token_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "token_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:23:44.000Z",
+                                  "updatedAt": "2026-07-28T02:23:44.000Z",
+                                  "uid": "35240-6350c993-d0da-4aac-a01b-ec139004c3ce"
+                                },
+                                {
+                                  "id": "b10bf646-4464-489d-bf0c-b6d9f1ee682a",
+                                  "name": "Token not found.",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "One-time password for accounts with two-factor authentication enabled.",
+                                        "key": "npm-otp",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/-/npm/v1/tokens/token/:token_id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "-",
+                                        "npm",
+                                        "v1",
+                                        "tokens",
+                                        "token",
+                                        ":token_id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "token_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:23:44.000Z",
+                                  "updatedAt": "2026-07-28T02:23:44.000Z",
+                                  "uid": "35240-b10bf646-4464-489d-bf0c-b6d9f1ee682a"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:23:44.000Z",
+                              "updatedAt": "2026-07-28T02:23:44.000Z",
+                              "uid": "35240-ed8dca1a-5d6c-4665-9f96-b3ba30e7ccf1"
+                            }
+                          ],
+                          "id": "50efe507-0098-4d91-8945-7445426bf579",
+                          "createdAt": "2026-07-28T02:23:44.000Z",
+                          "updatedAt": "2026-07-28T02:23:44.000Z",
+                          "uid": "35240-50efe507-0098-4d91-8945-7445426bf579"
+                        }
+                      ],
+                      "id": "5af556cb-2fd9-46bf-a63e-21c07430baa2",
+                      "createdAt": "2026-07-28T02:23:44.000Z",
+                      "updatedAt": "2026-07-28T02:23:44.000Z",
+                      "uid": "35240-5af556cb-2fd9-46bf-a63e-21c07430baa2"
+                    },
+                    {
+                      "name": "List access tokens",
+                      "id": "041b09cc-9de2-4939-b454-2c02f50b861d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/-/npm/v1/tokens?page=<integer>&perPage=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "-",
+                            "npm",
+                            "v1",
+                            "tokens"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number for paginated results.",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Number of tokens to return per page.",
+                              "key": "perPage",
+                              "value": "<integer>"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves a list of the authenticated user's active npm access tokens. Token UUIDs are redacted in the response, but each token object includes a key attribute containing the hexadecimal SHA-512 hash of the token for identification purposes."
+                      },
+                      "response": [
+                        {
+                          "id": "f42bf03e-8a67-4c54-a4ef-a69cc3be68db",
+                          "name": "List of tokens retrieved successfully.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/-/npm/v1/tokens?page=<integer>&perPage=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "-",
+                                "npm",
+                                "v1",
+                                "tokens"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number for paginated results.",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Number of tokens to return per page.",
+                                  "key": "perPage",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"objects\": [\n    {\n      \"key\": \"<string>\",\n      \"token\": \"<string>\",\n      \"cidr_whitelist\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"readonly\": \"<boolean>\",\n      \"automation\": \"<boolean>\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"token\": \"<string>\",\n      \"cidr_whitelist\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"readonly\": \"<boolean>\",\n      \"automation\": \"<boolean>\",\n      \"created\": \"<dateTime>\",\n      \"updated\": \"<dateTime>\"\n    }\n  ],\n  \"total\": \"<integer>\",\n  \"urls\": {\n    \"next\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:23:44.000Z",
+                          "updatedAt": "2026-07-28T02:23:44.000Z",
+                          "uid": "35240-f42bf03e-8a67-4c54-a4ef-a69cc3be68db"
+                        },
+                        {
+                          "id": "f16dc30b-9017-4c5f-b4eb-c17609564f00",
+                          "name": "Authentication required.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/-/npm/v1/tokens?page=<integer>&perPage=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "-",
+                                "npm",
+                                "v1",
+                                "tokens"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number for paginated results.",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Number of tokens to return per page.",
+                                  "key": "perPage",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:23:44.000Z",
+                          "updatedAt": "2026-07-28T02:23:44.000Z",
+                          "uid": "35240-f16dc30b-9017-4c5f-b4eb-c17609564f00"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:23:44.000Z",
+                      "updatedAt": "2026-07-28T02:23:44.000Z",
+                      "uid": "35240-041b09cc-9de2-4939-b454-2c02f50b861d"
+                    },
+                    {
+                      "name": "Create an access token",
+                      "id": "d33b8a8a-cb94-481b-9caa-61d3998c2270",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "One-time password for accounts with two-factor authentication enabled.",
+                            "key": "npm-otp",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"password\": \"<string>\",\n  \"readonly\": false,\n  \"automation\": false,\n  \"cidr_whitelist\": [\n    \"4136.9220.858187.41168442/66199212778\",\n    \"18807036187.65364901.20492.602644141/37\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/-/npm/v1/tokens",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "-",
+                            "npm",
+                            "v1",
+                            "tokens"
+                          ]
+                        },
+                        "description": "Creates a new npm access token with customizable permissions, scope restrictions, expiration settings, and CIDR IP range limitations. The response includes the full token value, which is only returned once and cannot be retrieved again."
+                      },
+                      "response": [
+                        {
+                          "id": "2da348a4-bf84-4421-aa55-7d57b55fa4d3",
+                          "name": "Token created successfully.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "One-time password for accounts with two-factor authentication enabled.",
+                                "key": "npm-otp",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"password\": \"<string>\",\n  \"readonly\": false,\n  \"automation\": false,\n  \"cidr_whitelist\": [\n    \"4136.9220.858187.41168442/66199212778\",\n    \"18807036187.65364901.20492.602644141/37\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/-/npm/v1/tokens",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "-",
+                                "npm",
+                                "v1",
+                                "tokens"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"key\": \"<string>\",\n  \"token\": \"<string>\",\n  \"cidr_whitelist\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"readonly\": \"<boolean>\",\n  \"automation\": \"<boolean>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-07-28T02:23:44.000Z",
+                          "updatedAt": "2026-07-28T02:23:44.000Z",
+                          "uid": "35240-2da348a4-bf84-4421-aa55-7d57b55fa4d3"
+                        },
+                        {
+                          "id": "0c9bf90e-bb65-4677-8f74-4083320ce985",
+                          "name": "Invalid request parameters.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "One-time password for accounts with two-factor authentication enabled.",
+                                "key": "npm-otp",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"password\": \"<string>\",\n  \"readonly\": false,\n  \"automation\": false,\n  \"cidr_whitelist\": [\n    \"4136.9220.858187.41168442/66199212778\",\n    \"18807036187.65364901.20492.602644141/37\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/-/npm/v1/tokens",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "-",
+                                "npm",
+                                "v1",
+                                "tokens"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:23:44.000Z",
+                          "updatedAt": "2026-07-28T02:23:44.000Z",
+                          "uid": "35240-0c9bf90e-bb65-4677-8f74-4083320ce985"
+                        },
+                        {
+                          "id": "442a1619-fe3f-4ac7-845c-5eb22243a5db",
+                          "name": "Authentication required.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "One-time password for accounts with two-factor authentication enabled.",
+                                "key": "npm-otp",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"password\": \"<string>\",\n  \"readonly\": false,\n  \"automation\": false,\n  \"cidr_whitelist\": [\n    \"4136.9220.858187.41168442/66199212778\",\n    \"18807036187.65364901.20492.602644141/37\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/-/npm/v1/tokens",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "-",
+                                "npm",
+                                "v1",
+                                "tokens"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:23:44.000Z",
+                          "updatedAt": "2026-07-28T02:23:44.000Z",
+                          "uid": "35240-442a1619-fe3f-4ac7-845c-5eb22243a5db"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:23:44.000Z",
+                      "updatedAt": "2026-07-28T02:23:44.000Z",
+                      "uid": "35240-d33b8a8a-cb94-481b-9caa-61d3998c2270"
+                    }
+                  ],
+                  "id": "96059d0f-4888-4afc-9c2f-5ecf41d5a313",
+                  "createdAt": "2026-07-28T02:23:44.000Z",
+                  "updatedAt": "2026-07-28T02:23:44.000Z",
+                  "uid": "35240-96059d0f-4888-4afc-9c2f-5ecf41d5a313"
+                }
+              ],
+              "id": "eac4e86e-f479-4868-8c33-f7b253370339",
+              "createdAt": "2026-07-28T02:23:44.000Z",
+              "updatedAt": "2026-07-28T02:23:44.000Z",
+              "uid": "35240-eac4e86e-f479-4868-8c33-f7b253370339"
+            }
+          ],
+          "id": "d92c322d-8427-46f3-8239-b2516d4eb40e",
+          "createdAt": "2026-07-28T02:23:44.000Z",
+          "updatedAt": "2026-07-28T02:23:44.000Z",
+          "uid": "35240-d92c322d-8427-46f3-8239-b2516d4eb40e"
+        }
+      ],
+      "id": "01d4db10-76bf-4d2f-bf2f-2f3eaf292be0",
+      "createdAt": "2026-07-28T02:23:44.000Z",
+      "updatedAt": "2026-07-28T02:23:44.000Z",
+      "uid": "35240-01d4db10-76bf-4d2f-bf2f-2f3eaf292be0"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://registry.npmjs.org"
+    }
+  ]
+}

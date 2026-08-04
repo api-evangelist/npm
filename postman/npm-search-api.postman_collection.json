@@ -1,0 +1,198 @@
+{
+  "info": {
+    "_postman_id": "b2e98bef-7604-4a34-996d-26c26a2b9817",
+    "name": "npm Hooks Downloads Search API",
+    "description": "The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.\n\nContact Support:\n Name: npm Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:23:43.000Z",
+    "updatedAt": "2026-07-28T02:23:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b2e98bef-7604-4a34-996d-26c26a2b9817"
+  },
+  "item": [
+    {
+      "name": "-",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "search",
+              "item": [
+                {
+                  "name": "Search packages",
+                  "id": "9b79dd49-c3ab-4ab8-ae19-6f13713c79f6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/-/v1/search?text=<string>&size=20&from=0&quality=<number>&popularity=<number>&maintenance=<number>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "-",
+                        "v1",
+                        "search"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Full-text search query. Supports special qualifiers such as author:username, maintainer:username, scope:scopename, keywords:keyword, not:unstable, not:insecure, is:unstable, is:insecure, and boost-exact:true.",
+                          "key": "text",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of results to return. Maximum value is 250.",
+                          "key": "size",
+                          "value": "20"
+                        },
+                        {
+                          "description": "Offset for pagination, indicating the starting position in the result set.",
+                          "key": "from",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Weighting for the quality score component of search results, between 0 and 1.",
+                          "key": "quality",
+                          "value": "<number>"
+                        },
+                        {
+                          "description": "Weighting for the popularity score component of search results, between 0 and 1.",
+                          "key": "popularity",
+                          "value": "<number>"
+                        },
+                        {
+                          "description": "Weighting for the maintenance score component of search results, between 0 and 1.",
+                          "key": "maintenance",
+                          "value": "<number>"
+                        }
+                      ]
+                    },
+                    "description": "Performs a full-text search across the npm registry. Results can be weighted by quality, popularity, and maintenance scores. Supports special search qualifiers such as author, maintainer, scope, and keywords filters. Qualifiers like not:unstable, not:insecure, is:unstable, and boost-exact can be included in the text parameter."
+                  },
+                  "response": [
+                    {
+                      "id": "1bf44c4a-902b-4dea-8057-7ba000eeaf20",
+                      "name": "Search results returned successfully.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/-/v1/search?text=<string>&size=20&from=0&quality=<number>&popularity=<number>&maintenance=<number>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "-",
+                            "v1",
+                            "search"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Full-text search query. Supports special qualifiers such as author:username, maintainer:username, scope:scopename, keywords:keyword, not:unstable, not:insecure, is:unstable, is:insecure, and boost-exact:true.",
+                              "key": "text",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Number of results to return. Maximum value is 250.",
+                              "key": "size",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Offset for pagination, indicating the starting position in the result set.",
+                              "key": "from",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Weighting for the quality score component of search results, between 0 and 1.",
+                              "key": "quality",
+                              "value": "<number>"
+                            },
+                            {
+                              "description": "Weighting for the popularity score component of search results, between 0 and 1.",
+                              "key": "popularity",
+                              "value": "<number>"
+                            },
+                            {
+                              "description": "Weighting for the maintenance score component of search results, between 0 and 1.",
+                              "key": "maintenance",
+                              "value": "<number>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"objects\": [\n    {\n      \"package\": {\n        \"name\": \"<string>\",\n        \"scope\": \"<string>\",\n        \"version\": \"<string>\",\n        \"description\": \"<string>\",\n        \"keywords\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"date\": \"<dateTime>\",\n        \"links\": {\n          \"Lorem_9\": \"<string>\",\n          \"in9\": \"<string>\",\n          \"aliquip_f0\": \"<string>\"\n        },\n        \"author\": {\n          \"name\": \"<string>\",\n          \"email\": \"<email>\",\n          \"url\": \"<uri>\"\n        },\n        \"publisher\": {\n          \"name\": \"<string>\",\n          \"email\": \"<email>\",\n          \"url\": \"<uri>\"\n        },\n        \"maintainers\": [\n          {\n            \"name\": \"<string>\",\n            \"email\": \"<email>\",\n            \"url\": \"<uri>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"email\": \"<email>\",\n            \"url\": \"<uri>\"\n          }\n        ]\n      },\n      \"score\": {\n        \"final\": \"<number>\",\n        \"detail\": {\n          \"quality\": \"<number>\",\n          \"popularity\": \"<number>\",\n          \"maintenance\": \"<number>\"\n        }\n      },\n      \"searchScore\": \"<number>\"\n    },\n    {\n      \"package\": {\n        \"name\": \"<string>\",\n        \"scope\": \"<string>\",\n        \"version\": \"<string>\",\n        \"description\": \"<string>\",\n        \"keywords\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"date\": \"<dateTime>\",\n        \"links\": {\n          \"commodoe_\": \"<string>\"\n        },\n        \"author\": {\n          \"name\": \"<string>\",\n          \"email\": \"<email>\",\n          \"url\": \"<uri>\"\n        },\n        \"publisher\": {\n          \"name\": \"<string>\",\n          \"email\": \"<email>\",\n          \"url\": \"<uri>\"\n        },\n        \"maintainers\": [\n          {\n            \"name\": \"<string>\",\n            \"email\": \"<email>\",\n            \"url\": \"<uri>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"email\": \"<email>\",\n            \"url\": \"<uri>\"\n          }\n        ]\n      },\n      \"score\": {\n        \"final\": \"<number>\",\n        \"detail\": {\n          \"quality\": \"<number>\",\n          \"popularity\": \"<number>\",\n          \"maintenance\": \"<number>\"\n        }\n      },\n      \"searchScore\": \"<number>\"\n    }\n  ],\n  \"total\": \"<integer>\",\n  \"time\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:23:43.000Z",
+                      "updatedAt": "2026-07-28T02:23:43.000Z",
+                      "uid": "35240-1bf44c4a-902b-4dea-8057-7ba000eeaf20"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:23:43.000Z",
+                  "updatedAt": "2026-07-28T02:23:43.000Z",
+                  "uid": "35240-9b79dd49-c3ab-4ab8-ae19-6f13713c79f6"
+                }
+              ],
+              "id": "9e58f3d8-a98c-454b-b101-6bc47f682c11",
+              "createdAt": "2026-07-28T02:23:43.000Z",
+              "updatedAt": "2026-07-28T02:23:43.000Z",
+              "uid": "35240-9e58f3d8-a98c-454b-b101-6bc47f682c11"
+            }
+          ],
+          "id": "0a853ee4-3875-405e-8386-96cbb4dc8e95",
+          "createdAt": "2026-07-28T02:23:43.000Z",
+          "updatedAt": "2026-07-28T02:23:43.000Z",
+          "uid": "35240-0a853ee4-3875-405e-8386-96cbb4dc8e95"
+        }
+      ],
+      "id": "d69bef17-61c8-4b3a-9b96-6bf49d95963f",
+      "createdAt": "2026-07-28T02:23:43.000Z",
+      "updatedAt": "2026-07-28T02:23:43.000Z",
+      "uid": "35240-d69bef17-61c8-4b3a-9b96-6bf49d95963f"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://registry.npmjs.org"
+    }
+  ]
+}

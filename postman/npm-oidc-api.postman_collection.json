@@ -1,0 +1,317 @@
+{
+  "info": {
+    "_postman_id": "b907576a-e94e-4a8b-98c6-eebfa670bbd3",
+    "name": "npm Hooks Downloads OIDC API",
+    "description": "The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.\n\nContact Support:\n Name: npm Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:23:31.000Z",
+    "updatedAt": "2026-07-28T02:23:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b907576a-e94e-4a8b-98c6-eebfa670bbd3"
+  },
+  "item": [
+    {
+      "name": "-",
+      "item": [
+        {
+          "name": "npm",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "security",
+                  "item": [
+                    {
+                      "name": "oidc",
+                      "item": [
+                        {
+                          "name": "tokens",
+                          "item": [
+                            {
+                              "name": "Exchange an OIDC token for an npm token",
+                              "id": "5700194a-fd46-4740-bc90-e03eabcb73cd",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"package\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/-/npm/v1/security/oidc/tokens",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "-",
+                                    "npm",
+                                    "v1",
+                                    "security",
+                                    "oidc",
+                                    "tokens"
+                                  ]
+                                },
+                                "description": "Exchanges a valid OIDC identity token from a supported CI/CD provider for a short-lived npm registry access token. The OIDC token must be provided as a Bearer token in the Authorization header. The provider must be pre-configured as a trusted publisher for the target package."
+                              },
+                              "response": [
+                                {
+                                  "id": "be1f3c74-7cf8-424d-a64b-022943db8757",
+                                  "name": "OIDC token exchanged successfully.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"package\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/-/npm/v1/security/oidc/tokens",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "-",
+                                        "npm",
+                                        "v1",
+                                        "security",
+                                        "oidc",
+                                        "tokens"
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"token\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:23:31.000Z",
+                                  "updatedAt": "2026-07-28T02:23:31.000Z",
+                                  "uid": "35240-be1f3c74-7cf8-424d-a64b-022943db8757"
+                                },
+                                {
+                                  "id": "894d382b-fe5f-4862-8824-2d8425e832c0",
+                                  "name": "Invalid or expired OIDC token.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"package\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/-/npm/v1/security/oidc/tokens",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "-",
+                                        "npm",
+                                        "v1",
+                                        "security",
+                                        "oidc",
+                                        "tokens"
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:23:31.000Z",
+                                  "updatedAt": "2026-07-28T02:23:31.000Z",
+                                  "uid": "35240-894d382b-fe5f-4862-8824-2d8425e832c0"
+                                },
+                                {
+                                  "id": "36fc7d16-9902-4fd4-83a6-acadd16f02ae",
+                                  "name": "OIDC token claims do not match trusted publisher configuration.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"package\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/-/npm/v1/security/oidc/tokens",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "-",
+                                        "npm",
+                                        "v1",
+                                        "security",
+                                        "oidc",
+                                        "tokens"
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T02:23:31.000Z",
+                                  "updatedAt": "2026-07-28T02:23:31.000Z",
+                                  "uid": "35240-36fc7d16-9902-4fd4-83a6-acadd16f02ae"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:23:31.000Z",
+                              "updatedAt": "2026-07-28T02:23:31.000Z",
+                              "uid": "35240-5700194a-fd46-4740-bc90-e03eabcb73cd"
+                            }
+                          ],
+                          "id": "e6d7eb21-b976-450c-baa6-5dc63fdae39a",
+                          "createdAt": "2026-07-28T02:23:31.000Z",
+                          "updatedAt": "2026-07-28T02:23:31.000Z",
+                          "uid": "35240-e6d7eb21-b976-450c-baa6-5dc63fdae39a"
+                        }
+                      ],
+                      "id": "4f249f77-00ca-4503-aebc-dd08aeead5f7",
+                      "createdAt": "2026-07-28T02:23:31.000Z",
+                      "updatedAt": "2026-07-28T02:23:31.000Z",
+                      "uid": "35240-4f249f77-00ca-4503-aebc-dd08aeead5f7"
+                    }
+                  ],
+                  "id": "c384160e-696f-4862-9517-e63add7de798",
+                  "createdAt": "2026-07-28T02:23:31.000Z",
+                  "updatedAt": "2026-07-28T02:23:31.000Z",
+                  "uid": "35240-c384160e-696f-4862-9517-e63add7de798"
+                }
+              ],
+              "id": "cfebd7d0-cd3d-4a61-b901-8cb9e7407efc",
+              "createdAt": "2026-07-28T02:23:31.000Z",
+              "updatedAt": "2026-07-28T02:23:31.000Z",
+              "uid": "35240-cfebd7d0-cd3d-4a61-b901-8cb9e7407efc"
+            }
+          ],
+          "id": "2bd30348-7726-4653-a8ec-766abab5d363",
+          "createdAt": "2026-07-28T02:23:31.000Z",
+          "updatedAt": "2026-07-28T02:23:31.000Z",
+          "uid": "35240-2bd30348-7726-4653-a8ec-766abab5d363"
+        }
+      ],
+      "id": "7741edc2-4e69-461e-b2c3-43b97a92b23a",
+      "createdAt": "2026-07-28T02:23:31.000Z",
+      "updatedAt": "2026-07-28T02:23:31.000Z",
+      "uid": "35240-7741edc2-4e69-461e-b2c3-43b97a92b23a"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://registry.npmjs.org"
+    }
+  ]
+}

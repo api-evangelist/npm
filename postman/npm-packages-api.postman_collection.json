@@ -1,0 +1,329 @@
+{
+  "info": {
+    "_postman_id": "3d0456ae-758f-40fc-91fc-79613243e0ab",
+    "name": "npm Hooks Downloads Packages API",
+    "description": "The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.\n\nContact Support:\n Name: npm Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:23:38.000Z",
+    "updatedAt": "2026-07-28T02:23:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3d0456ae-758f-40fc-91fc-79613243e0ab"
+  },
+  "item": [
+    {
+      "name": "{package}",
+      "item": [
+        {
+          "name": "{version}",
+          "item": [
+            {
+              "name": "Get a specific package version",
+              "id": "f6750023-3cf6-4c62-a7a4-15410201dc4c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:package/:version",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":package",
+                    ":version"
+                  ],
+                  "variable": [
+                    {
+                      "id": "c8c4a603-932e-4953-8ad7-5ca9f533907c",
+                      "key": "package",
+                      "value": "<string>",
+                      "description": "(Required) The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage)."
+                    },
+                    {
+                      "id": "fdc9ccf1-4742-479b-a200-7a3162626a3a",
+                      "key": "version",
+                      "value": "<string>",
+                      "description": "(Required) A valid semver version string, or the literal string \"latest\" to resolve the current latest dist-tag."
+                    }
+                  ]
+                },
+                "description": "Retrieves metadata for a specific version of a package. The version can be a valid semver string or the literal string \"latest\" to retrieve the version pointed to by the latest dist-tag. Returns the version-specific manifest including dependencies, scripts, and distribution information."
+              },
+              "response": [
+                {
+                  "id": "177b83ad-a747-4c10-88be-efb869ebf813",
+                  "name": "Package version metadata retrieved successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:package/:version",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":package",
+                        ":version"
+                      ],
+                      "variable": [
+                        {
+                          "key": "package"
+                        },
+                        {
+                          "key": "version"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"version\": \"<string>\",\n  \"description\": \"<string>\",\n  \"main\": \"<string>\",\n  \"scripts\": {\n    \"fugiat_e68\": \"<string>\"\n  },\n  \"dependencies\": {\n    \"inc31\": \"<string>\",\n    \"Loremd0\": \"<string>\"\n  },\n  \"devDependencies\": {\n    \"cupidatat_b_\": \"<string>\"\n  },\n  \"peerDependencies\": {\n    \"voluptated\": \"<string>\",\n    \"proident655\": \"<string>\",\n    \"laboris_e5\": \"<string>\"\n  },\n  \"optionalDependencies\": {\n    \"eu_24a\": \"<string>\"\n  },\n  \"engines\": {\n    \"aliqua_53\": \"<string>\",\n    \"velit2c1\": \"<string>\"\n  },\n  \"author\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"url\": \"<uri>\"\n  },\n  \"maintainers\": [\n    {\n      \"name\": \"<string>\",\n      \"email\": \"<email>\",\n      \"url\": \"<uri>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"email\": \"<email>\",\n      \"url\": \"<uri>\"\n    }\n  ],\n  \"repository\": {\n    \"type\": \"<string>\",\n    \"url\": \"<string>\"\n  },\n  \"license\": \"<string>\",\n  \"keywords\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dist\": {\n    \"shasum\": \"<string>\",\n    \"tarball\": \"<uri>\",\n    \"integrity\": \"<string>\",\n    \"fileCount\": \"<integer>\",\n    \"unpackedSize\": \"<integer>\",\n    \"signatures\": [\n      {\n        \"keyid\": \"<string>\",\n        \"sig\": \"<string>\"\n      },\n      {\n        \"keyid\": \"<string>\",\n        \"sig\": \"<string>\"\n      }\n    ]\n  },\n  \"_npmVersion\": \"<string>\",\n  \"_nodeVersion\": \"<string>\",\n  \"_npmUser\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"url\": \"<uri>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:23:39.000Z",
+                  "updatedAt": "2026-07-28T02:23:39.000Z",
+                  "uid": "35240-177b83ad-a747-4c10-88be-efb869ebf813"
+                },
+                {
+                  "id": "64be49c3-53ea-4eef-93c4-d94ee7320f6b",
+                  "name": "Package or version not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:package/:version",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":package",
+                        ":version"
+                      ],
+                      "variable": [
+                        {
+                          "key": "package"
+                        },
+                        {
+                          "key": "version"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:23:39.000Z",
+                  "updatedAt": "2026-07-28T02:23:39.000Z",
+                  "uid": "35240-64be49c3-53ea-4eef-93c4-d94ee7320f6b"
+                }
+              ],
+              "createdAt": "2026-07-28T02:23:39.000Z",
+              "updatedAt": "2026-07-28T02:23:39.000Z",
+              "uid": "35240-f6750023-3cf6-4c62-a7a4-15410201dc4c"
+            }
+          ],
+          "id": "8439fd14-d3d4-4015-9296-813e547c59ac",
+          "createdAt": "2026-07-28T02:23:39.000Z",
+          "updatedAt": "2026-07-28T02:23:39.000Z",
+          "uid": "35240-8439fd14-d3d4-4015-9296-813e547c59ac"
+        },
+        {
+          "name": "Get a package document (packument)",
+          "id": "dc92a203-46b5-4fc3-8e2b-5d72d445281e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/:package",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ":package"
+              ],
+              "variable": [
+                {
+                  "id": "da01db8b-61fd-4a1c-9831-bbf030707c95",
+                  "key": "package",
+                  "value": "<string>",
+                  "description": "(Required) The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage)."
+                }
+              ]
+            },
+            "description": "Retrieves the full package document (packument) for a given package name. The packument includes all published versions, dist-tags, maintainers, repository information, and README content. For scoped packages, the package name should be URL-encoded (e.g., @scope%2Fpackage)."
+          },
+          "response": [
+            {
+              "id": "edcfc9f4-dba9-45c8-8e63-c511e0efefa9",
+              "name": "Package document retrieved successfully.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:package",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":package"
+                  ],
+                  "variable": [
+                    {
+                      "key": "package"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"_id\": \"<string>\",\n  \"_rev\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"dist-tags\": {\n    \"nostrud_c98\": \"<string>\",\n    \"reprehenderit087\": \"<string>\",\n    \"nonbba\": \"<string>\",\n    \"in_edf\": \"<string>\"\n  },\n  \"versions\": {\n    \"reprehenderit_41e\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\",\n      \"description\": \"<string>\",\n      \"main\": \"<string>\",\n      \"scripts\": {\n        \"pariaturcdd\": \"<string>\",\n        \"esse_56a\": \"<string>\"\n      },\n      \"dependencies\": {\n        \"reprehenderit2\": \"<string>\",\n        \"sunt_eb\": \"<string>\",\n        \"cillum2aa\": \"<string>\"\n      },\n      \"devDependencies\": {\n        \"est9e9\": \"<string>\"\n      },\n      \"peerDependencies\": {\n        \"dolor_a25\": \"<string>\",\n        \"dolor_10\": \"<string>\",\n        \"fugiat_27\": \"<string>\"\n      },\n      \"optionalDependencies\": {\n        \"adipisicing_2\": \"<string>\"\n      },\n      \"engines\": {\n        \"ad_1\": \"<string>\",\n        \"voluptate__ca\": \"<string>\"\n      },\n      \"author\": {\n        \"name\": \"<string>\",\n        \"email\": \"<email>\",\n        \"url\": \"<uri>\"\n      },\n      \"maintainers\": [\n        {\n          \"name\": \"<string>\",\n          \"email\": \"<email>\",\n          \"url\": \"<uri>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"email\": \"<email>\",\n          \"url\": \"<uri>\"\n        }\n      ],\n      \"repository\": {\n        \"type\": \"<string>\",\n        \"url\": \"<string>\"\n      },\n      \"license\": \"<string>\",\n      \"keywords\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"dist\": {\n        \"shasum\": \"<string>\",\n        \"tarball\": \"<uri>\",\n        \"integrity\": \"<string>\",\n        \"fileCount\": \"<integer>\",\n        \"unpackedSize\": \"<integer>\",\n        \"signatures\": [\n          {\n            \"keyid\": \"<string>\",\n            \"sig\": \"<string>\"\n          },\n          {\n            \"keyid\": \"<string>\",\n            \"sig\": \"<string>\"\n          }\n        ]\n      },\n      \"_npmVersion\": \"<string>\",\n      \"_nodeVersion\": \"<string>\",\n      \"_npmUser\": {\n        \"name\": \"<string>\",\n        \"email\": \"<email>\",\n        \"url\": \"<uri>\"\n      }\n    },\n    \"culpa_03c\": {\n      \"name\": \"<string>\",\n      \"version\": \"<string>\",\n      \"description\": \"<string>\",\n      \"main\": \"<string>\",\n      \"scripts\": {\n        \"cupidatat0_\": \"<string>\"\n      },\n      \"dependencies\": {\n        \"labore_4f2\": \"<string>\",\n        \"id0\": \"<string>\"\n      },\n      \"devDependencies\": {\n        \"Excepteur_9f0\": \"<string>\",\n        \"in_6f\": \"<string>\"\n      },\n      \"peerDependencies\": {\n        \"ut0_\": \"<string>\",\n        \"adipisicing_c02\": \"<string>\"\n      },\n      \"optionalDependencies\": {\n        \"euc99\": \"<string>\"\n      },\n      \"engines\": {\n        \"esse7_\": \"<string>\"\n      },\n      \"author\": {\n        \"name\": \"<string>\",\n        \"email\": \"<email>\",\n        \"url\": \"<uri>\"\n      },\n      \"maintainers\": [\n        {\n          \"name\": \"<string>\",\n          \"email\": \"<email>\",\n          \"url\": \"<uri>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"email\": \"<email>\",\n          \"url\": \"<uri>\"\n        }\n      ],\n      \"repository\": {\n        \"type\": \"<string>\",\n        \"url\": \"<string>\"\n      },\n      \"license\": \"<string>\",\n      \"keywords\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"dist\": {\n        \"shasum\": \"<string>\",\n        \"tarball\": \"<uri>\",\n        \"integrity\": \"<string>\",\n        \"fileCount\": \"<integer>\",\n        \"unpackedSize\": \"<integer>\",\n        \"signatures\": [\n          {\n            \"keyid\": \"<string>\",\n            \"sig\": \"<string>\"\n          },\n          {\n            \"keyid\": \"<string>\",\n            \"sig\": \"<string>\"\n          }\n        ]\n      },\n      \"_npmVersion\": \"<string>\",\n      \"_nodeVersion\": \"<string>\",\n      \"_npmUser\": {\n        \"name\": \"<string>\",\n        \"email\": \"<email>\",\n        \"url\": \"<uri>\"\n      }\n    }\n  },\n  \"time\": {\n    \"incididunt_dd\": \"<dateTime>\",\n    \"fugiat9\": \"<dateTime>\",\n    \"reprehenderit_541\": \"<dateTime>\"\n  },\n  \"maintainers\": [\n    {\n      \"name\": \"<string>\",\n      \"email\": \"<email>\",\n      \"url\": \"<uri>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"email\": \"<email>\",\n      \"url\": \"<uri>\"\n    }\n  ],\n  \"author\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"url\": \"<uri>\"\n  },\n  \"repository\": {\n    \"type\": \"<string>\",\n    \"url\": \"<string>\"\n  },\n  \"readme\": \"<string>\",\n  \"readmeFilename\": \"<string>\",\n  \"homepage\": \"<uri>\",\n  \"keywords\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"bugs\": {\n    \"url\": \"<uri>\"\n  },\n  \"license\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:23:39.000Z",
+              "updatedAt": "2026-07-28T02:23:39.000Z",
+              "uid": "35240-edcfc9f4-dba9-45c8-8e63-c511e0efefa9"
+            },
+            {
+              "id": "c1c150af-d759-4e3a-adaa-0fdf068a5b21",
+              "name": "Package not found.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:package",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":package"
+                  ],
+                  "variable": [
+                    {
+                      "key": "package"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:23:39.000Z",
+              "updatedAt": "2026-07-28T02:23:39.000Z",
+              "uid": "35240-c1c150af-d759-4e3a-adaa-0fdf068a5b21"
+            }
+          ],
+          "createdAt": "2026-07-28T02:23:39.000Z",
+          "updatedAt": "2026-07-28T02:23:39.000Z",
+          "uid": "35240-dc92a203-46b5-4fc3-8e2b-5d72d445281e"
+        }
+      ],
+      "id": "3b1a4f10-3f7e-4ef1-9b80-80a8bdfcd9d0",
+      "createdAt": "2026-07-28T02:23:39.000Z",
+      "updatedAt": "2026-07-28T02:23:39.000Z",
+      "uid": "35240-3b1a4f10-3f7e-4ef1-9b80-80a8bdfcd9d0"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://registry.npmjs.org"
+    }
+  ]
+}

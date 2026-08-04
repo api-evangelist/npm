@@ -1,0 +1,112 @@
+{
+  "info": {
+    "_postman_id": "b451dfed-b6a2-4ff5-8d8d-d7e23d69d18f",
+    "name": "npm Hooks Downloads Registry API",
+    "description": "The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.\n\nContact Support:\n Name: npm Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:23:27.000Z",
+    "updatedAt": "2026-07-28T02:23:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b451dfed-b6a2-4ff5-8d8d-d7e23d69d18f"
+  },
+  "item": [
+    {
+      "name": "/",
+      "item": [
+        {
+          "name": "Get registry metadata",
+          "id": "cedf088e-22ca-4fba-86cd-f7698a6798dd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ]
+            },
+            "description": "Returns metadata about the npm registry, including document counts, storage sizes, and instance information. This endpoint follows the CouchDB database information convention."
+          },
+          "response": [
+            {
+              "id": "011dd24f-84f9-446c-8d4d-18be4471ea18",
+              "name": "Registry metadata retrieved successfully.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"db_name\": \"<string>\",\n  \"doc_count\": \"<integer>\",\n  \"doc_del_count\": \"<integer>\",\n  \"update_seq\": \"<integer>\",\n  \"purge_seq\": \"<integer>\",\n  \"compact_running\": \"<boolean>\",\n  \"disk_size\": \"<integer>\",\n  \"data_size\": \"<integer>\",\n  \"instance_start_time\": \"<string>\",\n  \"disk_format_version\": \"<integer>\",\n  \"committed_update_seq\": \"<integer>\"\n}",
+              "createdAt": "2026-07-28T02:23:27.000Z",
+              "updatedAt": "2026-07-28T02:23:27.000Z",
+              "uid": "35240-011dd24f-84f9-446c-8d4d-18be4471ea18"
+            }
+          ],
+          "createdAt": "2026-07-28T02:23:27.000Z",
+          "updatedAt": "2026-07-28T02:23:27.000Z",
+          "uid": "35240-cedf088e-22ca-4fba-86cd-f7698a6798dd"
+        }
+      ],
+      "id": "9b387af1-117a-4f21-b7e6-7a1c806de1bc",
+      "createdAt": "2026-07-28T02:23:27.000Z",
+      "updatedAt": "2026-07-28T02:23:27.000Z",
+      "uid": "35240-9b387af1-117a-4f21-b7e6-7a1c806de1bc"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://registry.npmjs.org"
+    }
+  ]
+}

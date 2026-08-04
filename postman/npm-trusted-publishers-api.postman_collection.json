@@ -1,0 +1,847 @@
+{
+  "info": {
+    "_postman_id": "e7e84424-a9c1-4649-a203-1b442f4fdfb7",
+    "name": "npm Hooks Downloads Trusted Publishers API",
+    "description": "The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.\n\nContact Support:\n Name: npm Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:23:45.000Z",
+    "updatedAt": "2026-07-28T02:23:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e7e84424-a9c1-4649-a203-1b442f4fdfb7"
+  },
+  "item": [
+    {
+      "name": "-",
+      "item": [
+        {
+          "name": "npm",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "security",
+                  "item": [
+                    {
+                      "name": "trusted-publishers",
+                      "item": [
+                        {
+                          "name": "packages",
+                          "item": [
+                            {
+                              "name": "{package}",
+                              "item": [
+                                {
+                                  "name": "{publisher_id}",
+                                  "item": [
+                                    {
+                                      "name": "Remove a trusted publisher from a package",
+                                      "id": "37e2aad4-3b81-4dad-acd7-0a5a7730bad0",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/-/npm/v1/security/trusted-publishers/packages/:package/:publisher_id",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "-",
+                                            "npm",
+                                            "v1",
+                                            "security",
+                                            "trusted-publishers",
+                                            "packages",
+                                            ":package",
+                                            ":publisher_id"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "9012246e-0f82-45fa-ba52-f301b3a6af6f",
+                                              "key": "package",
+                                              "value": "<string>",
+                                              "description": "(Required) The name of the package, URL-encoded for scoped packages (e.g., @scope%2Fpackage)."
+                                            },
+                                            {
+                                              "id": "6b59165d-40d7-4588-ad43-25bc2266f344",
+                                              "key": "publisher_id",
+                                              "value": "<string>",
+                                              "description": "(Required) The identifier of the trusted publisher configuration to remove."
+                                            }
+                                          ]
+                                        },
+                                        "description": "Removes a trusted publisher configuration from a package, revoking the CI/CD provider's ability to publish via OIDC token exchange."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "369791aa-a5e4-43a2-baea-f2637fd68b96",
+                                          "name": "Trusted publisher removed successfully.",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/-/npm/v1/security/trusted-publishers/packages/:package/:publisher_id",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "-",
+                                                "npm",
+                                                "v1",
+                                                "security",
+                                                "trusted-publishers",
+                                                "packages",
+                                                ":package",
+                                                ":publisher_id"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "package"
+                                                },
+                                                {
+                                                  "key": "publisher_id"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "No Content",
+                                          "code": 204,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-07-28T02:23:45.000Z",
+                                          "updatedAt": "2026-07-28T02:23:45.000Z",
+                                          "uid": "35240-369791aa-a5e4-43a2-baea-f2637fd68b96"
+                                        },
+                                        {
+                                          "id": "10aff7ef-7401-4780-8c7a-24cc41c920a9",
+                                          "name": "Authentication required.",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/-/npm/v1/security/trusted-publishers/packages/:package/:publisher_id",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "-",
+                                                "npm",
+                                                "v1",
+                                                "security",
+                                                "trusted-publishers",
+                                                "packages",
+                                                ":package",
+                                                ":publisher_id"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "package"
+                                                },
+                                                {
+                                                  "key": "publisher_id"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Unauthorized",
+                                          "code": 401,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                          "createdAt": "2026-07-28T02:23:45.000Z",
+                                          "updatedAt": "2026-07-28T02:23:45.000Z",
+                                          "uid": "35240-10aff7ef-7401-4780-8c7a-24cc41c920a9"
+                                        },
+                                        {
+                                          "id": "a98b2b36-3e64-41c9-8147-676be2d1be6e",
+                                          "name": "Trusted publisher configuration not found.",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: bearer",
+                                                "key": "Authorization",
+                                                "value": "Bearer <token>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/-/npm/v1/security/trusted-publishers/packages/:package/:publisher_id",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "-",
+                                                "npm",
+                                                "v1",
+                                                "security",
+                                                "trusted-publishers",
+                                                "packages",
+                                                ":package",
+                                                ":publisher_id"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "package"
+                                                },
+                                                {
+                                                  "key": "publisher_id"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Not Found",
+                                          "code": 404,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                          "createdAt": "2026-07-28T02:23:45.000Z",
+                                          "updatedAt": "2026-07-28T02:23:45.000Z",
+                                          "uid": "35240-a98b2b36-3e64-41c9-8147-676be2d1be6e"
+                                        }
+                                      ],
+                                      "createdAt": "2026-07-28T02:23:45.000Z",
+                                      "updatedAt": "2026-07-28T02:23:45.000Z",
+                                      "uid": "35240-37e2aad4-3b81-4dad-acd7-0a5a7730bad0"
+                                    }
+                                  ],
+                                  "id": "23679e71-82b5-4c26-87b3-45475d3a2e2e",
+                                  "createdAt": "2026-07-28T02:23:45.000Z",
+                                  "updatedAt": "2026-07-28T02:23:45.000Z",
+                                  "uid": "35240-23679e71-82b5-4c26-87b3-45475d3a2e2e"
+                                },
+                                {
+                                  "name": "List trusted publishers for a package",
+                                  "id": "c5c752b3-6a59-46b1-aaca-1dee30495f6f",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/-/npm/v1/security/trusted-publishers/packages/:package",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "-",
+                                        "npm",
+                                        "v1",
+                                        "security",
+                                        "trusted-publishers",
+                                        "packages",
+                                        ":package"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "a4c5680c-48cd-428c-ab09-36960ec94be5",
+                                          "key": "package",
+                                          "value": "<string>",
+                                          "description": "(Required) The name of the package, URL-encoded for scoped packages (e.g., @scope%2Fpackage)."
+                                        }
+                                      ]
+                                    },
+                                    "description": "Retrieves the trusted publisher configurations for a given package. Each configuration specifies a CI/CD provider and the conditions under which it is trusted to publish."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "a1f70a2f-1823-4f25-be88-783ec4f3a824",
+                                      "name": "Trusted publishers retrieved successfully.",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/-/npm/v1/security/trusted-publishers/packages/:package",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "-",
+                                            "npm",
+                                            "v1",
+                                            "security",
+                                            "trusted-publishers",
+                                            "packages",
+                                            ":package"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "package"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"objects\": [\n    {\n      \"id\": \"<string>\",\n      \"provider\": \"gitlab-ci\",\n      \"repository_owner\": \"<string>\",\n      \"repository\": \"<string>\",\n      \"workflow_filename\": \"<string>\",\n      \"environment\": \"<string>\",\n      \"created\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"provider\": \"circleci\",\n      \"repository_owner\": \"<string>\",\n      \"repository\": \"<string>\",\n      \"workflow_filename\": \"<string>\",\n      \"environment\": \"<string>\",\n      \"created\": \"<dateTime>\"\n    }\n  ]\n}",
+                                      "createdAt": "2026-07-28T02:23:45.000Z",
+                                      "updatedAt": "2026-07-28T02:23:45.000Z",
+                                      "uid": "35240-a1f70a2f-1823-4f25-be88-783ec4f3a824"
+                                    },
+                                    {
+                                      "id": "eab887d7-3220-402c-8062-a10891b1e8aa",
+                                      "name": "Authentication required.",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/-/npm/v1/security/trusted-publishers/packages/:package",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "-",
+                                            "npm",
+                                            "v1",
+                                            "security",
+                                            "trusted-publishers",
+                                            "packages",
+                                            ":package"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "package"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                      "createdAt": "2026-07-28T02:23:45.000Z",
+                                      "updatedAt": "2026-07-28T02:23:45.000Z",
+                                      "uid": "35240-eab887d7-3220-402c-8062-a10891b1e8aa"
+                                    },
+                                    {
+                                      "id": "a90ed97d-b1b0-4f6f-8bd6-9bb21f35cc3e",
+                                      "name": "Package not found.",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/-/npm/v1/security/trusted-publishers/packages/:package",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "-",
+                                            "npm",
+                                            "v1",
+                                            "security",
+                                            "trusted-publishers",
+                                            "packages",
+                                            ":package"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "package"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                      "createdAt": "2026-07-28T02:23:45.000Z",
+                                      "updatedAt": "2026-07-28T02:23:45.000Z",
+                                      "uid": "35240-a90ed97d-b1b0-4f6f-8bd6-9bb21f35cc3e"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T02:23:45.000Z",
+                                  "updatedAt": "2026-07-28T02:23:45.000Z",
+                                  "uid": "35240-c5c752b3-6a59-46b1-aaca-1dee30495f6f"
+                                },
+                                {
+                                  "name": "Add a trusted publisher for a package",
+                                  "id": "81a537f0-0754-47ab-9bbd-45cd40455b8e",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"provider\": \"circleci\",\n  \"repository_owner\": \"<string>\",\n  \"repository\": \"<string>\",\n  \"workflow_filename\": \"<string>\",\n  \"environment\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/-/npm/v1/security/trusted-publishers/packages/:package",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "-",
+                                        "npm",
+                                        "v1",
+                                        "security",
+                                        "trusted-publishers",
+                                        "packages",
+                                        ":package"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "e30934b3-3aa2-41ac-a1b1-2db7c216dfcb",
+                                          "key": "package",
+                                          "value": "<string>",
+                                          "description": "(Required) The name of the package, URL-encoded for scoped packages (e.g., @scope%2Fpackage)."
+                                        }
+                                      ]
+                                    },
+                                    "description": "Configures a new trusted publisher for a package. This allows the specified CI/CD provider to publish the package using OIDC token exchange without requiring long-lived npm tokens. Only users with write permissions on the package can configure trusted publishers."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "df990258-a889-4282-98b5-475d755d6347",
+                                      "name": "Trusted publisher added successfully.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"provider\": \"circleci\",\n  \"repository_owner\": \"<string>\",\n  \"repository\": \"<string>\",\n  \"workflow_filename\": \"<string>\",\n  \"environment\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/-/npm/v1/security/trusted-publishers/packages/:package",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "-",
+                                            "npm",
+                                            "v1",
+                                            "security",
+                                            "trusted-publishers",
+                                            "packages",
+                                            ":package"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "package"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Created",
+                                      "code": 201,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"id\": \"<string>\",\n  \"provider\": \"github-actions\",\n  \"repository_owner\": \"<string>\",\n  \"repository\": \"<string>\",\n  \"workflow_filename\": \"<string>\",\n  \"environment\": \"<string>\",\n  \"created\": \"<dateTime>\"\n}",
+                                      "createdAt": "2026-07-28T02:23:45.000Z",
+                                      "updatedAt": "2026-07-28T02:23:45.000Z",
+                                      "uid": "35240-df990258-a889-4282-98b5-475d755d6347"
+                                    },
+                                    {
+                                      "id": "fe0f1ea4-c811-4437-afdc-b578260b29b0",
+                                      "name": "Invalid request parameters.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"provider\": \"circleci\",\n  \"repository_owner\": \"<string>\",\n  \"repository\": \"<string>\",\n  \"workflow_filename\": \"<string>\",\n  \"environment\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/-/npm/v1/security/trusted-publishers/packages/:package",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "-",
+                                            "npm",
+                                            "v1",
+                                            "security",
+                                            "trusted-publishers",
+                                            "packages",
+                                            ":package"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "package"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Bad Request",
+                                      "code": 400,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                      "createdAt": "2026-07-28T02:23:45.000Z",
+                                      "updatedAt": "2026-07-28T02:23:45.000Z",
+                                      "uid": "35240-fe0f1ea4-c811-4437-afdc-b578260b29b0"
+                                    },
+                                    {
+                                      "id": "d9fcb031-8103-4813-9ecf-1de1b6030ede",
+                                      "name": "Authentication required.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"provider\": \"circleci\",\n  \"repository_owner\": \"<string>\",\n  \"repository\": \"<string>\",\n  \"workflow_filename\": \"<string>\",\n  \"environment\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/-/npm/v1/security/trusted-publishers/packages/:package",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "-",
+                                            "npm",
+                                            "v1",
+                                            "security",
+                                            "trusted-publishers",
+                                            "packages",
+                                            ":package"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "package"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                      "createdAt": "2026-07-28T02:23:45.000Z",
+                                      "updatedAt": "2026-07-28T02:23:45.000Z",
+                                      "uid": "35240-d9fcb031-8103-4813-9ecf-1de1b6030ede"
+                                    },
+                                    {
+                                      "id": "825b9967-b5c9-4c3b-99fa-801878826559",
+                                      "name": "Insufficient permissions to manage trusted publishers.",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"provider\": \"circleci\",\n  \"repository_owner\": \"<string>\",\n  \"repository\": \"<string>\",\n  \"workflow_filename\": \"<string>\",\n  \"environment\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/-/npm/v1/security/trusted-publishers/packages/:package",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "-",
+                                            "npm",
+                                            "v1",
+                                            "security",
+                                            "trusted-publishers",
+                                            "packages",
+                                            ":package"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "package"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Forbidden",
+                                      "code": 403,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                                      "createdAt": "2026-07-28T02:23:45.000Z",
+                                      "updatedAt": "2026-07-28T02:23:45.000Z",
+                                      "uid": "35240-825b9967-b5c9-4c3b-99fa-801878826559"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T02:23:45.000Z",
+                                  "updatedAt": "2026-07-28T02:23:45.000Z",
+                                  "uid": "35240-81a537f0-0754-47ab-9bbd-45cd40455b8e"
+                                }
+                              ],
+                              "id": "d5fe9341-795b-4416-b60b-4f9211e81a00",
+                              "createdAt": "2026-07-28T02:23:45.000Z",
+                              "updatedAt": "2026-07-28T02:23:45.000Z",
+                              "uid": "35240-d5fe9341-795b-4416-b60b-4f9211e81a00"
+                            }
+                          ],
+                          "id": "a38e14a9-24af-421c-b9cd-1196c248c16f",
+                          "createdAt": "2026-07-28T02:23:45.000Z",
+                          "updatedAt": "2026-07-28T02:23:45.000Z",
+                          "uid": "35240-a38e14a9-24af-421c-b9cd-1196c248c16f"
+                        }
+                      ],
+                      "id": "6330c9f6-6e4a-46b7-9a4b-1dead493ca09",
+                      "createdAt": "2026-07-28T02:23:45.000Z",
+                      "updatedAt": "2026-07-28T02:23:45.000Z",
+                      "uid": "35240-6330c9f6-6e4a-46b7-9a4b-1dead493ca09"
+                    }
+                  ],
+                  "id": "f0e60ecb-2a91-4630-9a23-8c239737be22",
+                  "createdAt": "2026-07-28T02:23:45.000Z",
+                  "updatedAt": "2026-07-28T02:23:45.000Z",
+                  "uid": "35240-f0e60ecb-2a91-4630-9a23-8c239737be22"
+                }
+              ],
+              "id": "fe1d7b59-d193-4724-8dfb-cf6bd1318bfe",
+              "createdAt": "2026-07-28T02:23:45.000Z",
+              "updatedAt": "2026-07-28T02:23:45.000Z",
+              "uid": "35240-fe1d7b59-d193-4724-8dfb-cf6bd1318bfe"
+            }
+          ],
+          "id": "4104b8be-99d5-4c71-ad5c-026b17f70d22",
+          "createdAt": "2026-07-28T02:23:45.000Z",
+          "updatedAt": "2026-07-28T02:23:45.000Z",
+          "uid": "35240-4104b8be-99d5-4c71-ad5c-026b17f70d22"
+        }
+      ],
+      "id": "319f13f9-fafb-41bd-a73c-5cafdf614a70",
+      "createdAt": "2026-07-28T02:23:45.000Z",
+      "updatedAt": "2026-07-28T02:23:45.000Z",
+      "uid": "35240-319f13f9-fafb-41bd-a73c-5cafdf614a70"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://registry.npmjs.org"
+    }
+  ]
+}

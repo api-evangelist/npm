@@ -1,0 +1,28 @@
+{
+  "provider": "npm",
+  "sources": [
+    "npm-downloads-api-openapi.yml",
+    "npm-hooks-api-openapi.yml",
+    "npm-oidc-api-openapi.yml",
+    "npm-packages-api-openapi.yml",
+    "npm-registry-api-openapi.yml",
+    "npm-search-api-openapi.yml",
+    "npm-tokens-api-openapi.yml",
+    "npm-trusted-publishers-api-openapi.yml"
+  ],
+  "outputs": [
+    "npm-downloads-api-openapi.yml",
+    "npm-hooks-api-openapi.yml",
+    "npm-oidc-api-openapi.yml",
+    "npm-packages-api-openapi.yml",
+    "npm-registry-api-openapi.yml",
+    "npm-search-api-openapi.yml",
+    "npm-tokens-api-openapi.yml",
+    "npm-trusted-publishers-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
