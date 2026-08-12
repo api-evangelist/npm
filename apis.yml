@@ -201,6 +201,12 @@ apis:
   - type: Documentation
     url: https://api-docs.npmjs.com/
 common:
+  - type: SecurityPolicy
+    url: https://github.com/npm/cli/blob/latest/SECURITY.md
+  - type: CodeOfConduct
+    url: https://github.com/npm/cli/blob/latest/CODE_OF_CONDUCT.md
+  - type: ContributionGuide
+    url: https://github.com/npm/cli/blob/latest/CONTRIBUTING.md
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/npm/overview
   - type: AgenticAccess
