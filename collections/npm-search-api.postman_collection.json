@@ -1,0 +1,185 @@
+{
+  "item": [
+    {
+      "id": "3c68445b-216b-4e6d-aaa2-02bab43207a4",
+      "name": "Search",
+      "description": {
+        "content": "Full-text search across the npm registry with weighted scoring.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7386851f-0829-4158-aaee-d61e8f285d63",
+          "name": "Search packages",
+          "request": {
+            "name": "Search packages",
+            "description": {
+              "content": "Performs a full-text search across the npm registry. Results can be weighted by quality, popularity, and maintenance scores. Supports special search qualifiers such as author, maintainer, scope, and keywords filters. Qualifiers like not:unstable, not:insecure, is:unstable, and boost-exact can be included in the text parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "-",
+                "v1",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "text",
+                  "value": "<string>",
+                  "description": "(Required) Full-text search query. Supports special qualifiers such as author:username, maintainer:username, scope:scopename, keywords:keyword, not:unstable, not:insecure, is:unstable, is:insecure, and boost-exact:true."
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "20",
+                  "description": "Number of results to return. Maximum value is 250."
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "0",
+                  "description": "Offset for pagination, indicating the starting position in the result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "quality",
+                  "value": "<number>",
+                  "description": "Weighting for the quality score component of search results, between 0 and 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "popularity",
+                  "value": "<number>",
+                  "description": "Weighting for the popularity score component of search results, between 0 and 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "maintenance",
+                  "value": "<number>",
+                  "description": "Weighting for the maintenance score component of search results, between 0 and 1."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "84de6b30-5045-4293-82a1-e9a2dd955758",
+              "name": "Search results returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "-",
+                    "v1",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "text",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "from",
+                      "value": "0"
+                    },
+                    {
+                      "key": "quality",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "popularity",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "maintenance",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objects\": [\n    {\n      \"package\": {\n        \"name\": \"string\",\n        \"scope\": \"string\",\n        \"version\": \"string\",\n        \"description\": \"string\",\n        \"keywords\": [\n          \"string\",\n          \"string\"\n        ],\n        \"date\": \"1961-12-23T03:31:20.775Z\",\n        \"links\": {\n          \"key_0\": \"string\"\n        },\n        \"author\": {\n          \"name\": \"string\",\n          \"email\": \"pU9sGmeN1iUU@hjyovQgTCtOpqWMscWecJJLSGyzYizOwn.hzx\",\n          \"url\": \"https://tttIbhdz.eiTwNA8YlbVb7Cj4YKDzL,vrcgAa63jrty45S1Ubq-XONq2eYvec0+O\"\n        },\n        \"publisher\": {\n          \"name\": \"string\",\n          \"email\": \"wa1yhLzfk@OSCQTRYuumyzgETSopaklCWcjrYYB.wv\",\n          \"url\": \"https://BimCEsafaUBsELzbCHsLJacCcugPMJ.kbyrdIc1xeA+swaI7kflvLnNXJdj,WPByH,j0o9Wpin8oOO.qWe087uyk\"\n        },\n        \"maintainers\": [\n          {\n            \"name\": \"string\",\n            \"email\": \"jmxah7AaAuD@KrDAALwMgdFvvLvJwkuPg.tcu\",\n            \"url\": \"http://eyjBfSfkuJLDXiSCHMwbYb.bnwsbZVDZGrVKlD\"\n          },\n          {\n            \"name\": \"string\",\n            \"email\": \"qCfk@CLrqUmDAgiA.bl\",\n            \"url\": \"https://yYrclEevSYguQRrAmZJIjMjOFNa.iwqeWFZ.XCm4rwZHd9H\"\n          }\n        ]\n      },\n      \"score\": {\n        \"final\": 3953.4099721019434,\n        \"detail\": {\n          \"quality\": 1929.4537081835394,\n          \"popularity\": 4083.91811274323,\n          \"maintenance\": 7097.074877989332\n        }\n      },\n      \"searchScore\": 5191.48919733773\n    },\n    {\n      \"package\": {\n        \"name\": \"string\",\n        \"scope\": \"string\",\n        \"version\": \"string\",\n        \"description\": \"string\",\n        \"keywords\": [\n          \"string\",\n          \"string\"\n        ],\n        \"date\": \"2019-03-12T20:42:47.862Z\",\n        \"links\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"author\": {\n          \"name\": \"string\",\n          \"email\": \"Oax0@tkymdYbptLbgLORKq.ri\",\n          \"url\": \"http://GxkfurBFvlbe.uvpg1h4Dlu3IPI+XpboSKdcN87\"\n        },\n        \"publisher\": {\n          \"name\": \"string\",\n          \"email\": \"m0cRfjvMWe9@ccevYZhvr.dhu\",\n          \"url\": \"http://nseCLCkipiDiItRuQkKGPLcaWYnVgS.gysrjJwwEuqheV.0ulZJgrqOHxMXZWNq.x9NjZT9ay\"\n        },\n        \"maintainers\": [\n          {\n            \"name\": \"string\",\n            \"email\": \"eePJOB3is@pbWQvU.vysl\",\n            \"url\": \"http://IpGFfGJsTkvHhgTlXwTpvpjDHJqsyBMq.doocAk\"\n          },\n          {\n            \"name\": \"string\",\n            \"email\": \"cEgrq1rMEoj2p@mCKir.nvag\",\n            \"url\": \"https://IlxRGQEpvmLvcoWMc.xggugr3HPg22vtgc6tOoHh\"\n          }\n        ]\n      },\n      \"score\": {\n        \"final\": 8631.889719053886,\n        \"detail\": {\n          \"quality\": 7623.908816338034,\n          \"popularity\": 1559.098393370919,\n          \"maintenance\": 3083.2065294956456\n        }\n      },\n      \"searchScore\": 7716.999548352325\n    }\n  ],\n  \"total\": 6848,\n  \"time\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://registry.npmjs.org",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9c8d95f8-cb7f-4d90-9e41-b450f09affa1",
+    "name": "npm Hooks Downloads Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.\n\nContact Support:\n Name: npm Support",
+      "type": "text/plain"
+    }
+  }
+}

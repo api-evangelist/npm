@@ -1,0 +1,213 @@
+{
+  "item": [
+    {
+      "id": "c913b7b1-b094-427a-836f-9b098496da76",
+      "name": "Downloads",
+      "description": {
+        "content": "Package tarball downloads.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1e879d09-7abe-4b0a-af3b-cd885a9fc3e0",
+          "name": "Download a package tarball",
+          "request": {
+            "name": "Download a package tarball",
+            "description": {
+              "content": "Downloads the tarball archive for a specific version of a package. The tarball filename is typically in the format {package}-{version}.tgz. This endpoint is used by the npm CLI during package installation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":package",
+                "-",
+                ":tarball"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "package",
+                  "description": "(Required) The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tarball",
+                  "description": "(Required) The tarball filename, typically in the format {package}-{version}.tgz."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/gzip"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "762fe216-55ec-4d08-971b-71ad7aee8738",
+              "name": "Tarball file returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":package",
+                    "-",
+                    ":tarball"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package",
+                      "description": "(Required) The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tarball",
+                      "description": "(Required) The tarball filename, typically in the format {package}-{version}.tgz."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/gzip"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/gzip"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "44a7bf59-15f1-40c4-99ab-ab55ededd8c4",
+              "name": "Tarball not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":package",
+                    "-",
+                    ":tarball"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "package",
+                      "description": "(Required) The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tarball",
+                      "description": "(Required) The tarball filename, typically in the format {package}-{version}.tgz."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"reason\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://registry.npmjs.org",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c252c390-4e9d-4b3b-9093-d50c968ef66c",
+    "name": "npm Hooks Downloads API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.\n\nContact Support:\n Name: npm Support",
+      "type": "text/plain"
+    }
+  }
+}

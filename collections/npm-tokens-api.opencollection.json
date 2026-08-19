@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "npm Hooks Downloads Tokens API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List access tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://registry.npmjs.org/-/npm/v1/tokens",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query",
+                "description": "Number of tokens to return per page."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of the authenticated user's active npm access tokens. Token UUIDs are redacted in the response, but each token object includes a key attribute containing the hexadecimal SHA-512 hash of the token for identification purposes."
+        },
+        {
+          "info": {
+            "name": "Create an access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://registry.npmjs.org/-/npm/v1/tokens",
+            "headers": [
+              {
+                "name": "npm-otp",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new npm access token with customizable permissions, scope restrictions, expiration settings, and CIDR IP range limitations. The response includes the full token value, which is only returned once and cannot be retrieved again."
+        },
+        {
+          "info": {
+            "name": "Delete an access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://registry.npmjs.org/-/npm/v1/tokens/token/:token_id",
+            "headers": [
+              {
+                "name": "npm-otp",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "token_id",
+                "value": "",
+                "type": "path",
+                "description": "The token key hash or UUID identifying the token to delete."
+              }
+            ]
+          },
+          "docs": "Deletes an npm access token by its identifier. Note that the token may remain valid in cache for up to one hour after deletion."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

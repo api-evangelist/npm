@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "npm Hooks Downloads Trusted Publishers API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Trusted Publishers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List trusted publishers for a package",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://registry.npmjs.org/-/npm/v1/security/trusted-publishers/packages/:package",
+            "params": [
+              {
+                "name": "package",
+                "value": "",
+                "type": "path",
+                "description": "The name of the package, URL-encoded for scoped packages (e.g., @scope%2Fpackage)."
+              }
+            ]
+          },
+          "docs": "Retrieves the trusted publisher configurations for a given package. Each configuration specifies a CI/CD provider and the conditions under which it is trusted to publish."
+        },
+        {
+          "info": {
+            "name": "Add a trusted publisher for a package",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://registry.npmjs.org/-/npm/v1/security/trusted-publishers/packages/:package",
+            "params": [
+              {
+                "name": "package",
+                "value": "",
+                "type": "path",
+                "description": "The name of the package, URL-encoded for scoped packages (e.g., @scope%2Fpackage)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures a new trusted publisher for a package. This allows the specified CI/CD provider to publish the package using OIDC token exchange without requiring long-lived npm tokens. Only users with write permissions on the package can configure trusted publishers."
+        },
+        {
+          "info": {
+            "name": "Remove a trusted publisher from a package",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://registry.npmjs.org/-/npm/v1/security/trusted-publishers/packages/:package/:publisher_id",
+            "params": [
+              {
+                "name": "package",
+                "value": "",
+                "type": "path",
+                "description": "The name of the package, URL-encoded for scoped packages (e.g., @scope%2Fpackage)."
+              },
+              {
+                "name": "publisher_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the trusted publisher configuration to remove."
+              }
+            ]
+          },
+          "docs": "Removes a trusted publisher configuration from a package, revoking the CI/CD provider's ability to publish via OIDC token exchange."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

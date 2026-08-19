@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "npm Hooks Downloads API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Downloads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download a package tarball",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://registry.npmjs.org/:package/-/:tarball",
+            "params": [
+              {
+                "name": "package",
+                "value": "",
+                "type": "path",
+                "description": "The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage)."
+              },
+              {
+                "name": "tarball",
+                "value": "",
+                "type": "path",
+                "description": "The tarball filename, typically in the format {package}-{version}.tgz."
+              }
+            ]
+          },
+          "docs": "Downloads the tarball archive for a specific version of a package. The tarball filename is typically in the format {package}-{version}.tgz. This endpoint is used by the npm CLI during package installation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "09c89ab3-10c3-4b75-b2ba-0f1c1f610155",
+      "id": "e27db677-0766-48ca-8379-77bfe406c934",
       "name": "Hooks",
       "description": {
         "content": "Webhook subscription management for npm registry events. Create, list, update, and delete hook subscriptions to receive notifications when packages, scopes, or user activities change.",
@@ -9,7 +9,7 @@
       },
       "item": [
         {
-          "id": "0708c3ff-880f-4a2b-ad76-2be2f6b63e47",
+          "id": "94ebf342-973c-405e-bc97-bf95873ec541",
           "name": "List webhooks",
           "request": {
             "name": "List webhooks",
@@ -60,7 +60,7 @@
           },
           "response": [
             {
-              "id": "0583f2f7-6f1c-4426-a430-2fa3ab107aa8",
+              "id": "94b13429-70da-40f0-ae0b-ac7c210262cb",
               "name": "List of hooks retrieved successfully.",
               "originalRequest": {
                 "url": {
@@ -114,12 +114,12 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"objects\": [\n    {\n      \"id\": \"string\",\n      \"username\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"owner\",\n      \"endpoint\": \"http://tK.qnutad7ZIURj-xKLrVb6TWDKHXABbrPwp8rcR.Rl\",\n      \"last_delivery\": {\n        \"id\": \"string\",\n        \"timestamp\": \"2024-09-15T22:15:06.661Z\",\n        \"status\": 7675\n      },\n      \"response_code\": 3535,\n      \"status\": \"string\",\n      \"created\": \"2020-11-29T23:12:36.087Z\",\n      \"updated\": \"2012-05-22T18:20:05.022Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"username\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"owner\",\n      \"endpoint\": \"https://YweFcfTnteWdzc.bmosYSgwQEVsgzDOQa\",\n      \"last_delivery\": {\n        \"id\": \"string\",\n        \"timestamp\": \"1962-04-15T15:45:21.999Z\",\n        \"status\": 925\n      },\n      \"response_code\": 8955,\n      \"status\": \"string\",\n      \"created\": \"1969-09-27T08:54:01.641Z\",\n      \"updated\": \"2024-06-07T18:42:28.791Z\"\n    }\n  ]\n}",
+              "body": "{\n  \"objects\": [\n    {\n      \"id\": \"string\",\n      \"username\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"package\",\n      \"endpoint\": \"https://bUlbgPWHcKIqVQkAvCeMDCtuR.xpjjd3J4IPnCdnuwUWt2.TKikzhXzXifGU.t\",\n      \"last_delivery\": {\n        \"id\": \"string\",\n        \"timestamp\": \"1976-06-05T22:41:49.229Z\",\n        \"status\": 2620\n      },\n      \"response_code\": 1601,\n      \"status\": \"string\",\n      \"created\": \"2011-08-08T09:43:45.146Z\",\n      \"updated\": \"2011-03-07T20:30:24.995Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"username\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"owner\",\n      \"endpoint\": \"https://uyobEXbVHurakfoNOJaKyxyFgXBr.pnftR\",\n      \"last_delivery\": {\n        \"id\": \"string\",\n        \"timestamp\": \"1988-09-30T15:42:34.805Z\",\n        \"status\": 7880\n      },\n      \"response_code\": 6445,\n      \"status\": \"string\",\n      \"created\": \"1991-12-17T21:48:48.400Z\",\n      \"updated\": \"2025-11-12T18:50:50.048Z\"\n    }\n  ]\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "89fe78fd-4af4-47d3-aa2e-77e397839fd2",
+              "id": "91be21c2-a690-4943-a431-96a5bed49315",
               "name": "Authentication required.",
               "originalRequest": {
                 "url": {
@@ -184,7 +184,7 @@
           }
         },
         {
-          "id": "a445ef50-c9ff-4e5e-9d42-89026affd93d",
+          "id": "5a10e7bc-027c-40e6-9d08-3bb5116a0f1c",
           "name": "Create a webhook",
           "request": {
             "name": "Create a webhook",
@@ -230,7 +230,7 @@
           },
           "response": [
             {
-              "id": "6f5d12bc-5b85-40ac-8bf7-04fc8c25aba3",
+              "id": "31e226ea-097e-4c65-832c-15a7cba26af5",
               "name": "Hook created successfully.",
               "originalRequest": {
                 "url": {
@@ -280,12 +280,12 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"username\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"scope\",\n  \"endpoint\": \"http://TJgSoIRz.gxizGC.tMkmCEyDJok-fM+LvlkLcTTf7NbOdpaOIf6ty3kSj6Aq9rdIwIYx\",\n  \"last_delivery\": {\n    \"id\": \"string\",\n    \"timestamp\": \"2001-02-15T07:27:56.923Z\",\n    \"status\": 7001\n  },\n  \"response_code\": 5719,\n  \"status\": \"string\",\n  \"created\": \"1981-09-06T22:14:34.468Z\",\n  \"updated\": \"1993-04-17T18:37:27.467Z\"\n}",
+              "body": "{\n  \"id\": \"string\",\n  \"username\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"owner\",\n  \"endpoint\": \"https://yHVJnuvicRQWqIlVyXqHSZOH.fzyM8Wr\",\n  \"last_delivery\": {\n    \"id\": \"string\",\n    \"timestamp\": \"1948-03-18T21:17:00.940Z\",\n    \"status\": 851\n  },\n  \"response_code\": 5899,\n  \"status\": \"string\",\n  \"created\": \"1979-07-27T18:09:37.077Z\",\n  \"updated\": \"1984-12-21T22:27:01.025Z\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "268a3f83-7e90-43f2-9e74-97658a201487",
+              "id": "ece0edde-7484-40a9-9ab9-ef152821bea7",
               "name": "Invalid request parameters.",
               "originalRequest": {
                 "url": {
@@ -340,7 +340,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "8a0e1baa-c31a-4d64-b0a6-40e9c7404074",
+              "id": "f4da3290-77ba-437e-82b3-17da4bcb09c5",
               "name": "Authentication required.",
               "originalRequest": {
                 "url": {
@@ -401,7 +401,7 @@
           }
         },
         {
-          "id": "05ed9d8c-22b1-4512-818f-30ffe2878ddf",
+          "id": "664d1b2d-7133-4cf8-b6e4-603deb515402",
           "name": "Get a webhook",
           "request": {
             "name": "Get a webhook",
@@ -443,7 +443,7 @@
           },
           "response": [
             {
-              "id": "837485a9-2014-4980-8754-521bf234bab8",
+              "id": "a0b9cd4a-b6b1-4e9a-9cac-ddad07c32a98",
               "name": "Hook retrieved successfully.",
               "originalRequest": {
                 "url": {
@@ -494,12 +494,12 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"username\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"scope\",\n  \"endpoint\": \"http://TJgSoIRz.gxizGC.tMkmCEyDJok-fM+LvlkLcTTf7NbOdpaOIf6ty3kSj6Aq9rdIwIYx\",\n  \"last_delivery\": {\n    \"id\": \"string\",\n    \"timestamp\": \"2001-02-15T07:27:56.923Z\",\n    \"status\": 7001\n  },\n  \"response_code\": 5719,\n  \"status\": \"string\",\n  \"created\": \"1981-09-06T22:14:34.468Z\",\n  \"updated\": \"1993-04-17T18:37:27.467Z\"\n}",
+              "body": "{\n  \"id\": \"string\",\n  \"username\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"owner\",\n  \"endpoint\": \"https://yHVJnuvicRQWqIlVyXqHSZOH.fzyM8Wr\",\n  \"last_delivery\": {\n    \"id\": \"string\",\n    \"timestamp\": \"1948-03-18T21:17:00.940Z\",\n    \"status\": 851\n  },\n  \"response_code\": 5899,\n  \"status\": \"string\",\n  \"created\": \"1979-07-27T18:09:37.077Z\",\n  \"updated\": \"1984-12-21T22:27:01.025Z\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "d1732a7d-8b74-46e0-8a25-1052f297394b",
+              "id": "055ad156-6c34-44b5-b76f-ae1c25e612bf",
               "name": "Authentication required.",
               "originalRequest": {
                 "url": {
@@ -555,7 +555,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "4e13f927-e395-4da4-ba9a-4c49c5de04c9",
+              "id": "6d575c1d-56f9-484e-bbd4-3831a1c93888",
               "name": "Hook not found.",
               "originalRequest": {
                 "url": {
@@ -617,7 +617,7 @@
           }
         },
         {
-          "id": "3f90b86a-259b-4c7b-9f30-373bf18727de",
+          "id": "c097d6d7-95f1-4001-b59b-0d5588e203b1",
           "name": "Update a webhook",
           "request": {
             "name": "Update a webhook",
@@ -672,7 +672,7 @@
           },
           "response": [
             {
-              "id": "5eefc94a-95bf-4199-9a6c-1aacf876a0bc",
+              "id": "aae2454b-973a-49b9-b5d5-46aed9cb3bde",
               "name": "Hook updated successfully.",
               "originalRequest": {
                 "url": {
@@ -731,12 +731,12 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"username\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"scope\",\n  \"endpoint\": \"http://TJgSoIRz.gxizGC.tMkmCEyDJok-fM+LvlkLcTTf7NbOdpaOIf6ty3kSj6Aq9rdIwIYx\",\n  \"last_delivery\": {\n    \"id\": \"string\",\n    \"timestamp\": \"2001-02-15T07:27:56.923Z\",\n    \"status\": 7001\n  },\n  \"response_code\": 5719,\n  \"status\": \"string\",\n  \"created\": \"1981-09-06T22:14:34.468Z\",\n  \"updated\": \"1993-04-17T18:37:27.467Z\"\n}",
+              "body": "{\n  \"id\": \"string\",\n  \"username\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"owner\",\n  \"endpoint\": \"https://yHVJnuvicRQWqIlVyXqHSZOH.fzyM8Wr\",\n  \"last_delivery\": {\n    \"id\": \"string\",\n    \"timestamp\": \"1948-03-18T21:17:00.940Z\",\n    \"status\": 851\n  },\n  \"response_code\": 5899,\n  \"status\": \"string\",\n  \"created\": \"1979-07-27T18:09:37.077Z\",\n  \"updated\": \"1984-12-21T22:27:01.025Z\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "ad364bc6-7693-48a9-9239-306baf344b11",
+              "id": "cbce2136-0e26-4942-b43f-1b19f7b5ed75",
               "name": "Invalid request parameters.",
               "originalRequest": {
                 "url": {
@@ -800,7 +800,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "fea83fde-a921-4bbf-a848-34e6eafdb5c4",
+              "id": "645f7f86-ba4e-4f13-af0c-d4671892b02f",
               "name": "Authentication required.",
               "originalRequest": {
                 "url": {
@@ -864,7 +864,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "332729ae-2e1f-4977-8956-5dd8f6dc8705",
+              "id": "c0448c7a-91d6-47ab-a2cf-94bd11871f63",
               "name": "Hook not found.",
               "originalRequest": {
                 "url": {
@@ -934,7 +934,7 @@
           }
         },
         {
-          "id": "65b0f697-d936-4be4-bc40-42320ab4f3a4",
+          "id": "571d8e30-cd5a-401c-b238-242a13b6c3d8",
           "name": "Delete a webhook",
           "request": {
             "name": "Delete a webhook",
@@ -976,7 +976,7 @@
           },
           "response": [
             {
-              "id": "ec5e3e88-3b27-4301-b276-c39f6c6be23c",
+              "id": "da628088-2213-4007-821e-5bf34fd1989c",
               "name": "Hook deleted successfully.",
               "originalRequest": {
                 "url": {
@@ -1027,12 +1027,12 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"username\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"scope\",\n  \"endpoint\": \"http://TJgSoIRz.gxizGC.tMkmCEyDJok-fM+LvlkLcTTf7NbOdpaOIf6ty3kSj6Aq9rdIwIYx\",\n  \"last_delivery\": {\n    \"id\": \"string\",\n    \"timestamp\": \"2001-02-15T07:27:56.923Z\",\n    \"status\": 7001\n  },\n  \"response_code\": 5719,\n  \"status\": \"string\",\n  \"created\": \"1981-09-06T22:14:34.468Z\",\n  \"updated\": \"1993-04-17T18:37:27.467Z\"\n}",
+              "body": "{\n  \"id\": \"string\",\n  \"username\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"owner\",\n  \"endpoint\": \"https://yHVJnuvicRQWqIlVyXqHSZOH.fzyM8Wr\",\n  \"last_delivery\": {\n    \"id\": \"string\",\n    \"timestamp\": \"1948-03-18T21:17:00.940Z\",\n    \"status\": 851\n  },\n  \"response_code\": 5899,\n  \"status\": \"string\",\n  \"created\": \"1979-07-27T18:09:37.077Z\",\n  \"updated\": \"1984-12-21T22:27:01.025Z\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "77adad2e-5bdf-4a15-8f28-179e4f717742",
+              "id": "1648249b-c6f6-422d-baab-74426abd9ae1",
               "name": "Authentication required.",
               "originalRequest": {
                 "url": {
@@ -1088,7 +1088,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "1881e04a-cd53-465f-8abf-6fec3139a1bd",
+              "id": "92e35fe1-4df0-4e46-b325-e0d86e8c5a1d",
               "name": "Hook not found.",
               "originalRequest": {
                 "url": {
@@ -1171,8 +1171,8 @@
     ]
   },
   "info": {
-    "_postman_id": "2c645ed1-ea8d-49b4-9475-6ab07f8e0b16",
-    "name": "npm Hooks API",
+    "_postman_id": "938b3141-64f5-4926-b13a-eae019021ceb",
+    "name": "npm Downloads Hooks API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.\n\nContact Support:\n Name: npm Support",

@@ -1,467 +1,7 @@
 {
   "item": [
     {
-      "id": "5ba9f0b8-95f1-4a49-b8ac-910ae1105ad5",
-      "name": "Downloads",
-      "description": {
-        "content": "Package tarball downloads.",
-        "type": "text/plain"
-      },
-      "item": [
-        {
-          "id": "f9b99f6d-84b6-4b9d-aafb-8cc3765b7aae",
-          "name": "Download a package tarball",
-          "request": {
-            "name": "Download a package tarball",
-            "description": {
-              "content": "Downloads the tarball archive for a specific version of a package. The tarball filename is typically in the format {package}-{version}.tgz. This endpoint is used by the npm CLI during package installation.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                ":package",
-                "-",
-                ":tarball"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "package",
-                  "description": "(Required) The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage)."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "tarball",
-                  "description": "(Required) The tarball filename, typically in the format {package}-{version}.tgz."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/gzip"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "91e8ffbc-2b55-4cc7-bf81-320eb9b9985d",
-              "name": "Tarball file returned successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    ":package",
-                    "-",
-                    ":tarball"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "package",
-                      "description": "(Required) The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage)."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tarball",
-                      "description": "(Required) The tarball filename, typically in the format {package}-{version}.tgz."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/gzip"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/gzip"
-                }
-              ],
-              "body": "string",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "a59ffcfa-1dbc-46d1-9826-3166bcdb0195",
-              "name": "Tarball not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    ":package",
-                    "-",
-                    ":tarball"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "package",
-                      "description": "(Required) The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage)."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "tarball",
-                      "description": "(Required) The tarball filename, typically in the format {package}-{version}.tgz."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"reason\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        }
-      ],
-      "event": []
-    },
-    {
-      "id": "89a2f98b-b6fa-4b6f-b73e-3ed7634a34ed",
-      "name": "Packages",
-      "description": {
-        "content": "Package metadata retrieval, including full packuments and version-specific documents.",
-        "type": "text/plain"
-      },
-      "item": [
-        {
-          "id": "55ee7da0-c51e-4f61-838a-fa4397518913",
-          "name": "Get a package document (packument)",
-          "request": {
-            "name": "Get a package document (packument)",
-            "description": {
-              "content": "Retrieves the full package document (packument) for a given package name. The packument includes all published versions, dist-tags, maintainers, repository information, and README content. For scoped packages, the package name should be URL-encoded (e.g., @scope%2Fpackage).",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                ":package"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "package",
-                  "description": "(Required) The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage)."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "46ea8bd1-2ff0-4d18-a508-fcd581e507ed",
-              "name": "Package document retrieved successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    ":package"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "package",
-                      "description": "(Required) The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage)."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"_id\": \"string\",\n  \"_rev\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"dist-tags\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": \"string\"\n  },\n  \"versions\": {\n    \"key_0\": {\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"description\": \"string\",\n      \"main\": \"string\",\n      \"scripts\": {\n        \"key_0\": \"string\"\n      },\n      \"dependencies\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      },\n      \"devDependencies\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"peerDependencies\": {\n        \"key_0\": \"string\"\n      },\n      \"optionalDependencies\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"engines\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"author\": {\n        \"name\": \"string\",\n        \"email\": \"cevaqliXHf1@HRjXTmMfFxoRqbCAH.ailq\",\n        \"url\": \"http://pHZDWUJcdgYtgQtlwemaB.tysbkwK25lY.dyKQS-w-TZW\"\n      },\n      \"maintainers\": [\n        {\n          \"name\": \"string\",\n          \"email\": \"hk2QrEQONRY6IN7@iwuWEgsDdCmUbzBkTSkpzams.nqq\",\n          \"url\": \"https://fEyYVSviUsyqDERsJppqria.kia7U47tAdNDnJI.BnuFgMS.JO5ucXOdD\"\n        },\n        {\n          \"name\": \"string\",\n          \"email\": \"6W9LHZ@DeEBIHtPygHoVmoHifYNEwFVQalm.oseo\",\n          \"url\": \"https://GEfZJIfKcugTpthpqL.pvsyWlDiPj.MCGyOJUklRuA-sy8zfxGD65r\"\n        }\n      ],\n      \"repository\": {\n        \"type\": \"string\",\n        \"url\": \"string\"\n      },\n      \"license\": \"string\",\n      \"keywords\": [\n        \"string\",\n        \"string\"\n      ],\n      \"dist\": {\n        \"shasum\": \"string\",\n        \"tarball\": \"http://BGGiQq.qbqoI.6Gkj9+SXlM,DsQDm65DKBvMILxUNAtw5Q-WKvUQ\",\n        \"integrity\": \"string\",\n        \"fileCount\": 2375,\n        \"unpackedSize\": 9944,\n        \"signatures\": [\n          {\n            \"keyid\": \"string\",\n            \"sig\": \"string\"\n          },\n          {\n            \"keyid\": \"string\",\n            \"sig\": \"string\"\n          }\n        ]\n      },\n      \"_npmVersion\": \"string\",\n      \"_nodeVersion\": \"string\",\n      \"_npmUser\": {\n        \"name\": \"string\",\n        \"email\": \"JWak6uHeFxpqfx@apatvC.lwo\",\n        \"url\": \"http://GOtCxSwZOXnYTU.wqoqaRt+uMXQ,bTHJejG+cK65VUX56SH4D0DF0amgzbAUYV8dpz-yI-l5KX7\"\n      }\n    },\n    \"key_1\": {\n      \"name\": \"string\",\n      \"version\": \"string\",\n      \"description\": \"string\",\n      \"main\": \"string\",\n      \"scripts\": {\n        \"key_0\": \"string\"\n      },\n      \"dependencies\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      },\n      \"devDependencies\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"peerDependencies\": {\n        \"key_0\": \"string\"\n      },\n      \"optionalDependencies\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"engines\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"author\": {\n        \"name\": \"string\",\n        \"email\": \"BuVFqjDr5@pUfFJnuiJa.yze\",\n        \"url\": \"https://nUDyufJeZwadcXOPtOMTzGMMZ.exK60b-Z3dajqST5psFGSgk-4-xOQlc6MVG4apsUyrXORD5xlSF2qmhpAyQ2IXdMKiGknLP765NC\"\n      },\n      \"maintainers\": [\n        {\n          \"name\": \"string\",\n          \"email\": \"oW-XeojYpDP9L@mFXquTQZUDmOYxhYjWZMgpUBNiSTE.okts\",\n          \"url\": \"http://GZHhSpfdicHSPWQOdU.ntwfr23xZaQNqULSjRRvK.3GO,g9xoRdPo3wFkFx+OhAemJRRjuoVSlk9\"\n        },\n        {\n          \"name\": \"string\",\n          \"email\": \"7tD19GYQ1e-36@nxzWkVSj.yqva\",\n          \"url\": \"http://YkgTOmxQZ.undPDSj3ZwhF01B\"\n        }\n      ],\n      \"repository\": {\n        \"type\": \"string\",\n        \"url\": \"string\"\n      },\n      \"license\": \"string\",\n      \"keywords\": [\n        \"string\",\n        \"string\"\n      ],\n      \"dist\": {\n        \"shasum\": \"string\",\n        \"tarball\": \"http://FgoFNczyiCKFzLMGmnuQ.xgmXjFIfdp2DT5iv7CMf8IqD.TgPKWXEhYp8CMQiI3BdPytw\",\n        \"integrity\": \"string\",\n        \"fileCount\": 80,\n        \"unpackedSize\": 9495,\n        \"signatures\": [\n          {\n            \"keyid\": \"string\",\n            \"sig\": \"string\"\n          },\n          {\n            \"keyid\": \"string\",\n            \"sig\": \"string\"\n          }\n        ]\n      },\n      \"_npmVersion\": \"string\",\n      \"_nodeVersion\": \"string\",\n      \"_npmUser\": {\n        \"name\": \"string\",\n        \"email\": \"d3eV@ISNSZHIRheJ.cx\",\n        \"url\": \"https://lq.xoyR2At7WLtq8\"\n      }\n    }\n  },\n  \"time\": {\n    \"key_0\": \"2025-11-08T15:47:27.501Z\",\n    \"key_1\": \"1975-09-15T06:06:48.901Z\",\n    \"key_2\": \"2001-12-18T16:53:37.636Z\",\n    \"key_3\": \"1989-04-05T00:06:00.698Z\",\n    \"key_4\": \"1974-03-04T17:12:07.708Z\"\n  },\n  \"maintainers\": [\n    {\n      \"name\": \"string\",\n      \"email\": \"2XHLot@veqzjqonZMguRvhdxGLzIExVZ.ui\",\n      \"url\": \"https://hPfDLybLkCexmTeXZmEIQwiZuqvrtRv.xvB3WIV3kJHGwlOX\"\n    },\n    {\n      \"name\": \"string\",\n      \"email\": \"lD1K-HBsMSXN@shrCToItPkRBpVPBMUZLyCYFVTHHNkmrV.hv\",\n      \"url\": \"https://gYVJAKRAdMGyBLoo.wybkVKxtSBKxiLKk0orpE\"\n    }\n  ],\n  \"author\": {\n    \"name\": \"string\",\n    \"email\": \"Jl5z6UgKOmnMMk@oRwiyCMukHIEugyCZRkDA.qymw\",\n    \"url\": \"http://TyOMLAQtDbpfCizcqw.cnyWgxwcBIVaXBru994N0PhqVOK8ic-beSy2YYCEvE7g\"\n  },\n  \"repository\": {\n    \"type\": \"string\",\n    \"url\": \"string\"\n  },\n  \"readme\": \"string\",\n  \"readmeFilename\": \"string\",\n  \"homepage\": \"https://YbwLdEbedUvXMSLFBwyrRKiOuMVAZij.vaoPZrJ7cnltrFmw4wRJ6VMoivGC8PSHBkvOF6E2qXuAi5ZPqkArVW8F5nJJI-\",\n  \"keywords\": [\n    \"string\",\n    \"string\"\n  ],\n  \"bugs\": {\n    \"url\": \"https://wg.seEzAoDvBPP2tVG4AXv2ELbbnp6fTFDGWl7H.7YRY.qg3wpVF+3q4IpQ-RthLb\"\n  },\n  \"license\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "8eeaa982-d2dc-4f9d-915e-f6690cb9f46d",
-              "name": "Package not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    ":package"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "package",
-                      "description": "(Required) The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage)."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"reason\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "0059729f-4720-40de-a7c4-f28e83bd444f",
-          "name": "Get a specific package version",
-          "request": {
-            "name": "Get a specific package version",
-            "description": {
-              "content": "Retrieves metadata for a specific version of a package. The version can be a valid semver string or the literal string \"latest\" to retrieve the version pointed to by the latest dist-tag. Returns the version-specific manifest including dependencies, scripts, and distribution information.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                ":package",
-                ":version"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "package",
-                  "description": "(Required) The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage)."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "version",
-                  "description": "(Required) A valid semver version string, or the literal string \"latest\" to resolve the current latest dist-tag."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "b0dc7ba1-ade9-427d-8339-be39e66f7c7a",
-              "name": "Package version metadata retrieved successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    ":package",
-                    ":version"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "package",
-                      "description": "(Required) The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage)."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "version",
-                      "description": "(Required) A valid semver version string, or the literal string \"latest\" to resolve the current latest dist-tag."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"name\": \"string\",\n  \"version\": \"string\",\n  \"description\": \"string\",\n  \"main\": \"string\",\n  \"scripts\": {\n    \"key_0\": \"string\"\n  },\n  \"dependencies\": {\n    \"key_0\": \"string\"\n  },\n  \"devDependencies\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  },\n  \"peerDependencies\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  },\n  \"optionalDependencies\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": \"string\"\n  },\n  \"engines\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"author\": {\n    \"name\": \"string\",\n    \"email\": \"W8m9X@OKnYIwPCqIPRjIKrqxcYvSs.ff\",\n    \"url\": \"https://FMVYLntdTJxhfjOkxuCTVN.zeczX0mcmmel2x.ZOxUQ1DEmHktfoeCufKoRafcZhxkya\"\n  },\n  \"maintainers\": [\n    {\n      \"name\": \"string\",\n      \"email\": \"bfGSr-FJ@PbBBMkxnE.ydzf\",\n      \"url\": \"https://uQmS.yazgIkHu9tOxjr7YInu9TgeiUaLCsbPYP5e-aB4HWGe+wIu4sER\"\n    },\n    {\n      \"name\": \"string\",\n      \"email\": \"TOMLPthp1HQ@M.ry\",\n      \"url\": \"http://kNgnhLkFKyfCTMDLfMPNR.zfV-vI1s1HtMVXIqppo4btcokJqgATGWy6YbgU.UDOyQPHHNPbXDKscYDuzARb3EuWapBvwWfSu4p\"\n    }\n  ],\n  \"repository\": {\n    \"type\": \"string\",\n    \"url\": \"string\"\n  },\n  \"license\": \"string\",\n  \"keywords\": [\n    \"string\",\n    \"string\"\n  ],\n  \"dist\": {\n    \"shasum\": \"string\",\n    \"tarball\": \"https://kvmqswmEH.ilbnohJYhmNoDFS1SPIvEKpd5PaXzV66E\",\n    \"integrity\": \"string\",\n    \"fileCount\": 3553,\n    \"unpackedSize\": 2971,\n    \"signatures\": [\n      {\n        \"keyid\": \"string\",\n        \"sig\": \"string\"\n      },\n      {\n        \"keyid\": \"string\",\n        \"sig\": \"string\"\n      }\n    ]\n  },\n  \"_npmVersion\": \"string\",\n  \"_nodeVersion\": \"string\",\n  \"_npmUser\": {\n    \"name\": \"string\",\n    \"email\": \"vCXyw-wEDeXNvNv@leyCGBxEGNpnKrpONBizLYGZDatY.uvn\",\n    \"url\": \"https://QbxijpQAInqt.omgmqMa-.XOrltOnWbyQLXPikfUrRCrrB5bNnmmJ03,+APl13iau3eswB+\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2c92f7f0-25e4-4c25-8cd0-a61487e32394",
-              "name": "Package or version not found.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    ":package",
-                    ":version"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "package",
-                      "description": "(Required) The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage)."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "version",
-                      "description": "(Required) A valid semver version string, or the literal string \"latest\" to resolve the current latest dist-tag."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"string\",\n  \"reason\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        }
-      ],
-      "event": []
-    },
-    {
-      "id": "de4e0733-15ef-43c8-80a0-1c100bcb3ee5",
+      "id": "db746d52-6af3-473b-b54d-f60c93f00965",
       "name": "Registry",
       "description": {
         "content": "Registry metadata and status information.",
@@ -469,7 +9,7 @@
       },
       "item": [
         {
-          "id": "4125f29a-eeec-4609-baf2-ff463936ce12",
+          "id": "02f28a4f-f452-480c-9fc4-e35187658a53",
           "name": "Get registry metadata",
           "request": {
             "name": "Get registry metadata",
@@ -498,7 +38,7 @@
           },
           "response": [
             {
-              "id": "8e35521e-d2cd-4d11-98d5-437de87a9cc7",
+              "id": "d7a01723-ffb5-4764-a69a-f373da1e9ef6",
               "name": "Registry metadata retrieved successfully.",
               "originalRequest": {
                 "url": {
@@ -513,152 +53,13 @@
                 },
                 "header": [
                   {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"db_name\": \"string\",\n  \"doc_count\": 3891,\n  \"doc_del_count\": 525,\n  \"update_seq\": 5098,\n  \"purge_seq\": 1805,\n  \"compact_running\": true,\n  \"disk_size\": 7559,\n  \"data_size\": 6335,\n  \"instance_start_time\": \"string\",\n  \"disk_format_version\": 3144,\n  \"committed_update_seq\": 5877\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        }
-      ],
-      "event": []
-    },
-    {
-      "id": "2339a4b1-f59a-4e62-ac5c-d7cb5ab76e7e",
-      "name": "Search",
-      "description": {
-        "content": "Full-text search across the npm registry with weighted scoring.",
-        "type": "text/plain"
-      },
-      "item": [
-        {
-          "id": "1acf6653-23c2-45d0-96e3-394becce4cca",
-          "name": "Search packages",
-          "request": {
-            "name": "Search packages",
-            "description": {
-              "content": "Performs a full-text search across the npm registry. Results can be weighted by quality, popularity, and maintenance scores. Supports special search qualifiers such as author, maintainer, scope, and keywords filters. Qualifiers like not:unstable, not:insecure, is:unstable, and boost-exact can be included in the text parameter.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "-",
-                "v1",
-                "search"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "text",
-                  "value": "<string>",
-                  "description": "(Required) Full-text search query. Supports special qualifiers such as author:username, maintainer:username, scope:scopename, keywords:keyword, not:unstable, not:insecure, is:unstable, is:insecure, and boost-exact:true."
-                },
-                {
-                  "disabled": false,
-                  "key": "size",
-                  "value": "20",
-                  "description": "Number of results to return. Maximum value is 250."
-                },
-                {
-                  "disabled": false,
-                  "key": "from",
-                  "value": "0",
-                  "description": "Offset for pagination, indicating the starting position in the result set."
-                },
-                {
-                  "disabled": false,
-                  "key": "quality",
-                  "value": "<number>",
-                  "description": "Weighting for the quality score component of search results, between 0 and 1."
-                },
-                {
-                  "disabled": false,
-                  "key": "popularity",
-                  "value": "<number>",
-                  "description": "Weighting for the popularity score component of search results, between 0 and 1."
-                },
-                {
-                  "disabled": false,
-                  "key": "maintenance",
-                  "value": "<number>",
-                  "description": "Weighting for the maintenance score component of search results, between 0 and 1."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "dcca7545-fa3a-4740-b115-35b1f546b84a",
-              "name": "Search results returned successfully.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "-",
-                    "v1",
-                    "search"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "text",
-                      "value": "<string>"
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
                     },
-                    {
-                      "key": "size",
-                      "value": "20"
-                    },
-                    {
-                      "key": "from",
-                      "value": "0"
-                    },
-                    {
-                      "key": "quality",
-                      "value": "<number>"
-                    },
-                    {
-                      "key": "popularity",
-                      "value": "<number>"
-                    },
-                    {
-                      "key": "maintenance",
-                      "value": "<number>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
@@ -675,7 +76,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"objects\": [\n    {\n      \"package\": {\n        \"name\": \"string\",\n        \"scope\": \"string\",\n        \"version\": \"string\",\n        \"description\": \"string\",\n        \"keywords\": [\n          \"string\",\n          \"string\"\n        ],\n        \"date\": \"1960-09-14T05:06:00.630Z\",\n        \"links\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\",\n          \"key_3\": \"string\",\n          \"key_4\": \"string\"\n        },\n        \"author\": {\n          \"name\": \"string\",\n          \"email\": \"8L9ddc5O1V@EGmobjvgHHssSPVXGvrBPduzoHjCtWs.pb\",\n          \"url\": \"https://tjJkWObxZXfIbFFtBNYcnInnUb.fxaiv3ZTw5FJkHnOPJaeYdMwkZiCEQD2WFNdHlJfFTNdZm1IpmlGKaANrHh4-\"\n        },\n        \"publisher\": {\n          \"name\": \"string\",\n          \"email\": \"5DKMqxzv@WQRmBHwPlntoqGZAesaHuNmvryCtdA.lh\",\n          \"url\": \"https://enfRR.ajay0Az2+ncIqPZTvgJHxpc8pZ5RwbK3Wuki81NLB.IyHQegNLZbpTGRt0VNDQk3xMjrfb8cwvZd\"\n        },\n        \"maintainers\": [\n          {\n            \"name\": \"string\",\n            \"email\": \"1Pp@WPfAXvOU.zbbq\",\n            \"url\": \"http://yedYixBkEvOnvARCRbHJhOLD.kbhvzCrq+BqWlO7I6WDesWKEYMje0KkpZfmC4mFtl6.THWnJAw7caYsMitGEGUj\"\n          },\n          {\n            \"name\": \"string\",\n            \"email\": \"6LIJq@cJVirmqkPFhUSKznaMULIRSKlKcWHCQ.vhz\",\n            \"url\": \"https://JrBbJcEYgnwxRwo.obitTxxcwlBrgA.HP9sj5fPy1i-g30kxAI,9V4wjK-lkaqrwiXAwiq\"\n          }\n        ]\n      },\n      \"score\": {\n        \"final\": 1938.899474594379,\n        \"detail\": {\n          \"quality\": 1389.1468341910129,\n          \"popularity\": 7344.568418076597,\n          \"maintenance\": 3681.2621873483718\n        }\n      },\n      \"searchScore\": 8542.768546341451\n    },\n    {\n      \"package\": {\n        \"name\": \"string\",\n        \"scope\": \"string\",\n        \"version\": \"string\",\n        \"description\": \"string\",\n        \"keywords\": [\n          \"string\",\n          \"string\"\n        ],\n        \"date\": \"1974-11-21T17:01:32.293Z\",\n        \"links\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\",\n          \"key_3\": \"string\"\n        },\n        \"author\": {\n          \"name\": \"string\",\n          \"email\": \"WMa1bufHmvi1D@mPFQrFoxnHfxeYwbnjqn.lym\",\n          \"url\": \"https://RuukfpLYXLtLyncAt.mgogj9IlEJfgEQGPV+IlNu4jU36UidaJcyjTty\"\n        },\n        \"publisher\": {\n          \"name\": \"string\",\n          \"email\": \"OK2tP0wNpOu4cMj@WxNsrSvXXzFcdCgbYyEQtx.iar\",\n          \"url\": \"http://gkJtveekQjaINmfBwOQo.xbImKMfuWm5.AHCPLfSt.KSH-XKvP.XeYGfsKR3bdu3\"\n        },\n        \"maintainers\": [\n          {\n            \"name\": \"string\",\n            \"email\": \"rBP8dkDb@VeYzPkF.ecc\",\n            \"url\": \"http://bYnc.gkaehIgFThqxUHVqE9jZRR5bTeTFLGQtLzWPgy3mhgstybHauEByBv9Ku1pkPpvn\"\n          },\n          {\n            \"name\": \"string\",\n            \"email\": \"9gv9@cIiGagwdK.fqgo\",\n            \"url\": \"http://isQceUpg.ilUT5IO5cQ6r4x0JoGkijSGSJ9Aaa.EtXZJEZGYcx1zBlYBXU2aaEJc8i7nXtF4F\"\n          }\n        ]\n      },\n      \"score\": {\n        \"final\": 9546.015952355574,\n        \"detail\": {\n          \"quality\": 164.52872997315905,\n          \"popularity\": 247.5268532835495,\n          \"maintenance\": 9724.40498325695\n        }\n      },\n      \"searchScore\": 7718.72993957465\n    }\n  ],\n  \"total\": 2254,\n  \"time\": \"string\"\n}",
+              "body": "{\n  \"db_name\": \"string\",\n  \"doc_count\": 3928,\n  \"doc_del_count\": 4133,\n  \"update_seq\": 8179,\n  \"purge_seq\": 7902,\n  \"compact_running\": true,\n  \"disk_size\": 5247,\n  \"data_size\": 4184,\n  \"instance_start_time\": \"string\",\n  \"disk_format_version\": 4574,\n  \"committed_update_seq\": 5444\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -697,12 +98,21 @@
       "key": "baseUrl"
     }
   ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
   "info": {
-    "_postman_id": "4d9f08ff-c297-4f4d-9b8b-ad4b5b7ea5af",
-    "name": "npm Registry API",
+    "_postman_id": "6842a991-de71-42ed-b5c6-d417dc8d0f0d",
+    "name": "npm Hooks Downloads Registry API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
-      "content": "The npm Registry API provides programmatic access to the npm package registry, the largest software registry in the world hosting over two million JavaScript packages. Developers can query package metadata, download tarballs, search for packages, and retrieve version-specific information. The API follows CouchDB-based conventions and serves package manifests in JSON format, enabling tools and services to integrate with the npm ecosystem for dependency resolution, package discovery, and automated workflows.\n\nContact Support:\n Name: npm Support",
+      "content": "The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.\n\nContact Support:\n Name: npm Support",
       "type": "text/plain"
     }
   }

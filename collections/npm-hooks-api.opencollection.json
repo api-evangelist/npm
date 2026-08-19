@@ -1,7 +1,7 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "npm Hooks API",
+    "name": "npm Downloads Hooks API",
     "version": "1.0.0"
   },
   "request": {
