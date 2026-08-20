@@ -66,6 +66,12 @@ apis:
     or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions.
   humanURL: https://blog.npmjs.org/post/145260155635/introducing-hooks-get-notifications-of-npm
   tags:
+  - Webhook
+  - Notification
+  - Event
+  - Automation
+  - Packages
+  tags_raw:
   - Webhooks
   - Notifications
   - Events
