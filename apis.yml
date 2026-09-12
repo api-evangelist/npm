@@ -1,5 +1,6 @@
 aid: npm
 name: npm
+x-parent: github
 description: >-
   npm is the world's largest software registry, hosting over two million JavaScript packages for the Node.js ecosystem.
   Their developer platform provides APIs for searching and retrieving package metadata, managing access tokens,
@@ -42,7 +43,7 @@ tags:
   - Package Management
   - Registry
   - Security
-url: https://raw.githubusercontent.com/api-evangelist/npm/refs/heads/main/apis.yml
+url: https://www.npmjs.com/
 created: '2026-03-20'
 modified: '2026-05-19'
 specificationVersion: '0.23'
