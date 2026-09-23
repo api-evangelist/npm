@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: npm Downloads Hooks API
-  description: The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.
+  description: The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry.
   version: 1.0.0
   contact:
     name: npm Support
@@ -191,16 +191,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
-      type: object
-      description: An error response from the npm API.
-      properties:
-        error:
-          type: string
-          description: The error type or code.
-        message:
-          type: string
-          description: A human-readable description of the error.
     HookUpdateRequest:
       type: object
       description: Request body for updating an existing webhook subscription.
@@ -215,32 +205,6 @@ components:
         secret:
           type: string
           description: The updated shared secret for payload signing.
-    HookCreateRequest:
-      type: object
-      description: Request body for creating a new webhook subscription.
-      required:
-      - type
-      - name
-      - endpoint
-      - secret
-      properties:
-        type:
-          type: string
-          description: The type of entity to watch for changes.
-          enum:
-          - package
-          - scope
-          - owner
-        name:
-          type: string
-          description: The name of the entity to watch. For packages, use the package name. For scopes, use the scope name (e.g., @myorg). For owners, use the npm username.
-        endpoint:
-          type: string
-          format: uri
-          description: The URI to receive webhook payloads via HTTP POST.
-        secret:
-          type: string
-          description: A shared secret used to sign webhook payloads. The signature is included in the x-npm-signature header of each delivery.
     Hook:
       type: object
       description: A webhook subscription object that defines what registry events trigger notifications and where those notifications are sent.
@@ -293,6 +257,42 @@ components:
           type: string
           format: date-time
           description: When the hook was last updated.
+    HookCreateRequest:
+      type: object
+      description: Request body for creating a new webhook subscription.
+      required:
+      - type
+      - name
+      - endpoint
+      - secret
+      properties:
+        type:
+          type: string
+          description: The type of entity to watch for changes.
+          enum:
+          - package
+          - scope
+          - owner
+        name:
+          type: string
+          description: The name of the entity to watch. For packages, use the package name. For scopes, use the scope name (e.g., @myorg). For owners, use the npm username.
+        endpoint:
+          type: string
+          format: uri
+          description: The URI to receive webhook payloads via HTTP POST.
+        secret:
+          type: string
+          description: A shared secret used to sign webhook payloads. The signature is included in the x-npm-signature header of each delivery.
+    Error:
+      type: object
+      description: An error response from the npm API.
+      properties:
+        error:
+          type: string
+          description: The error type or code.
+        message:
+          type: string
+          description: A human-readable description of the error.
   parameters:
     hookId:
       name: id

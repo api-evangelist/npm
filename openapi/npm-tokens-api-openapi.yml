@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: npm Hooks Downloads Tokens API
-  description: The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.
+  title: npm Public Tokens API
+  description: The npm Public API provides authenticated endpoints for managing npm access tokens, configuring trusted publishers, and exchanging OIDC tokens for short-lived registry access.
   version: 1.0.0
   contact:
     name: npm Support
@@ -142,39 +142,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    TokenCreateRequest:
-      type: object
-      description: Request body for creating a new npm access token.
-      required:
-      - password
-      properties:
-        password:
-          type: string
-          description: The user's npm account password, required to authorize token creation.
-        readonly:
-          type: boolean
-          description: Set to true to create a read-only token.
-          default: false
-        automation:
-          type: boolean
-          description: Set to true to create an automation token that bypasses two-factor authentication for publishing.
-          default: false
-        cidr_whitelist:
-          type: array
-          description: List of CIDR IP ranges to restrict where this token can be used from.
-          items:
-            type: string
-            pattern: ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$
-    TokenWithValue:
-      type: object
-      description: An npm access token including the full token value. The token value is only returned once at creation time and cannot be retrieved again.
-      allOf:
-      - $ref: '#/components/schemas/Token'
-      - type: object
-        properties:
-          token:
-            type: string
-            description: The full token UUID value. This is only returned at creation time.
     Error:
       type: object
       description: An error response from the npm API.
@@ -185,6 +152,16 @@ components:
         message:
           type: string
           description: A human-readable description of the error.
+    TokenWithValue:
+      type: object
+      description: An npm access token including the full token value. The token value is only returned once at creation time and cannot be retrieved again.
+      allOf:
+      - $ref: '#/components/schemas/Token'
+      - type: object
+        properties:
+          token:
+            type: string
+            description: The full token UUID value. This is only returned at creation time.
     Token:
       type: object
       description: An npm access token with its metadata. The actual token value is redacted; only the key hash is provided.
@@ -214,11 +191,42 @@ components:
           type: string
           format: date-time
           description: The date and time the token was last updated.
+    TokenCreateRequest:
+      type: object
+      description: Request body for creating a new npm access token.
+      required:
+      - password
+      properties:
+        password:
+          type: string
+          description: The user's npm account password, required to authorize token creation.
+        readonly:
+          type: boolean
+          description: Set to true to create a read-only token.
+          default: false
+        automation:
+          type: boolean
+          description: Set to true to create an automation token that bypasses two-factor authentication for publishing.
+          default: false
+        cidr_whitelist:
+          type: array
+          description: List of CIDR IP ranges to restrict where this token can be used from.
+          items:
+            type: string
+            pattern: ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
-      description: npm access token provided as a Bearer token.
+      description: npm access token provided as a Bearer token. Supports both classic tokens and granular access tokens.
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication using npm username and password.
+    oidcBearerAuth:
+      type: http
+      scheme: bearer
+      description: OIDC identity token from a supported CI/CD provider, provided as a Bearer token for token exchange.
 externalDocs:
-  description: npm Hooks Documentation
-  url: https://blog.npmjs.org/post/145260155635/introducing-hooks-get-notifications-of-npm
+  description: npm Public API Documentation
+  url: https://api-docs.npmjs.com/

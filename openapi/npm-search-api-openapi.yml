@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: npm Hooks Downloads Search API
-  description: The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.
+  description: The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry.
   version: 1.0.0
   contact:
     name: npm Support
@@ -95,6 +95,21 @@ components:
         time:
           type: string
           description: Timestamp of when the search was performed.
+    Person:
+      type: object
+      description: A person object representing a user, author, or maintainer.
+      properties:
+        name:
+          type: string
+          description: The display name of the person.
+        email:
+          type: string
+          format: email
+          description: The email address of the person.
+        url:
+          type: string
+          format: uri
+          description: The personal URL or website of the person.
     SearchResultItem:
       type: object
       description: A single search result item containing package metadata and scoring information.
@@ -161,21 +176,6 @@ components:
         searchScore:
           type: number
           description: The search relevance score for this result.
-    Person:
-      type: object
-      description: A person object representing a user, author, or maintainer.
-      properties:
-        name:
-          type: string
-          description: The display name of the person.
-        email:
-          type: string
-          format: email
-          description: The email address of the person.
-        url:
-          type: string
-          format: uri
-          description: The personal URL or website of the person.
   securitySchemes:
     bearerAuth:
       type: http

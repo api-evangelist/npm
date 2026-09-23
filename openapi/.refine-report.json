@@ -1,28 +1,40 @@
 {
   "provider": "npm",
   "sources": [
+    "_original/npm-public-api-openapi.yml",
     "npm-downloads-api-openapi.yml",
     "npm-hooks-api-openapi.yml",
-    "npm-oidc-api-openapi.yml",
     "npm-packages-api-openapi.yml",
     "npm-registry-api-openapi.yml",
-    "npm-search-api-openapi.yml",
-    "npm-tokens-api-openapi.yml",
-    "npm-trusted-publishers-api-openapi.yml"
+    "npm-search-api-openapi.yml"
   ],
   "outputs": [
+    "npm-oidc-api-openapi.yml",
+    "npm-tokens-api-openapi.yml",
+    "npm-trusted-publishers-api-openapi.yml",
     "npm-downloads-api-openapi.yml",
     "npm-hooks-api-openapi.yml",
-    "npm-oidc-api-openapi.yml",
     "npm-packages-api-openapi.yml",
     "npm-registry-api-openapi.yml",
-    "npm-search-api-openapi.yml",
-    "npm-tokens-api-openapi.yml",
-    "npm-trusted-publishers-api-openapi.yml"
+    "npm-search-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
-  "warnings": [],
-  "notes": [],
-  "skipped": []
+  "warnings": [
+    "npm-downloads-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /{package}/-/{tarball} get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "npm-hooks-api-openapi.yml: previously refined output kept for 5 operation(s) no archived document covers (e.g. /-/npm/v1/hooks get, /-/npm/v1/hooks/hook post, /-/npm/v1/hooks/hook/{id} delete); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "npm-packages-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /{package} get, /{package}/{version} get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "npm-registry-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. / get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "npm-search-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /-/v1/search get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "npm-public-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "npm-oidc-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "npm-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "npm-trusted-publishers-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

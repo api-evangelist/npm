@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: npm Hooks Downloads Packages API
-  description: The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions. Note that npm hooks services have been deprecated as of July 2024.
+  description: The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry.
   version: 1.0.0
   contact:
     name: npm Support
@@ -63,111 +63,31 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    PackageVersion:
+    Person:
       type: object
-      description: Metadata for a specific version of a package, including dependencies, scripts, and distribution information.
+      description: A person object representing a user, author, or maintainer.
       properties:
         name:
           type: string
-          description: The name of the package.
-        version:
+          description: The display name of the person.
+        email:
           type: string
-          description: The semver version string.
-        description:
-          type: string
-          description: A short description of the package.
-        main:
-          type: string
-          description: The entry point module for the package.
-        scripts:
-          type: object
-          description: A mapping of script names to shell commands.
-          additionalProperties:
-            type: string
-        dependencies:
-          type: object
-          description: A mapping of package names to semver ranges for runtime dependencies.
-          additionalProperties:
-            type: string
-        devDependencies:
-          type: object
-          description: A mapping of package names to semver ranges for development dependencies.
-          additionalProperties:
-            type: string
-        peerDependencies:
-          type: object
-          description: A mapping of package names to semver ranges for peer dependencies.
-          additionalProperties:
-            type: string
-        optionalDependencies:
-          type: object
-          description: A mapping of package names to semver ranges for optional dependencies.
-          additionalProperties:
-            type: string
-        engines:
-          type: object
-          description: A mapping of runtime names to semver ranges specifying compatible environments.
-          additionalProperties:
-            type: string
-        author:
-          $ref: '#/components/schemas/Person'
-        maintainers:
-          type: array
-          description: List of maintainers for this version.
-          items:
-            $ref: '#/components/schemas/Person'
-        repository:
-          $ref: '#/components/schemas/Repository'
-        license:
-          type: string
-          description: The SPDX license identifier.
-        keywords:
-          type: array
-          description: Keywords associated with this version.
-          items:
-            type: string
-        dist:
-          $ref: '#/components/schemas/Distribution'
-        _npmVersion:
-          type: string
-          description: The version of npm used to publish this package version.
-        _nodeVersion:
-          type: string
-          description: The version of Node.js used to publish this package version.
-        _npmUser:
-          $ref: '#/components/schemas/Person'
-    Distribution:
-      type: object
-      description: Distribution metadata for a specific published version, including integrity hashes and tarball location.
-      properties:
-        shasum:
-          type: string
-          description: The SHA-1 checksum of the tarball.
-        tarball:
+          format: email
+          description: The email address of the person.
+        url:
           type: string
           format: uri
-          description: The URL where the tarball can be downloaded.
-        integrity:
+          description: The personal URL or website of the person.
+    Repository:
+      type: object
+      description: Source code repository information.
+      properties:
+        type:
           type: string
-          description: The Subresource Integrity (SRI) hash of the tarball, typically using SHA-512.
-        fileCount:
-          type: integer
-          description: The number of files in the tarball.
-        unpackedSize:
-          type: integer
-          description: The total unpacked size of the tarball in bytes.
-        signatures:
-          type: array
-          description: Cryptographic signatures for the package version.
-          items:
-            type: object
-            properties:
-              keyid:
-                type: string
-                description: The identifier of the signing key.
-              sig:
-                type: string
-                description: The signature value.
+          description: The version control system type, typically "git".
+        url:
+          type: string
+          description: The URL of the source code repository.
     Error:
       type: object
       description: An error response from the registry.
@@ -245,31 +165,111 @@ components:
         license:
           type: string
           description: The SPDX license identifier for the package.
-    Repository:
+    Distribution:
       type: object
-      description: Source code repository information.
+      description: Distribution metadata for a specific published version, including integrity hashes and tarball location.
       properties:
-        type:
+        shasum:
           type: string
-          description: The version control system type, typically "git".
-        url:
+          description: The SHA-1 checksum of the tarball.
+        tarball:
           type: string
-          description: The URL of the source code repository.
-    Person:
+          format: uri
+          description: The URL where the tarball can be downloaded.
+        integrity:
+          type: string
+          description: The Subresource Integrity (SRI) hash of the tarball, typically using SHA-512.
+        fileCount:
+          type: integer
+          description: The number of files in the tarball.
+        unpackedSize:
+          type: integer
+          description: The total unpacked size of the tarball in bytes.
+        signatures:
+          type: array
+          description: Cryptographic signatures for the package version.
+          items:
+            type: object
+            properties:
+              keyid:
+                type: string
+                description: The identifier of the signing key.
+              sig:
+                type: string
+                description: The signature value.
+    PackageVersion:
       type: object
-      description: A person object representing a user, author, or maintainer.
+      description: Metadata for a specific version of a package, including dependencies, scripts, and distribution information.
       properties:
         name:
           type: string
-          description: The display name of the person.
-        email:
+          description: The name of the package.
+        version:
           type: string
-          format: email
-          description: The email address of the person.
-        url:
+          description: The semver version string.
+        description:
           type: string
-          format: uri
-          description: The personal URL or website of the person.
+          description: A short description of the package.
+        main:
+          type: string
+          description: The entry point module for the package.
+        scripts:
+          type: object
+          description: A mapping of script names to shell commands.
+          additionalProperties:
+            type: string
+        dependencies:
+          type: object
+          description: A mapping of package names to semver ranges for runtime dependencies.
+          additionalProperties:
+            type: string
+        devDependencies:
+          type: object
+          description: A mapping of package names to semver ranges for development dependencies.
+          additionalProperties:
+            type: string
+        peerDependencies:
+          type: object
+          description: A mapping of package names to semver ranges for peer dependencies.
+          additionalProperties:
+            type: string
+        optionalDependencies:
+          type: object
+          description: A mapping of package names to semver ranges for optional dependencies.
+          additionalProperties:
+            type: string
+        engines:
+          type: object
+          description: A mapping of runtime names to semver ranges specifying compatible environments.
+          additionalProperties:
+            type: string
+        author:
+          $ref: '#/components/schemas/Person'
+        maintainers:
+          type: array
+          description: List of maintainers for this version.
+          items:
+            $ref: '#/components/schemas/Person'
+        repository:
+          $ref: '#/components/schemas/Repository'
+        license:
+          type: string
+          description: The SPDX license identifier.
+        keywords:
+          type: array
+          description: Keywords associated with this version.
+          items:
+            type: string
+        dist:
+          $ref: '#/components/schemas/Distribution'
+        _npmVersion:
+          type: string
+          description: The version of npm used to publish this package version.
+        _nodeVersion:
+          type: string
+          description: The version of Node.js used to publish this package version.
+        _npmUser:
+          $ref: '#/components/schemas/Person'
   parameters:
     packageName:
       name: package
