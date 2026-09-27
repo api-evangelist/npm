@@ -46,6 +46,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
+  parameters:
+    packageName:
+      name: package
+      in: path
+      description: The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage).
+      required: true
+      schema:
+        type: string
   schemas:
     Error:
       type: object
@@ -57,14 +65,6 @@ components:
         reason:
           type: string
           description: A human-readable explanation of the error.
-  parameters:
-    packageName:
-      name: package
-      in: path
-      description: The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage).
-      required: true
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

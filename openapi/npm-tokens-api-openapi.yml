@@ -142,16 +142,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
-      type: object
-      description: An error response from the npm API.
-      properties:
-        error:
-          type: string
-          description: The error type or code.
-        message:
-          type: string
-          description: A human-readable description of the error.
     TokenWithValue:
       type: object
       description: An npm access token including the full token value. The token value is only returned once at creation time and cannot be retrieved again.
@@ -214,6 +204,16 @@ components:
           items:
             type: string
             pattern: ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$
+    Error:
+      type: object
+      description: An error response from the npm API.
+      properties:
+        error:
+          type: string
+          description: The error type or code.
+        message:
+          type: string
+          description: A human-readable description of the error.
   securitySchemes:
     bearerAuth:
       type: http

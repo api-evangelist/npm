@@ -121,16 +121,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
-      type: object
-      description: An error response from the npm API.
-      properties:
-        error:
-          type: string
-          description: The error type or code.
-        message:
-          type: string
-          description: A human-readable description of the error.
     TrustedPublisherRequest:
       type: object
       description: Request body for adding a trusted publisher configuration.
@@ -158,6 +148,16 @@ components:
         environment:
           type: string
           description: The deployment environment name to restrict publishing to.
+    Error:
+      type: object
+      description: An error response from the npm API.
+      properties:
+        error:
+          type: string
+          description: The error type or code.
+        message:
+          type: string
+          description: A human-readable description of the error.
     TrustedPublisher:
       type: object
       description: A trusted publisher configuration that allows a CI/CD provider to publish a package using OIDC token exchange.
