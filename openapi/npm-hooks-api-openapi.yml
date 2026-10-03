@@ -191,6 +191,30 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    HookUpdateRequest:
+      type: object
+      description: Request body for updating an existing webhook subscription.
+      required:
+      - endpoint
+      - secret
+      properties:
+        endpoint:
+          type: string
+          format: uri
+          description: The updated URI to receive webhook payloads.
+        secret:
+          type: string
+          description: The updated shared secret for payload signing.
+    Error:
+      type: object
+      description: An error response from the npm API.
+      properties:
+        error:
+          type: string
+          description: The error type or code.
+        message:
+          type: string
+          description: A human-readable description of the error.
     HookCreateRequest:
       type: object
       description: Request body for creating a new webhook subscription.
@@ -217,30 +241,6 @@ components:
         secret:
           type: string
           description: A shared secret used to sign webhook payloads. The signature is included in the x-npm-signature header of each delivery.
-    HookUpdateRequest:
-      type: object
-      description: Request body for updating an existing webhook subscription.
-      required:
-      - endpoint
-      - secret
-      properties:
-        endpoint:
-          type: string
-          format: uri
-          description: The updated URI to receive webhook payloads.
-        secret:
-          type: string
-          description: The updated shared secret for payload signing.
-    Error:
-      type: object
-      description: An error response from the npm API.
-      properties:
-        error:
-          type: string
-          description: The error type or code.
-        message:
-          type: string
-          description: A human-readable description of the error.
     Hook:
       type: object
       description: A webhook subscription object that defines what registry events trigger notifications and where those notifications are sent.
