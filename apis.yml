@@ -227,6 +227,9 @@ apis:
   - type: Documentation
     url: https://api-docs.npmjs.com/
 common:
+  - type: CapabilityMap
+    url: capabilities/npm-capability-edges.yml
+    name: npm Business Capability Map
   - type: SecurityPolicy
     url: https://github.com/npm/cli/blob/latest/SECURITY.md
   - type: CodeOfConduct

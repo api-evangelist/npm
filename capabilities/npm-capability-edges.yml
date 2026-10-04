@@ -1,0 +1,46 @@
+slug: npm
+provider: npm
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Hooks
+  spec_file: npm-hooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.9
+  evidence: The npm Hooks API allows developers to subscribe to notifications about changes in the npm
+    registry; POST /-/npm/v1/hooks/hook  createHook  Create a webhook
+  reason: Full CRUD lifecycle over outbound webhook subscriptions exposed to external developers — exactly
+    Webhook & Event Subscription Management within the developer platform/API ecosystem.
+- tag: Tokens
+  spec_file: npm-tokens-api-openapi.yml
+  capability_id: BC-4270.40
+  capability_id_l1: BC-4270
+  capability_name: Developer Identity & Credential Management
+  confidence: 0.85
+  evidence: GET /-/npm/v1/tokens  listTokens  List access tokens; POST /-/npm/v1/tokens  createToken  Create
+    an access token
+  reason: Issuance, listing and revocation of developer access tokens for the public npm API is Developer
+    Identity & Credential Management on a developer platform, rather than enterprise workforce IAM.
+- tag: OIDC
+  spec_file: npm-oidc-api-openapi.yml
+  capability_id: BC-4270.40
+  capability_id_l1: BC-4270
+  capability_name: Developer Identity & Credential Management
+  confidence: 0.7
+  evidence: POST /-/npm/v1/security/oidc/tokens  exchangeOidcToken  Exchange an OIDC token for an npm
+    token
+  reason: Exchanging a federated OIDC token for a short-lived registry token is issuance of developer
+    credentials via federated identity, i.e. Developer Identity & Credential Management. Single endpoint,
+    so moderate confidence.
