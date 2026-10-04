@@ -63,6 +63,41 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      description: An error response from the registry.
+      properties:
+        error:
+          type: string
+          description: The error type or code.
+        reason:
+          type: string
+          description: A human-readable explanation of the error.
+    Person:
+      type: object
+      description: A person object representing a user, author, or maintainer.
+      properties:
+        name:
+          type: string
+          description: The display name of the person.
+        email:
+          type: string
+          format: email
+          description: The email address of the person.
+        url:
+          type: string
+          format: uri
+          description: The personal URL or website of the person.
+    Repository:
+      type: object
+      description: Source code repository information.
+      properties:
+        type:
+          type: string
+          description: The version control system type, typically "git".
+        url:
+          type: string
+          description: The URL of the source code repository.
     PackageDocument:
       type: object
       description: A full package document (packument) containing all metadata for a package, including every published version.
@@ -130,6 +165,38 @@ components:
         license:
           type: string
           description: The SPDX license identifier for the package.
+    Distribution:
+      type: object
+      description: Distribution metadata for a specific published version, including integrity hashes and tarball location.
+      properties:
+        shasum:
+          type: string
+          description: The SHA-1 checksum of the tarball.
+        tarball:
+          type: string
+          format: uri
+          description: The URL where the tarball can be downloaded.
+        integrity:
+          type: string
+          description: The Subresource Integrity (SRI) hash of the tarball, typically using SHA-512.
+        fileCount:
+          type: integer
+          description: The number of files in the tarball.
+        unpackedSize:
+          type: integer
+          description: The total unpacked size of the tarball in bytes.
+        signatures:
+          type: array
+          description: Cryptographic signatures for the package version.
+          items:
+            type: object
+            properties:
+              keyid:
+                type: string
+                description: The identifier of the signing key.
+              sig:
+                type: string
+                description: The signature value.
     PackageVersion:
       type: object
       description: Metadata for a specific version of a package, including dependencies, scripts, and distribution information.
@@ -203,85 +270,18 @@ components:
           description: The version of Node.js used to publish this package version.
         _npmUser:
           $ref: '#/components/schemas/Person'
-    Repository:
-      type: object
-      description: Source code repository information.
-      properties:
-        type:
-          type: string
-          description: The version control system type, typically "git".
-        url:
-          type: string
-          description: The URL of the source code repository.
-    Error:
-      type: object
-      description: An error response from the registry.
-      properties:
-        error:
-          type: string
-          description: The error type or code.
-        reason:
-          type: string
-          description: A human-readable explanation of the error.
-    Person:
-      type: object
-      description: A person object representing a user, author, or maintainer.
-      properties:
-        name:
-          type: string
-          description: The display name of the person.
-        email:
-          type: string
-          format: email
-          description: The email address of the person.
-        url:
-          type: string
-          format: uri
-          description: The personal URL or website of the person.
-    Distribution:
-      type: object
-      description: Distribution metadata for a specific published version, including integrity hashes and tarball location.
-      properties:
-        shasum:
-          type: string
-          description: The SHA-1 checksum of the tarball.
-        tarball:
-          type: string
-          format: uri
-          description: The URL where the tarball can be downloaded.
-        integrity:
-          type: string
-          description: The Subresource Integrity (SRI) hash of the tarball, typically using SHA-512.
-        fileCount:
-          type: integer
-          description: The number of files in the tarball.
-        unpackedSize:
-          type: integer
-          description: The total unpacked size of the tarball in bytes.
-        signatures:
-          type: array
-          description: Cryptographic signatures for the package version.
-          items:
-            type: object
-            properties:
-              keyid:
-                type: string
-                description: The identifier of the signing key.
-              sig:
-                type: string
-                description: The signature value.
   parameters:
-    packageName:
-      name: package
-      in: path
-      description: The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage).
-      required: true
-      schema:
-        type: string
     packageVersion:
       name: version
       in: path
       description: A valid semver version string, or the literal string "latest" to resolve the current latest dist-tag.
+      required: true
+      schema:
+        type: string
+    packageName:
+      name: package
+      in: path
+      description: The name of the package. For scoped packages, use URL encoding (e.g., @scope%2Fpackage).
       required: true
       schema:
         type: string

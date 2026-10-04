@@ -142,39 +142,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
-      type: object
-      description: An error response from the npm API.
-      properties:
-        error:
-          type: string
-          description: The error type or code.
-        message:
-          type: string
-          description: A human-readable description of the error.
-    TokenCreateRequest:
-      type: object
-      description: Request body for creating a new npm access token.
-      required:
-      - password
-      properties:
-        password:
-          type: string
-          description: The user's npm account password, required to authorize token creation.
-        readonly:
-          type: boolean
-          description: Set to true to create a read-only token.
-          default: false
-        automation:
-          type: boolean
-          description: Set to true to create an automation token that bypasses two-factor authentication for publishing.
-          default: false
-        cidr_whitelist:
-          type: array
-          description: List of CIDR IP ranges to restrict where this token can be used from.
-          items:
-            type: string
-            pattern: ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$
     TokenWithValue:
       type: object
       description: An npm access token including the full token value. The token value is only returned once at creation time and cannot be retrieved again.
@@ -214,6 +181,39 @@ components:
           type: string
           format: date-time
           description: The date and time the token was last updated.
+    Error:
+      type: object
+      description: An error response from the npm API.
+      properties:
+        error:
+          type: string
+          description: The error type or code.
+        message:
+          type: string
+          description: A human-readable description of the error.
+    TokenCreateRequest:
+      type: object
+      description: Request body for creating a new npm access token.
+      required:
+      - password
+      properties:
+        password:
+          type: string
+          description: The user's npm account password, required to authorize token creation.
+        readonly:
+          type: boolean
+          description: Set to true to create a read-only token.
+          default: false
+        automation:
+          type: boolean
+          description: Set to true to create an automation token that bypasses two-factor authentication for publishing.
+          default: false
+        cidr_whitelist:
+          type: array
+          description: List of CIDR IP ranges to restrict where this token can be used from.
+          items:
+            type: string
+            pattern: ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$
   securitySchemes:
     bearerAuth:
       type: http
