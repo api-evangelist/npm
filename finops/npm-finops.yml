@@ -140,10 +140,8 @@ apis:
 unitEconomics:
   - name: Cost per private package GB-month
     metric: packages_storage_cost / packages_storage_GB
-    target: minimize via cleanup of stale package versions
   - name: Cost per developer-month
     metric: github_seat_cost + packages_overage / active_developers
-    target: monitor against GitHub Team baseline
 maintainers:
   - FN: API Evangelist
     email: info@apievangelist.com
