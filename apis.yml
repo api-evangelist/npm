@@ -168,6 +168,8 @@ apis:
   humanURL: https://github.com/npm/registry/blob/main/docs/REGISTRY-API.md
   baseURL: https://registry.npmjs.org
   tags:
+  - OpenID Connect
+  tags_raw:
   - OIDC
   properties:
   - type: OpenAPI
