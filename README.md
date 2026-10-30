@@ -1,4 +1,4 @@
-# npm (npm)
+# npm
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,164 +66,207 @@
 
 npm is the world's largest software registry, hosting over two million JavaScript packages for the Node.js ecosystem. Their developer platform provides APIs for searching and retrieving package metadata, managing access tokens, subscribing to registry event webhooks, and publishing packages with supply chain provenance verification.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/npm/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/npm/refs/heads/main/apis.yml)
+**Areas:** Packages · JavaScript · Node.js · Package Management · Registry · Security · Developer Tools · npm
 
-## Scope
+## npm on APIs.io
 
-- **Position:** Consuming
-- **Access:** 3rd-Party
+Everything profiled for npm is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/npm/](https://apis.io/providers/npm/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (10)
 
-- Packages
-- JavaScript
-- Node.js
-- Package Management
-- Registry
-- Security
+- [npm Registry API](https://apis.io/apis/npm/registry/) — The npm Registry API provides programmatic access to the npm package registry, the largest software registry in the world hosting over two million…
+- [npm Hooks API](https://apis.io/apis/npm/hooks/) — The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI…
+- [npm CLI](https://apis.io/apis/npm/cli/) — The npm CLI is the official command-line interface for the npm package manager, providing developers with tools to install, publish, and manage JavaScript…
+- [npm Provenance](https://apis.io/apis/npm/provenance/) — npm Provenance provides supply chain security for JavaScript packages by establishing a verifiable link between a published package and its source code…
+- [npm Downloads API](https://apis.io/apis/npm/npm-downloads-api/) — Package tarball downloads.
+- [npm OIDC API](https://apis.io/apis/npm/npm-oidc-api/) — OpenID Connect token exchange for trusted publishing. Exchange OIDC identity tokens from supported CI/CD providers for short-lived npm registry access tokens.
+- [npm Packages API](https://apis.io/apis/npm/npm-packages-api/) — Package metadata retrieval, including full packuments and version-specific documents.
+- [npm Search API](https://apis.io/apis/npm/npm-search-api/) — Full-text search across the npm registry with weighted scoring.
+- [npm Tokens API](https://apis.io/apis/npm/npm-tokens-api/) — Manage npm access tokens for authentication. Create, list, and delete tokens with customizable permissions and restrictions.
+- [npm Trusted Publishers API](https://apis.io/apis/npm/npm-trusted-publishers-api/) — Configure trusted publisher settings for packages to enable OIDC token exchange from CI/CD providers without long-lived npm tokens.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-20
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### npm Registry API
+Event-driven and webhook contracts.
 
-The npm Registry API provides programmatic access to the npm package registry, the largest software registry in the world hosting over two million JavaScript packages. Developers can query package metadata, download tarballs, search for packages, and retrieve version-specific information. The API follows CouchDB-based conventions and serves package manifests in JSON format, enabling tools and services to integrate with the npm ecosystem for dependency resolution, package discovery, and automated workflows.
+- [npm Hooks Events](https://apis.io/asyncapis/npm/npm-hooks-asyncapi/)
 
-- **Human URL:** [https://github.com/npm/registry/blob/main/docs/REGISTRY-API.md](https://github.com/npm/registry/blob/main/docs/REGISTRY-API.md)
-- **Base URL:** `https://registry.npmjs.org`
+#### Event channels (1)
 
-#### Tags
+Individual events and webhooks the provider emits.
 
-- Packages
-- JavaScript
-- Registry
-- Package Management
-- Node.js
+- [/webhook](https://apis.io/channels/npm/webhook/)
 
-#### Properties
+#### Agentic access (1)
 
-- [Documentation](https://github.com/npm/registry/blob/main/docs/REGISTRY-API.md)
-- [OpenAPI](openapi/npm-registry-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/npm-registry-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/npm-registry-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/npm-package-schema.json) — [JSON Schema](https://json-schema.org/specification)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### npm Public API
+- [Npm Agentic Access](https://apis.io/agentic-access/npm/npm-agentic-access/)
 
-The npm Public API provides authenticated endpoints for managing npm access tokens, configuring trusted publishers, and exchanging OIDC tokens for short-lived registry access. It supports creating, listing, and deleting npm access tokens with customizable permissions, scope restrictions, expiration settings, and CIDR IP range limitations. The API also enables CI/CD providers like GitHub Actions, GitLab CI, and CircleCI to publish packages securely through OIDC token exchange without requiring long-lived npm tokens.
+#### JSON Schema (19)
 
-- **Human URL:** [https://api-docs.npmjs.com/](https://api-docs.npmjs.com/)
-- **Base URL:** `https://npm.pkg.github.com`
+The data models the API reads and writes.
 
-#### Tags
+- [Distribution](https://apis.io/schemas/npm/npm-distribution/)
+- [Error](https://apis.io/schemas/npm/npm-error/)
+- [Hook](https://apis.io/schemas/npm/npm-hook/)
+- [npm Hook Event Payload](https://apis.io/schemas/npm/npm-hook-event/)
+- [HookCreateRequest](https://apis.io/schemas/npm/npm-hookcreaterequest/)
+- [HookUpdateRequest](https://apis.io/schemas/npm/npm-hookupdaterequest/)
+- [npm Package Document](https://apis.io/schemas/npm/npm-package/)
+- [PackageDocument](https://apis.io/schemas/npm/npm-packagedocument/)
+- [PackageVersion](https://apis.io/schemas/npm/npm-packageversion/)
+- [Person](https://apis.io/schemas/npm/npm-person/)
+- [RegistryMetadata](https://apis.io/schemas/npm/npm-registrymetadata/)
+- [Repository](https://apis.io/schemas/npm/npm-repository/)
+- [SearchResultItem](https://apis.io/schemas/npm/npm-searchresultitem/)
+- [SearchResults](https://apis.io/schemas/npm/npm-searchresults/)
+- [Token](https://apis.io/schemas/npm/npm-token/)
+- [TokenCreateRequest](https://apis.io/schemas/npm/npm-tokencreaterequest/)
+- [TokenWithValue](https://apis.io/schemas/npm/npm-tokenwithvalue/)
+- [TrustedPublisher](https://apis.io/schemas/npm/npm-trustedpublisher/)
+- [TrustedPublisherRequest](https://apis.io/schemas/npm/npm-trustedpublisherrequest/)
 
-- Packages
-- Tokens
-- Authentication
-- Security
-- OIDC
-- Access Control
+#### JSON Structure (1)
 
-#### Properties
+Data models expressed in JSON Structure.
 
-- [Documentation](https://api-docs.npmjs.com/)
-- [OpenAPI](openapi/npm-public-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/npm-public-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/npm-public-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Npm Structure](https://apis.io/json-structure/npm/npm-structure/)
 
-### npm Hooks API
+#### JSON-LD (1)
 
-The npm Hooks API allows developers to subscribe to notifications about changes in the npm registry. Hooks send HTTP POST payloads to a configured URI whenever a package is changed, enabling developers to build integrations that respond to registry events in real time. Users can add hooks to follow specific packages, track all activity of given npm users, or monitor all packages within an organization or user scope. The API provides endpoints for creating, listing, updating, and deleting hook subscriptions.
+Linked-data contexts for the provider's vocabulary.
 
-- **Human URL:** [https://blog.npmjs.org/post/145260155635/introducing-hooks-get-notifications-of-npm](https://blog.npmjs.org/post/145260155635/introducing-hooks-get-notifications-of-npm)
+- [Npm Context](https://apis.io/jsonld/npm/npm-context/)
 
-#### Tags
+#### Vocabulary (1)
 
-- Webhooks
-- Notifications
-- Events
-- Automation
-- Packages
+The provider's domain terms, defined.
 
-#### Properties
+- [npm Domain Vocabulary](https://apis.io/vocabularies/npm/npm-vocabulary/)
 
-- [Documentation](https://blog.npmjs.org/post/145260155635/introducing-hooks-get-notifications-of-npm)
-- [OpenAPI](openapi/npm-hooks-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/npm-hooks-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/npm-hooks-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [AsyncAPI](asyncapi/npm-hooks-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [JSON Schema](json-schema/npm-hook-event-schema.json) — [JSON Schema](https://json-schema.org/specification)
+#### Collections (17)
 
-### npm CLI
+Postman and Open Collection request collections.
 
-The npm CLI is the official command-line interface for the npm package manager, providing developers with tools to install, publish, and manage JavaScript packages and their dependencies. It supports package publishing with provenance attestation via Sigstore, workspace management for monorepos, script execution, semantic versioning, and comprehensive dependency tree management. The CLI is bundled with Node.js and serves as the primary developer interface for interacting with the npm registry.
+- [npm Hooks Downloads API](https://apis.io/collections/npm/open-npm-downloads-api/)
+- [npm Downloads Hooks API](https://apis.io/collections/npm/open-npm-hooks-api/)
+- [npm Hooks Downloads OIDC API](https://apis.io/collections/npm/open-npm-oidc-api/)
+- [npm Hooks Downloads Packages API](https://apis.io/collections/npm/open-npm-packages-api/)
+- [npm Public API](https://apis.io/collections/npm/open-npm-public-api/)
+- [npm Hooks Downloads Registry API](https://apis.io/collections/npm/open-npm-registry-api/)
+- [npm Hooks Downloads Search API](https://apis.io/collections/npm/open-npm-search-api/)
+- [npm Hooks Downloads Tokens API](https://apis.io/collections/npm/open-npm-tokens-api/)
+- [npm Hooks Downloads Trusted Publishers API](https://apis.io/collections/npm/open-npm-trusted-publishers-api/)
+- [npm Hooks Downloads API](https://apis.io/collections/npm/postman-npm-downloads-api/)
+- [npm Downloads Hooks API](https://apis.io/collections/npm/postman-npm-hooks-api/)
+- [npm Hooks Downloads OIDC API](https://apis.io/collections/npm/postman-npm-oidc-api/)
+- [npm Hooks Downloads Packages API](https://apis.io/collections/npm/postman-npm-packages-api/)
+- [npm Hooks Downloads Registry API](https://apis.io/collections/npm/postman-npm-registry-api/)
+- [npm Hooks Downloads Search API](https://apis.io/collections/npm/postman-npm-search-api/)
+- [npm Hooks Downloads Tokens API](https://apis.io/collections/npm/postman-npm-tokens-api/)
+- [npm Hooks Downloads Trusted Publishers API](https://apis.io/collections/npm/postman-npm-trusted-publishers-api/)
 
-- **Human URL:** [https://docs.npmjs.com/cli](https://docs.npmjs.com/cli)
+#### Governance rules (2)
 
-#### Tags
+Spectral rulesets for the provider's contracts.
 
-- Command Line
-- Package Management
-- JavaScript
-- Node.js
-- Developer Tools
+- [npm — asyncapi rules](https://apis.io/rules/npm/npm-asyncapi-spectral-rules/)
+- [npm — jsonschema rules](https://apis.io/rules/npm/npm-jsonschema-spectral-rules/)
 
-#### Properties
+#### Security (3)
 
-- [Documentation](https://docs.npmjs.com/cli)
-- [Source Code](https://github.com/npm/cli)
-- [Postman Collection](collections/npm-hooks-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/npm-hooks-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/npm-public-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/npm-public-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/npm-registry-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/npm-registry-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Authentication, trust centre, and vulnerability disclosure.
 
-### npm Provenance
+- [Npm Authentication](https://apis.io/security/npm/npm-authentication/)
+- [Npm Domain Security](https://apis.io/security/npm/npm-domain-security/)
+- [Npm Vulnerability Disclosure](https://apis.io/security/npm/npm-vulnerability-disclosure/)
 
-npm Provenance provides supply chain security for JavaScript packages by establishing a verifiable link between a published package and its source code repository and build environment. When a package is published with provenance, it is signed using Sigstore public good servers and the attestation is logged in a public transparency ledger. This allows developers to verify where and how a package was built before downloading it, helping to protect against supply chain attacks and ensuring the integrity of the npm ecosystem.
+#### Plans and pricing (1)
 
-- **Human URL:** [https://docs.npmjs.com/generating-provenance-statements](https://docs.npmjs.com/generating-provenance-statements)
+Published plans, tiers and prices.
 
-#### Tags
+- [Npm Plans Pricing](https://apis.io/plans/npm/npm-plans-pricing/)
 
-- Security
-- Supply Chain
-- Verification
-- Sigstore
-- Transparency
-- CI/CD
+#### Rate limits (1)
 
-#### Properties
+Published request limits.
 
-- [Documentation](https://docs.npmjs.com/generating-provenance-statements)
-- [Documentation](https://github.blog/security/supply-chain-security/introducing-npm-package-provenance/)
-- [Postman Collection](collections/npm-hooks-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/npm-hooks-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/npm-public-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/npm-public-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/npm-registry-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/npm-registry-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Npm Rate Limits](https://apis.io/rate-limits/npm/npm-rate-limits/)
 
-## Common Properties
+#### FinOps (1)
 
-- [LinkedIn](https://www.linkedin.com/company/npm-inc-)
-- [Portal](https://www.npmjs.com/)
-- [Documentation](https://docs.npmjs.com/)
-- [Blog](https://blog.npmjs.org/)
-- [Login](https://www.npmjs.com/login)
-- [Support](https://www.npmjs.com/support)
-- [Privacy Policy](https://docs.npmjs.com/policies/privacy)
-- [Terms of Service](https://docs.npmjs.com/policies/terms)
+What the API costs to run, by operation.
+
+- [Npm Finops](https://apis.io/finops/npm/npm-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.npmjs.com/)
-- [Git Hub Org](https://github.com/npm)
-- [Status Page](https://status.npmjs.org/)
+- [Documentation](https://docs.npmjs.com/)
+- [Support](https://www.npmjs.com/support)
+- [Blog](https://blog.npmjs.org/)
+- [Terms of service](https://docs.npmjs.com/policies/terms)
+- [Privacy policy](https://docs.npmjs.com/policies/privacy)
+- [Status](https://status.npmjs.org/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** API Evangelist
-**Email:** info@apievangelist.com
+**Kin Score 48.3** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 68.8 |
+| Contract governance | 13.6 |
+| Operational transparency | 39.5 |
+| Developer ergonomics | 39.3 |
+| Access clarity | 42.1 |
+
+**Agent readiness 27.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 30.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/npm/](https://apis.io/providers/npm/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for npm: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/npm/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
